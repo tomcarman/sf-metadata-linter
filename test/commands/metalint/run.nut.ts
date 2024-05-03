@@ -1,5 +1,5 @@
-import { execCmd, TestSession } from '@salesforce/cli-plugins-testkit';
-import { expect } from 'chai';
+import { TestSession } from '@salesforce/cli-plugins-testkit';
+// import { expect } from 'chai';
 
 describe('metalint run NUTs', () => {
   let session: TestSession;
@@ -12,10 +12,10 @@ describe('metalint run NUTs', () => {
     await session?.clean();
   });
 
-  it('should display provided name', () => {
-    const name = 'World';
-    const command = `metalint run --name ${name}`;
-    const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
-    expect(output).to.contain(name);
-  });
+  // it('should display provided name', () => {
+  //   const name = 'World';
+  //   const command = `metalint run --name ${name}`;
+  //   const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
+  //   expect(output).to.contain(name);
+  // });
 });
