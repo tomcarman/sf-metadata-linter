@@ -1,6 +1,7 @@
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import { fileExists, readAllFiles } from '../util.js';
+import { fieldsMustHaveDescriptions } from '../../rules/fields-must-have-descriptions.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-metadata-linter', 'metalint.run');
@@ -30,10 +31,14 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     const dir = flags['directory'];
 
     this.spinner.start('Building list of files to lint...');
-    const files = await readAllFiles(dir);
+    const files = (await readAllFiles(dir)) as string[];
     this.spinner.stop();
     // eslint-disable-next-line no-console
-    console.log(files);
+    // console.log(files);
+
+    const fieldsWithoutDescriptions = fieldsMustHaveDescriptions(files);
+    // eslint-disable-next-line no-console
+    console.log(fieldsWithoutDescriptions);
 
     return { outcome: 'Complete' };
   }
