@@ -2184,6 +2184,11 @@
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.4.tgz#56e2cc26c397c038fab0e3a917a12d5c5909e901"
   integrity sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==
 
+"@types/sarif@^2.1.7":
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/@types/sarif/-/sarif-2.1.7.tgz#dab4d16ba7568e9846c454a8764f33c5d98e5524"
+  integrity sha512-kRz0VEkJqWLf1LLVN4pT1cg1Z9wAuvI6L97V3m2f5B76Tg8d413ddvLBPTEHAZJlnn4XSvu0FkZtViCQGVyrXQ==
+
 "@types/semver@^7.5.0":
   version "7.5.8"
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.5.8.tgz#8268a8c57a3e4abd25c165ecd36237db7948a55e"
@@ -3986,7 +3991,7 @@ fromentries@^1.2.0:
   resolved "https://registry.yarnpkg.com/fromentries/-/fromentries-1.3.2.tgz#e4bca6808816bf8f93b52750f1127f5a6fd86e3a"
   integrity sha512-cHEpEQHUg0f8XdtZCc2ZAhrHzKzT0MrFUTcvx+hfxYu7rGMDc5SKoXFh+n4YigxsHXRzc6OrCshdR1bWH6HHyg==
 
-fs-extra@^11.0.0:
+fs-extra@^11.0.0, fs-extra@^11.1.1:
   version "11.2.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.2.0.tgz#e70e17dfad64232287d01929399e0ea7c86b0e5b"
   integrity sha512-PmDi3uwK5nFuXh7XDTlVnS17xJS7vW36is2+w3xcv8SVxiB4NyATf4ctkVY5bkSjX0Y4nbvZCq1/EjtEyr9ktw==
@@ -5523,6 +5528,14 @@ node-releases@^2.0.14:
   version "2.0.14"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.14.tgz#2ffb053bceb8b2be8495ece1ab6ce600c4461b0b"
   integrity sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==
+
+node-sarif-builder@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/node-sarif-builder/-/node-sarif-builder-3.1.0.tgz#a54ade0599f38ce98a0f7f2121e0a455ba5c318e"
+  integrity sha512-6HnIXxQRJiJiawtPwbMWgZ+FiPVe7uxw/HPX4fD6bFdMZ91NCXagZjwWbD50n0dLOM5foB/XHxPgi2xWWH+uaA==
+  dependencies:
+    "@types/sarif" "^2.1.7"
+    fs-extra "^11.1.1"
 
 normalize-package-data@^2.5.0:
   version "2.5.0"
