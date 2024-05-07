@@ -52,21 +52,20 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     const sarifRuleBuilder = new SarifRuleBuilder().initSimple({
       ruleId: 'fields-must-have-descriptions',
       shortDescriptionText: 'Fields must have descriptions',
-      helpUri: 'http://www.google.com',
+      fullDescriptionText: 'Custom fields must have a description in the field metadata file',
     });
     sarifRunBuilder.addRule(sarifRuleBuilder);
 
     const sarifResultBuilder = new SarifResultBuilder();
 
     for (const field of fieldsWithoutDescriptions) {
-      // let path = process.env.SARIF_URI_ABSOLUTE ? pathToFileURL(field) : path.relative(process.cwd(), field).replace(/\\/g, '/') as const
-
       const sarifResultInit = {
         ruleId: 'fields-must-have-descriptions',
         messageText: 'Field is missing a description',
         level: 'error' as const,
-        // fileUri: pathToFileURL(field).toString(),
         fileUri: path.relative(process.cwd(), field).replace(/\\/g, '/'),
+        startLine: 3,
+        endLine: 3,
       };
 
       sarifResultBuilder.initSimple(sarifResultInit);
