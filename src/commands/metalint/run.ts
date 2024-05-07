@@ -1,5 +1,5 @@
-import { pathToFileURL } from 'node:url';
-// import * as path from 'node:path';
+// import { pathToFileURL } from 'node:url';
+import * as path from 'node:path';
 import { SarifBuilder, SarifRunBuilder, SarifResultBuilder, SarifRuleBuilder } from 'node-sarif-builder';
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
@@ -65,7 +65,8 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
         ruleId: 'fields-must-have-descriptions',
         messageText: 'Field is missing a description',
         level: 'error' as const,
-        fileUri: pathToFileURL(field).toString(),
+        // fileUri: pathToFileURL(field).toString(),
+        fileUri: path.relative(process.cwd(), field).replace(/\\/g, '/'),
       };
 
       sarifResultBuilder.initSimple(sarifResultInit);
