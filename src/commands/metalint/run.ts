@@ -1,3 +1,6 @@
+import { pathToFileURL } from 'node:url';
+// import * as path from 'node:path';
+import { SarifBuilder, SarifRunBuilder, SarifResultBuilder, SarifRuleBuilder } from 'node-sarif-builder';
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import { fileExists, readAllFiles } from '../util.js';
@@ -33,12 +36,46 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     this.spinner.start('Building list of files to lint...');
     const files = (await readAllFiles(dir)) as string[];
     this.spinner.stop();
-    // eslint-disable-next-line no-console
-    // console.log(files);
 
+    // Run rules
     const fieldsWithoutDescriptions = fieldsMustHaveDescriptions(files);
     // eslint-disable-next-line no-console
     console.log(fieldsWithoutDescriptions);
+
+    // Setup sarif builder, add rules
+    const sarifBuilder = new SarifBuilder();
+    const sarifRunBuilder = new SarifRunBuilder().initSimple({
+      toolDriverName: 'sf-metadata-linter',
+      toolDriverVersion: '1.0.0',
+    });
+
+    const sarifRuleBuilder = new SarifRuleBuilder().initSimple({
+      ruleId: 'fields-must-have-descriptions',
+      shortDescriptionText: 'Fields must have descriptions',
+      helpUri: 'http://www.google.com',
+    });
+    sarifRunBuilder.addRule(sarifRuleBuilder);
+
+    for (const field of fieldsWithoutDescriptions) {
+      const sarifResultBuilder = new SarifResultBuilder();
+
+      // let path = process.env.SARIF_URI_ABSOLUTE ? pathToFileURL(field) : path.relative(process.cwd(), field).replace(/\\/g, '/') as const
+
+      const sarifResultInit = {
+        ruleId: 'fields-must-have-descriptions',
+        messageText: 'Field is missing a description',
+        level: 'error' as const,
+        fileUri: pathToFileURL(field).toString(),
+      };
+
+      sarifResultBuilder.initSimple(sarifResultInit);
+      sarifRunBuilder.addResult(sarifResultBuilder);
+
+      sarifBuilder.addRun(sarifRunBuilder);
+      const sarifResults = sarifBuilder.buildSarifJsonString({ indent: false });
+      // eslint-disable-next-line no-console
+      console.log(sarifResults);
+    }
 
     return { outcome: 'Complete' };
   }
