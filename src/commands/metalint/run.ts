@@ -56,9 +56,9 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     });
     sarifRunBuilder.addRule(sarifRuleBuilder);
 
-    for (const field of fieldsWithoutDescriptions) {
-      const sarifResultBuilder = new SarifResultBuilder();
+    const sarifResultBuilder = new SarifResultBuilder();
 
+    for (const field of fieldsWithoutDescriptions) {
       // let path = process.env.SARIF_URI_ABSOLUTE ? pathToFileURL(field) : path.relative(process.cwd(), field).replace(/\\/g, '/') as const
 
       const sarifResultInit = {
@@ -70,12 +70,12 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
 
       sarifResultBuilder.initSimple(sarifResultInit);
       sarifRunBuilder.addResult(sarifResultBuilder);
-
-      sarifBuilder.addRun(sarifRunBuilder);
-      const sarifResults = sarifBuilder.buildSarifJsonString({ indent: false });
-      // eslint-disable-next-line no-console
-      console.log(sarifResults);
     }
+
+    sarifBuilder.addRun(sarifRunBuilder);
+    const sarifResults = sarifBuilder.buildSarifJsonString({ indent: false });
+    // eslint-disable-next-line no-console
+    console.log(sarifResults);
 
     return { outcome: 'Complete' };
   }
