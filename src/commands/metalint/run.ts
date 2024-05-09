@@ -4,7 +4,7 @@ import { SarifBuilder, SarifRunBuilder, SarifResultBuilder, SarifRuleBuilder } f
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import { fileExists, readAllFiles } from '../util.js';
-import { fieldsMustHaveDescriptions } from '../../rules/fields-must-have-descriptions.js';
+import { fieldsMustHaveDescriptions } from '../../rules/field-should-have-a-description.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-metadata-linter', 'metalint.run');
@@ -50,9 +50,9 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     });
 
     const sarifRuleBuilder = new SarifRuleBuilder().initSimple({
-      ruleId: 'fields-must-have-descriptions',
-      shortDescriptionText: 'Fields must have descriptions',
-      fullDescriptionText: 'Custom fields must have a description in the field metadata file',
+      ruleId: 'field-should-have-a-description',
+      shortDescriptionText: 'Custom Fields should have description.',
+      fullDescriptionText: 'A Custom Field should have a description, describing how the field is used.',
     });
     sarifRunBuilder.addRule(sarifRuleBuilder);
 
@@ -60,8 +60,8 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
 
     for (const field of fieldsWithoutDescriptions) {
       const sarifResultInit = {
-        ruleId: 'fields-must-have-descriptions',
-        messageText: 'Field is missing a description',
+        ruleId: 'fields-should-have-a-description',
+        messageText: 'Custom Fields should have description.',
         level: 'error' as const,
         fileUri: path.relative(process.cwd(), field).replace(/\\/g, '/'),
         startLine: 3,
