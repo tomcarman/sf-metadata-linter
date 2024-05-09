@@ -1,6 +1,6 @@
 import * as fs from 'node:fs';
 
-export function fieldsMustHaveDescriptions(files: string[]): string[] {
+export function execute(files: string[]): string[] {
   const customFields = files.filter(
     (file) => (file.includes('__c') || file.includes('__e')) && file.endsWith('.field-meta.xml')
   );
