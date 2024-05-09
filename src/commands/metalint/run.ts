@@ -1,10 +1,9 @@
-// import { pathToFileURL } from 'node:url';
+// import { pathToFileURL  } from 'node:url';
 import * as path from 'node:path';
 import { SarifBuilder, SarifRunBuilder, SarifResultBuilder, SarifRuleBuilder } from 'node-sarif-builder';
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import { fileExists, readAllFiles } from '../util.js';
-import { fieldsMustHaveDescriptions } from '../../rules/field-should-have-a-description.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-metadata-linter', 'metalint.run');
@@ -37,10 +36,11 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     const files = (await readAllFiles(dir)) as string[];
     this.spinner.stop();
 
-    // Run rules
-    const fieldsWithoutDescriptions = fieldsMustHaveDescriptions(files);
-    // eslint-disable-next-line no-console
-    console.log(fieldsWithoutDescriptions);
+    const rulesToRun = ['field-should-have-a-description'];
+
+    this.spinner.start('Running rules...');
+    const ruleResults = await executeRules(rulesToRun, files);
+    this.spinner.stop();
 
     // Setup sarif builder, add rules
     const sarifBuilder = new SarifBuilder();
@@ -54,22 +54,25 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
       shortDescriptionText: 'Custom Fields should have description.',
       fullDescriptionText: 'A Custom Field should have a description, describing how the field is used.',
     });
+
     sarifRunBuilder.addRule(sarifRuleBuilder);
 
     const sarifResultBuilder = new SarifResultBuilder();
 
-    for (const field of fieldsWithoutDescriptions) {
-      const sarifResultInit = {
-        ruleId: 'fields-should-have-a-description',
-        messageText: 'Custom Fields should have description.',
-        level: 'error' as const,
-        fileUri: path.relative(process.cwd(), field).replace(/\\/g, '/'),
-        startLine: 3,
-        endLine: 3,
-      };
-
-      sarifResultBuilder.initSimple(sarifResultInit);
-      sarifRunBuilder.addResult(sarifResultBuilder);
+    for (const rule of ruleResults) {
+      for (const field of rule) {
+        // Dumb but fine for now
+        const sarifResultInit = {
+          ruleId: 'fields-should-have-a-description',
+          messageText: 'Custom Fields should have description.',
+          level: 'error' as const,
+          fileUri: path.relative(process.cwd(), field).replace(/\\/g, '/'),
+          startLine: 3,
+          endLine: 3,
+        };
+        sarifResultBuilder.initSimple(sarifResultInit);
+        sarifRunBuilder.addResult(sarifResultBuilder);
+      }
     }
 
     sarifBuilder.addRun(sarifRunBuilder);
@@ -79,4 +82,21 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
 
     return { outcome: 'Complete' };
   }
+}
+
+async function executeRules(rulesToRun: string[], files: string[]): Promise<string[][]> {
+  type RuleModule = {
+    execute: (files: string[]) => string[];
+  };
+
+  const ruleResults: string[][] = [];
+
+  await Promise.all(
+    rulesToRun.map(async (rule) => {
+      const ruleModule = (await import(`../../rules/${rule}.ts`)) as RuleModule;
+      ruleResults.push(ruleModule.execute(files));
+    })
+  );
+
+  return ruleResults;
 }
