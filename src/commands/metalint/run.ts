@@ -67,29 +67,3 @@ function executeRules(ruleIdsToRun: string[], files: string[]): RuleResults {
   }
   return ruleResults;
 }
-// type RuleClassMap = {
-//   [key: string]: string;
-// };
-
-// const ruleClassMap: RuleClassMap = {
-//   'field-should-have-a-description': 'FieldShouldHaveADescription',
-//   'object-should-have-a-description': 'ObjectShouldHaveADescription',
-// };
-
-// type Rules = {
-//   [key: string]: new () => RuleClass;
-// };
-// const rules = rulesModule as Rules;
-
-// function executeRules(rulesToRun: string[], files: string[]): RuleResults {
-//   const allRuleResults: RuleResults = {};
-
-//   for (const ruleName of rulesToRun) {
-//     const Rule = rules[ruleClassMap[ruleName]];
-//     const ruleInstance = new Rule();
-//     ruleInstance.setFiles(files);
-//     ruleInstance.execute();
-//     allRuleResults[ruleInstance.ruleId] = ruleInstance;
-//   }
-//   return allRuleResults;
-// }
