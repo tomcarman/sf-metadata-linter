@@ -1,9 +1,10 @@
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import { fileExists, readAllFiles } from '../util.js';
-import * as rulesModule from '../../rules/_rules.js';
-import type { RuleClass, RuleResults } from '../../common/types.js';
 import { generateSarifResults } from '../../common/sarif-builder.js';
+import { ruleClassMap } from '../../common/types.js';
+import * as rulesModule from '../../rules/_rules.js';
+import type { RuleClasses, RuleResults } from '../../common/types.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-metadata-linter', 'metalint.run');
@@ -53,29 +54,42 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
   }
 }
 
-type RuleClassMap = {
-  [key: string]: string;
-};
+function executeRules(ruleIdsToRun: string[], files: string[]): RuleResults {
+  const ruleClasses = rulesModule as RuleClasses;
+  const ruleResults: RuleResults = {};
 
-const ruleClassMap: RuleClassMap = {
-  'field-should-have-a-description': 'FieldShouldHaveADescription',
-  'object-should-have-a-description': 'ObjectShouldHaveADescription',
-};
-
-type Rules = {
-  [key: string]: new () => RuleClass;
-};
-const rules = rulesModule as Rules;
-
-function executeRules(rulesToRun: string[], files: string[]): RuleResults {
-  const allRuleResults: RuleResults = {};
-
-  for (const ruleName of rulesToRun) {
-    const Rule = rules[ruleClassMap[ruleName]];
-    const ruleInstance = new Rule();
-    ruleInstance.setFiles(files);
-    ruleInstance.execute();
-    allRuleResults[ruleInstance.ruleId] = ruleInstance;
+  for (const ruleId of ruleIdsToRun) {
+    const RuleClass = ruleClasses[ruleClassMap[ruleId]];
+    const rule = new RuleClass();
+    rule.setFiles(files);
+    rule.execute();
+    ruleResults[rule.ruleId] = rule;
   }
-  return allRuleResults;
+  return ruleResults;
 }
+// type RuleClassMap = {
+//   [key: string]: string;
+// };
+
+// const ruleClassMap: RuleClassMap = {
+//   'field-should-have-a-description': 'FieldShouldHaveADescription',
+//   'object-should-have-a-description': 'ObjectShouldHaveADescription',
+// };
+
+// type Rules = {
+//   [key: string]: new () => RuleClass;
+// };
+// const rules = rulesModule as Rules;
+
+// function executeRules(rulesToRun: string[], files: string[]): RuleResults {
+//   const allRuleResults: RuleResults = {};
+
+//   for (const ruleName of rulesToRun) {
+//     const Rule = rules[ruleClassMap[ruleName]];
+//     const ruleInstance = new Rule();
+//     ruleInstance.setFiles(files);
+//     ruleInstance.execute();
+//     allRuleResults[ruleInstance.ruleId] = ruleInstance;
+//   }
+//   return allRuleResults;
+// }

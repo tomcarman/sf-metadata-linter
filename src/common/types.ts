@@ -29,3 +29,16 @@ export class SingleRuleResult {
 export type RuleResults = {
   [key: string]: RuleClass;
 };
+
+export type RuleClasses = {
+  [key: string]: new () => RuleClass;
+};
+
+export type RuleIdToRuleClassNameMap = {
+  [key: string]: string;
+};
+
+export const ruleClassMap: RuleIdToRuleClassNameMap = {
+  'field-should-have-a-description': 'FieldShouldHaveADescription',
+  'object-should-have-a-description': 'ObjectShouldHaveADescription',
+};
