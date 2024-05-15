@@ -1,14 +1,31 @@
 import * as fs from 'node:fs';
+import { RuleClass, SingleRuleResult } from '../common/types.js';
 
-export function execute(files: string[]): string[] {
-  const customFields = files.filter(
-    (file) => (file.includes('__c') || file.includes('__e')) && file.endsWith('.field-meta.xml')
-  );
+export default class FieldShouldHaveADescription implements RuleClass {
+  public ruleId: string = 'field-should-have-a-description';
+  public shortDescriptionText = 'Custom Fields should have description.';
+  public fullDescriptionText = 'A Custom Field should have a description, describing how the field is used.';
+  public startLine = 1;
+  public endLine = 1;
+  public files: string[] = [];
+  public results: SingleRuleResult[] = [];
 
-  const customFieldsWithoutDescriptions = customFields.filter((file) => {
-    const contents = fs.readFileSync(file, 'utf-8');
-    return !contents.includes('<description>');
-  });
+  public setFiles(files: string[]): void {
+    this.files = files;
+  }
 
-  return customFieldsWithoutDescriptions;
+  public execute(): void {
+    const customFields = this.files.filter(
+      (file) => (file.includes('__c') || file.includes('__e')) && file.endsWith('.field-meta.xml')
+    );
+
+    const ruleViolations = customFields.filter((file) => {
+      const contents = fs.readFileSync(file, 'utf-8');
+      return !contents.includes('<description>');
+    });
+
+    for (const ruleViolation of ruleViolations) {
+      this.results.push(new SingleRuleResult(this.startLine, this.endLine, 1, 1, ruleViolation)); // TODO: columns should be nullable
+    }
+  }
 }
