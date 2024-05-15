@@ -1,7 +1,7 @@
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import { fileExists, readAllFiles } from '../util.js';
-import * as rulesModule from '../../rules/index.js';
+import * as rulesModule from '../../rules/_rules.js';
 import type { RuleClass, RuleResults } from '../../common/types.js';
 import { generateSarifResults } from '../../common/sarif-builder.js';
 
