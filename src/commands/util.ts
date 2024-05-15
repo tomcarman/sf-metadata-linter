@@ -26,7 +26,3 @@ export async function readAllFiles(dir: string): Promise<string[] | undefined> {
     }
   }
 }
-
-export function getCustomFields(files: string[]): string[] {
-  return files.filter((file) => (file.includes('__c') || file.includes('__e')) && file.endsWith('.field-meta.xml'));
-}
