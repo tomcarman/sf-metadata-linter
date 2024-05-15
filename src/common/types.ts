@@ -11,18 +11,18 @@ export abstract class RuleClass {
 }
 
 export class SingleRuleResult {
+  public filePath: string;
   public startLine: number;
   public endLine: number;
-  public startColumn: number;
-  public endColumn: number;
-  public filePath: string;
+  public startColumn?: number;
+  public endColumn?: number;
 
-  public constructor(startLine: number, endLine: number, startColumn: number, endColumn: number, filePath: string) {
+  public constructor(filePath: string, startLine: number, endLine: number, startColumn?: number, endColumn?: number) {
+    this.filePath = filePath;
     this.startLine = startLine;
     this.endLine = endLine;
     this.startColumn = startColumn;
     this.endColumn = endColumn;
-    this.filePath = filePath;
   }
 }
 

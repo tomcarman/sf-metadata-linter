@@ -25,7 +25,7 @@ export default class FieldShouldHaveADescription implements RuleClass {
     });
 
     for (const ruleViolation of ruleViolations) {
-      this.results.push(new SingleRuleResult(this.startLine, this.endLine, 1, 1, ruleViolation)); // TODO: columns should be nullable
+      this.results.push(new SingleRuleResult(ruleViolation, this.startLine, this.endLine));
     }
   }
 }
