@@ -1,7 +1,10 @@
+import type { Result } from 'sarif';
+
 export abstract class RuleClass {
   public abstract ruleId: string;
   public abstract shortDescriptionText: string;
   public abstract fullDescriptionText: string;
+  public abstract level: Result.level;
   public abstract startLine: number;
   public abstract endLine: number;
   public abstract files: string[];

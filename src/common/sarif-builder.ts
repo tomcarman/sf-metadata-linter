@@ -44,7 +44,7 @@ function addResultsToSarifRun(sarifRunBuilder: SarifRunBuilder, ruleResults: Rul
         const sarifResult = new SarifResultBuilder().initSimple({
           ruleId: rule.ruleId,
           messageText: rule.shortDescriptionText,
-          level: 'error' as const,
+          level: rule.level,
           fileUri: path.relative(process.cwd(), result.filePath).replace(/\\/g, '/'),
           startLine: result.startLine,
           endLine: result.endLine,
