@@ -26,7 +26,6 @@ export default class ObjectShouldHaveADescription implements RuleClass {
 
     for (const ruleViolation of ruleViolations) {
       this.results.push(new SingleRuleResult(ruleViolation, this.startLine, this.endLine));
-      // this.results.push(new SingleRuleResult(ruleViolation, this.startLine, this.endLine, 1, 1)); // TODO: columns should be nullable
     }
   }
 }
