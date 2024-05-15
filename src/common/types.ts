@@ -1,10 +1,10 @@
 export abstract class RuleClass {
-  public ruleId: string = '';
-  public shortDescriptionText: string = '';
-  public fullDescriptionText: string = '';
-  public startLine: number = 0;
-  public endLine: number = 0;
-  public files: string[] = [];
+  public abstract ruleId: string;
+  public abstract shortDescriptionText: string;
+  public abstract fullDescriptionText: string;
+  public abstract startLine: number;
+  public abstract endLine: number;
+  public abstract files: string[];
   public abstract results: SingleRuleResult[];
   public abstract setFiles(files: string[]): void;
   public abstract execute(): void;
