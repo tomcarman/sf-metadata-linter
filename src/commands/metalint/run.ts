@@ -78,35 +78,3 @@ function executeRules(rulesToRun: string[], files: string[]): RuleResults {
   }
   return allRuleResults;
 }
-
-// await function executeRules(rulesToRun: string[], files: string[]): Promise<string[][]> {
-
-// const ruleToRun = config['test-rule'];
-// const ruleToRun2 = 'TestRule'
-
-// const Rule = rulesModule[ruleToRun];  // eslint-disable-line
-// const ruleInstance = new Rule(); // eslint-disable-line
-// ruleInstance.setFiles(files);  // eslint-disable-line
-// ruleResults.push(ruleInstance.execute());  // eslint-disable-line
-
-// await Promise.all(
-//   rulesToRun.map(async (ruleName) => {
-//     const aRule = (await import(`../../rules/${ruleName}.ts`)).rule; // eslint-disable-line
-//     aRule.setFiles(files); // eslint-disable-line
-//     ruleResults.push(aRule.execute()); // eslint-disable-line
-
-//   })
-// );
-
-// const ruleInstance = new config[ruleName].execute();
-
-// const rule = (await import(`../../rules/${ruleName}.ts`)) as RuleClass; // eslint-disable-line
-// const ruleInstance = new RuleClass(files); // eslint-disable-line
-// ruleResults.push(ruleInstance.execute()); // eslint-disable-line
-
-// rules2[rulesName]
-
-// const Rule = (await import(`../../rules/${ruleName}.ts`)).rule;
-// const aRule = new Rule();
-// aRule.setFiles(files);
-// ruleResults.push(aRule.execute());
