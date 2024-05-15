@@ -12,6 +12,15 @@ export function generateSarifResults(ruleResults: RuleResults): string {
   return sarifBuilder.buildSarifJsonString({ indent: false });
 }
 
+function initSarifRun(): SarifRunBuilder {
+  const sarifRun = new SarifRunBuilder().initSimple({
+    toolDriverName: 'sf-metadata-linter',
+    toolDriverVersion: '1.0.0',
+  });
+
+  return sarifRun;
+}
+
 function addRulesToSarifRun(sarifRunBuilder: SarifRunBuilder, ruleResults: RuleResults): void {
   for (const ruleId in ruleResults) {
     if (Object.hasOwn(ruleResults, ruleId)) {
@@ -45,65 +54,3 @@ function addResultsToSarifRun(sarifRunBuilder: SarifRunBuilder, ruleResults: Rul
     }
   }
 }
-
-// RunBuilder
-// RuleBuilder -  added to RunBuilder
-// ResultNBuilder - added to RunBuilder
-// RunBuilder added to SarifBuilder
-
-function initSarifRun(): SarifRunBuilder {
-  const sarifRun = new SarifRunBuilder().initSimple({
-    toolDriverName: 'sf-metadata-linter',
-    toolDriverVersion: '1.0.0',
-  });
-
-  return sarifRun;
-}
-
-// const sarifResultBuilder = new SarifResultBuilder();
-// for (const rule of ruleResults) {
-//   for (const field of rule) {
-//     // Dumb but fine for now
-//     const sarifResultInit = {
-//       ruleId: 'fields-should-have-a-description',
-//       messageText: 'Custom Fields should have description.',
-//       level: 'error' as const,
-//       fileUri: path.relative(process.cwd(), field).replace(/\\/g, '/'),
-//       startLine: 3,
-//       endLine: 3,
-//     };
-//     sarifResultBuilder.initSimple(sarifResultInit);
-//     sarifRunBuilder.addResult(sarifResultBuilder);
-//   }
-// }
-
-// const sarifRuleBuilder = new SarifRuleBuilder().initSimple({
-//   ruleId: 'field-should-have-a-description',
-//   shortDescriptionText: 'Custom Fields should have description.',
-//   fullDescriptionText: 'A Custom Field should have a description, describing how the field is used.',
-// });
-
-// sarifRunBuilder.addRule(sarifRuleBuilder);
-
-// const sarifResultBuilder = new SarifResultBuilder();
-
-// for (const rule of ruleResults) {
-//   for (const field of rule) {
-//     // Dumb but fine for now
-//     const sarifResultInit = {
-//       ruleId: 'fields-should-have-a-description',
-//       messageText: 'Custom Fields should have description.',
-//       level: 'error' as const,
-//       fileUri: path.relative(process.cwd(), field).replace(/\\/g, '/'),
-//       startLine: 3,
-//       endLine: 3,
-//     };
-//     sarifResultBuilder.initSimple(sarifResultInit);
-//     sarifRunBuilder.addResult(sarifResultBuilder);
-//   }
-// }
-
-// sarifBuilder.addRun(sarifRunBuilder);
-// const sarifResults = sarifBuilder.buildSarifJsonString({ indent: false });
-// // eslint-disable-next-line no-console
-// console.log(sarifResults);
