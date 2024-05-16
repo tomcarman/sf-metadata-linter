@@ -7,6 +7,7 @@
     "@salesforce/core": "^7.2.0",
     "@salesforce/sf-plugins-core": "^9.0.1",
     "@types/sarif": "^2.1.7",
+    "csv-stringify": "^6.5.0",
     "fast-xml-parser": "^4.3.6",
     "node-sarif-builder": "^3.1.0"
   },
