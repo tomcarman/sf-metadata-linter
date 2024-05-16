@@ -3,6 +3,7 @@ import { Messages } from '@salesforce/core';
 import { fileExists, readAllFiles } from '../util.js';
 import { generateSarifResults } from '../../common/sarif-builder.js';
 import { generateCsvResults } from '../../common/csv-builder.js';
+import { generateTableResults } from '../../common/table-builder.js';
 import { ruleClassMap } from '../../common/types.js';
 import * as rulesModule from '../../rules/_rules.js';
 import type { RuleClasses, RuleResults } from '../../common/types.js';
@@ -53,6 +54,8 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     this.spinner.stop();
     // eslint-disable-next-line no-console
     console.log(sarifResults);
+
+    generateTableResults(ruleResults);
 
     return { outcome: 'Complete' };
   }
