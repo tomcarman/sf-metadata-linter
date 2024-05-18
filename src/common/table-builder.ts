@@ -12,7 +12,7 @@ export function generateTableResults(ruleResults: RuleResults): void {
       head: [],
       border: [],
     },
-    colWidths: [40, 80, 10, 10, 10, 10, 10],
+    colWidths: [40, 100, 10, 10, 10, 10, 10],
   });
 
   for (const ruleId in ruleResults) {
