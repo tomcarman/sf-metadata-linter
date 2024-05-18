@@ -27,6 +27,11 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
       required: true,
       exists: true,
     }),
+    format: Flags.option({
+      summary: messages.getMessage('flags.format.summary'),
+      char: 'f',
+      options: ['csv', 'sarif', 'table'] as const,
+    })(),
   };
 
   public async run(): Promise<MetalintRunResult> {

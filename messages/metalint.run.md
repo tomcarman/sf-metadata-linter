@@ -21,3 +21,7 @@ More information about a flag. Don't repeat the summary.
 # error.InvalidDir
 
 You must provide a folder to lint - eg. force-app
+
+# flags.format.summary
+
+Specifies the output format for results.
