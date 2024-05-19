@@ -1,15 +1,21 @@
 import * as path from 'node:path';
+import fs from 'node:fs';
 import { SarifBuilder, SarifRunBuilder, SarifResultBuilder, SarifRuleBuilder } from 'node-sarif-builder';
 import type { RuleResults } from '../common/types.js';
 
 export function generateSarifResults(ruleResults: RuleResults): string {
+  const filename = 'sf-metadata-linter-results.sarif'; // TODO - make this a flag
+
   const sarifRun = initSarifRun();
   addRulesToSarifRun(sarifRun, ruleResults);
   addResultsToSarifRun(sarifRun, ruleResults);
 
   const sarifBuilder = new SarifBuilder();
   sarifBuilder.addRun(sarifRun);
-  return sarifBuilder.buildSarifJsonString({ indent: false });
+  const results = sarifBuilder.buildSarifJsonString({ indent: false });
+  fs.writeFileSync(filename, results);
+
+  return `Results saved to ${filename}`;
 }
 
 function initSarifRun(): SarifRunBuilder {

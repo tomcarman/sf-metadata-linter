@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import { stringify } from 'csv-stringify';
 import type { RuleResults } from '../common/types.js';
 
-export function generateCsvResults(ruleResults: RuleResults): void {
-  const filename = 'sf-metadata-linter-results.csv';
+export function generateCsvResults(ruleResults: RuleResults): string {
+  const filename = 'sf-metadata-linter-results.csv'; // TODO - make this a flag
   const writeableStream = fs.createWriteStream(filename);
 
   const columns = [
@@ -41,4 +41,6 @@ export function generateCsvResults(ruleResults: RuleResults): void {
     }
   }
   stringifier.pipe(writeableStream);
+
+  return `Results saved to ${filename}`;
 }

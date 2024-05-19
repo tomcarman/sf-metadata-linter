@@ -2,7 +2,7 @@ import Table from 'cli-table3';
 import chalk from 'chalk';
 import type { RuleResults } from '../common/types.js';
 
-export function generateTableResults(ruleResults: RuleResults): void {
+export function generateTableResults(ruleResults: RuleResults): string {
   const headerValues = ['ruleId', 'filePath', 'level', 'startLn', 'endLn', 'startCol', 'endCol'];
   const headers = headerValues.map((header) => chalk.bold(header));
 
@@ -38,5 +38,7 @@ export function generateTableResults(ruleResults: RuleResults): void {
     }
   }
 
-  process.stdout.write(table.toString());
+  return table.toString();
+
+  // process.stdout.write(table.toString());
 }

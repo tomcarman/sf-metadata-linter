@@ -31,6 +31,7 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
       summary: messages.getMessage('flags.format.summary'),
       char: 'f',
       options: ['csv', 'sarif', 'table'] as const,
+      default: 'table',
     })(),
   };
 
@@ -39,6 +40,7 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     if (!(await fileExists(flags['directory']))) throw messages.createError('error.InvalidDir');
 
     const dir = flags['directory'];
+    const format = flags['format'];
 
     this.spinner.start('Building list of files to lint...');
     const files = (await readAllFiles(dir)) as string[];
@@ -50,17 +52,28 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     const ruleResults = executeRules(rulesToRun, files);
     this.spinner.stop();
 
-    this.spinner.start('Generating SARIF...');
-    const sarifResults = generateSarifResults(ruleResults);
-    this.spinner.stop();
+    let results = '';
 
-    this.spinner.start('Generating CSV...');
-    generateCsvResults(ruleResults);
-    this.spinner.stop();
+    if (format === 'sarif') {
+      this.spinner.start('Generating SARIF...');
+      results = generateSarifResults(ruleResults);
+      this.spinner.stop();
+    }
+
+    if (format === 'csv') {
+      this.spinner.start('Generating CSV...');
+      results = generateCsvResults(ruleResults);
+      this.spinner.stop();
+    }
+
+    if (format === 'table') {
+      this.spinner.start('Generating results...');
+      results = generateTableResults(ruleResults);
+      this.spinner.stop();
+    }
+
     // eslint-disable-next-line no-console
-    console.log(sarifResults);
-
-    generateTableResults(ruleResults);
+    console.log(results);
 
     return { outcome: 'Complete' };
   }
