@@ -54,23 +54,15 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
 
     let results = '';
 
-    if (format === 'sarif') {
-      this.spinner.start('Generating SARIF...');
-      results = generateSarifResults(ruleResults);
-      this.spinner.stop();
-    }
+    const formatFunctions = {
+      sarif: generateSarifResults,
+      csv: generateCsvResults,
+      table: generateTableResults,
+    };
 
-    if (format === 'csv') {
-      this.spinner.start('Generating CSV...');
-      results = generateCsvResults(ruleResults);
-      this.spinner.stop();
-    }
-
-    if (format === 'table') {
-      this.spinner.start('Generating results...');
-      results = generateTableResults(ruleResults);
-      this.spinner.stop();
-    }
+    this.spinner.start(`Generating ${format}...`);
+    results = formatFunctions[format](ruleResults);
+    this.spinner.stop();
 
     // eslint-disable-next-line no-console
     console.log(results);
