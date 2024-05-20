@@ -50,3 +50,6 @@ oclif.lock
 # yarn stuff
 .yarn/
 .yarnrc.yml
+
+# test/demo files
+demo/
