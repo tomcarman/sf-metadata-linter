@@ -12,12 +12,14 @@
     "csv-stringify": "^6.5.0",
     "fast-xml-parser": "^4.3.6",
     "js-yaml": "^4.1.0",
-    "node-sarif-builder": "^3.1.0"
+    "node-sarif-builder": "^3.1.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@oclif/plugin-command-snapshot": "^5.1.9",
     "@salesforce/cli-plugins-testkit": "^5.3.4",
     "@salesforce/dev-scripts": "^9.0.0",
+    "@types/js-yaml": "^4.0.9",
     "eslint-plugin-sf-plugin": "^1.18.1",
     "husky": "^8.0.0",
     "oclif": "^4.10.7",
