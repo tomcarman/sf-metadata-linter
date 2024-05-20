@@ -53,14 +53,14 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
 
     let results = '';
 
-    const formatFunctions = {
+    const resultFormatters = {
       sarif: generateSarifResults,
       csv: generateCsvResults,
       table: generateTableResults,
     };
 
     this.spinner.start(`Generating ${format}...`);
-    results = formatFunctions[format](ruleResults);
+    results = resultFormatters[format](ruleResults);
     this.spinner.stop();
 
     await readConfigFile();
@@ -69,6 +69,7 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
   }
 }
 
+// TODO move elsewhere?
 function executeRules(ruleIdsToRun: string[], files: string[]): RuleResults {
   const ruleClasses = rulesModule as RuleClasses;
   const ruleResults: RuleResults = {};
