@@ -11,6 +11,7 @@
     "cli-table3": "^0.6.5",
     "csv-stringify": "^6.5.0",
     "fast-xml-parser": "^4.3.6",
+    "js-yaml": "^4.1.0",
     "node-sarif-builder": "^3.1.0"
   },
   "devDependencies": {
