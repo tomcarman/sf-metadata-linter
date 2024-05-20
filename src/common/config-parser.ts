@@ -37,19 +37,3 @@ export async function readConfigFile(): Promise<void> {
     }
   }
 }
-
-// configSchema.validate(loadedConfig)
-// .then(validConfig => {
-//   // eslint-disable-next-line no-console
-//   // console.log(valid);
-//   const config = validConfig as ConfigFile;
-//   // eslint-disable-next-line no-console
-//   console.log(config);
-
-// })
-// .catch(error => {
-//   if(error instanceof Error) {
-//     // eslint-disable-next-line no-console
-//     console.log(error.message);
-//   }
-// })
