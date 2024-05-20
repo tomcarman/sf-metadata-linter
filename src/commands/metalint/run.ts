@@ -1,6 +1,6 @@
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
-import { fileExists, readAllFiles } from '../util.js';
+import { readAllFiles } from '../util.js';
 import { generateSarifResults } from '../../common/sarif-builder.js';
 import { generateCsvResults } from '../../common/csv-builder.js';
 import { generateTableResults } from '../../common/table-builder.js';
@@ -37,8 +37,6 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
 
   public async run(): Promise<MetalintRunResult> {
     const { flags } = await this.parse(MetalintRun);
-    if (!(await fileExists(flags['directory']))) throw messages.createError('error.InvalidDir');
-
     const dir = flags['directory'];
     const format = flags['format'];
 
