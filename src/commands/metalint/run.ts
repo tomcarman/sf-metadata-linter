@@ -65,6 +65,8 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
 
     await readConfigFile();
 
+    this.log(results);
+
     return { outcome: results };
   }
 }

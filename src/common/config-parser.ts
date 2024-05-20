@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { ConfigFile } from '../common/types.js';
 
 export async function readConfigFile(): Promise<void> {
-  const loadedConfig = yaml.load(fs.readFileSync('config.yaml', 'utf8'));
+  const loadedConfig = yaml.load(fs.readFileSync('demo/config.yaml', 'utf8'));
 
   const configSchema = yup.object().shape({
     version: yup.number().required(),
