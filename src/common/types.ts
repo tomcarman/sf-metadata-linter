@@ -45,3 +45,24 @@ export const ruleClassMap: RuleIdToRuleClassNameMap = {
   'field-should-have-a-description': 'FieldShouldHaveADescription',
   'object-should-have-a-description': 'ObjectShouldHaveADescription',
 };
+
+export type ConfigFile = {
+  version: number;
+  config: Config;
+  rules?: RuleConfig[] | null;
+};
+export type Config = {
+  csvfilename: string;
+  sariffilename: string;
+};
+export type RuleConfig = {
+  ruleid: string;
+  active: boolean;
+  priority: number;
+  property?: RuleProperty;
+};
+
+export type RuleProperty = {
+  name: string;
+  value: unknown;
+};

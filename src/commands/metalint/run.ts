@@ -1,6 +1,7 @@
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import { readAllFiles } from '../util.js';
+import { readConfigFile } from '../../common/config-parser.js';
 import { generateSarifResults } from '../../common/sarif-builder.js';
 import { generateCsvResults } from '../../common/csv-builder.js';
 import { generateTableResults } from '../../common/table-builder.js';
@@ -62,10 +63,9 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     results = formatFunctions[format](ruleResults);
     this.spinner.stop();
 
-    // eslint-disable-next-line no-console
-    console.log(results);
+    await readConfigFile();
 
-    return { outcome: 'Complete' };
+    return { outcome: results };
   }
 }
 
