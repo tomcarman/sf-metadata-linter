@@ -9,6 +9,7 @@ export abstract class RuleClass {
   public abstract endLine: number;
   public abstract files: string[];
   public abstract results: SingleRuleResult[];
+  public abstract ruleProperties?: RuleProperty[];
   public abstract setFiles(files: string[]): void;
   public abstract execute(): void;
 }
@@ -44,12 +45,13 @@ export type RuleIdToRuleClassNameMap = {
 export const ruleClassMap: RuleIdToRuleClassNameMap = {
   'field-should-have-a-description': 'FieldShouldHaveADescription',
   'object-should-have-a-description': 'ObjectShouldHaveADescription',
+  'field-description-minimum-length': 'FieldDescriptionMinimumLength',
 };
 
 export type ConfigFile = {
   version: number;
   config: Config;
-  rules?: RuleConfig[] | null;
+  rules: RuleConfig[];
 };
 export type Config = {
   csvfilename: string;
@@ -59,7 +61,7 @@ export type RuleConfig = {
   ruleid: string;
   active: boolean;
   priority: number;
-  property?: RuleProperty;
+  properties?: RuleProperty[] | null;
 };
 
 export type RuleProperty = {
