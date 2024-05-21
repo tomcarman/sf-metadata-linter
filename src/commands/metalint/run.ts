@@ -22,6 +22,12 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
   public static readonly examples = messages.getMessages('examples');
 
   public static readonly flags = {
+    config: Flags.file({
+      summary: messages.getMessage('flags.config.summary'),
+      char: 'c',
+      required: true,
+      exists: true,
+    }),
     directory: Flags.directory({
       summary: messages.getMessage('flags.directory.summary'),
       char: 'd',
@@ -38,6 +44,7 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
 
   public async run(): Promise<MetalintRunResult> {
     const { flags } = await this.parse(MetalintRun);
+    const config = flags['config'];
     const dir = flags['directory'];
     const format = flags['format'];
 
@@ -63,7 +70,7 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     results = resultFormatters[format](ruleResults);
     this.spinner.stop();
 
-    await readConfigFile();
+    await readConfigFile(config);
 
     this.log(results);
 

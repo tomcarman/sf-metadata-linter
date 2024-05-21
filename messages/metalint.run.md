@@ -25,3 +25,7 @@ You must provide a folder to lint - eg. force-app
 # flags.format.summary
 
 Specifies the output format for results.
+
+# flags.config.summary
+
+YAML config file defining rules and settings.

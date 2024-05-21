@@ -3,8 +3,8 @@ import yaml from 'js-yaml';
 import * as yup from 'yup';
 import { ConfigFile } from '../common/types.js';
 
-export async function readConfigFile(): Promise<void> {
-  const loadedConfig = yaml.load(fs.readFileSync('demo/config.yaml', 'utf8'));
+export async function readConfigFile(configFile: string): Promise<void> {
+  const loadedConfig = yaml.load(fs.readFileSync(configFile, 'utf8'));
 
   const configSchema = yup.object().shape({
     version: yup.number().required(),
