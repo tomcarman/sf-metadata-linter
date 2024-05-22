@@ -5,7 +5,7 @@ import { readConfigFile } from '../../common/config-parser.js';
 import { generateSarifResults } from '../../common/sarif-builder.js';
 import { generateCsvResults } from '../../common/csv-builder.js';
 import { generateTableResults } from '../../common/table-builder.js';
-import { ruleClassMap, ConfigFile } from '../../common/types.js';
+import { ruleClassMap, ConfigFile, RuleProperty, RuleConfig } from '../../common/types.js';
 import * as rulesModule from '../../rules/_rules.js';
 import type { RuleClasses, RuleResults } from '../../common/types.js';
 
@@ -49,20 +49,20 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     const format = flags['format'];
 
     const config = (await readConfigFile(configFile)) as ConfigFile;
-    this.log('Valid config.json: ', config);
+
+    const rulesToRun = config.rules.filter((rule) => rule.active).map((rule) => rule.name);
+
+    const ruleConfigMap: Map<string, RuleConfig> = new Map();
+    config.rules.filter((rule) => rule.active).forEach((rule) => ruleConfigMap.set(rule.name, rule));
+
+    console.log(ruleConfigMap);
 
     this.spinner.start('Building list of files to lint...');
     const files = (await readAllFiles(dir)) as string[];
     this.spinner.stop();
 
-    const rulesToRun = [
-      'field-should-have-a-description',
-      'object-should-have-a-description',
-      'field-description-minimum-length',
-    ];
-
     this.spinner.start('Running rules...');
-    const ruleResults = executeRules(rulesToRun, files);
+    const ruleResults = executeRules(rulesToRun, ruleConfigMap, files);
     this.spinner.stop();
 
     let results = '';
@@ -84,14 +84,16 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
 }
 
 // TODO move elsewhere?
-function executeRules(ruleIdsToRun: string[], files: string[]): RuleResults {
+function executeRules(rulesToRun: string[], ruleConfigMap: Map<string, RuleConfig>, files: string[]): RuleResults {
   const ruleClasses = rulesModule as RuleClasses;
   const ruleResults: RuleResults = {};
 
-  for (const ruleId of ruleIdsToRun) {
+  for (const ruleId of rulesToRun) {
     const RuleClass = ruleClasses[ruleClassMap[ruleId]];
     const rule = new RuleClass();
     rule.setFiles(files);
+    rule.setPriority(ruleConfigMap.get(ruleId)?.priority as number);
+    rule.setRuleProperties(ruleConfigMap.get(ruleId)?.properties as RuleProperty[]);
     rule.execute();
     ruleResults[rule.ruleId] = rule;
   }

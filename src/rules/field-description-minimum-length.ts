@@ -5,14 +5,29 @@ import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { SfCustomField } from '../common/metadata-types.js';
 
 export default class FieldDescriptionMinimumLength extends RuleClass {
+  // Optional rule properties
+  public minimumLength = 50; // Default value
+
   public ruleId: string = 'field-description-minimum-length';
-  public shortDescriptionText = 'Custom Field Description does not meet the minimum length.';
-  public fullDescriptionText = 'A Custom Field should have a description, describing how the field is used.';
+  public shortDescriptionText = `Custom Field Description does not meet the minimum length (${this.minimumLength})`;
+  public fullDescriptionText = `A Custom Field should have a description, describing how the field is used. This description should be at least ${this.minimumLength} characters long.`;
   public level: Result.level = 'warning';
   public startLine = 1;
   public endLine = 1;
 
+  public loadRuleProperties(): void {
+    if (!this.ruleProperties) {
+      return;
+    }
+    for (const ruleProperty of this.ruleProperties) {
+      if (ruleProperty.name === 'minimumLength') {
+        this.minimumLength = ruleProperty.value as number;
+      }
+    }
+  }
+
   public execute(): void {
+    this.loadRuleProperties();
     const customFields = this.files.filter(
       (file) => (file.includes('__c') || file.includes('__e')) && file.endsWith('.field-meta.xml')
     );
@@ -24,7 +39,7 @@ export default class FieldDescriptionMinimumLength extends RuleClass {
       const customFieldContents = customField.CustomField;
 
       if (customFieldContents.description) {
-        return customFieldContents.description.length < 100;
+        return customFieldContents.description.length < this.minimumLength;
       }
     });
 

@@ -18,6 +18,21 @@ export abstract class RuleClass {
   public setRuleProperties(ruleProperties: RuleProperty[]): void {
     this.ruleProperties = ruleProperties;
   }
+  public setPriority(priority: number): void {
+    switch (priority) {
+      case 1:
+        this.level = 'error';
+        break;
+      case 2:
+        this.level = 'warning';
+        break;
+      case 3:
+        this.level = 'note';
+        break;
+      default:
+        this.level = 'warning';
+    }
+  }
 
   public abstract execute(): void;
 }
@@ -66,7 +81,7 @@ export type Config = {
   sariffilename: string;
 };
 export type RuleConfig = {
-  ruleid: string;
+  name: string;
   active: boolean;
   priority: number;
   properties?: RuleProperty[] | null;
