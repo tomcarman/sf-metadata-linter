@@ -48,10 +48,12 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     const dir = flags['directory'];
     const format = flags['format'];
 
+    this.spinner.start('Reading config file...');
     const config = (await readConfigFile(configFile)) as ConfigFile;
     const rulesToRun = config.rules.filter((rule) => rule.active).map((rule) => rule.name);
     const ruleConfigMap: Map<string, RuleConfig> = new Map();
     config.rules.filter((rule) => rule.active).forEach((rule) => ruleConfigMap.set(rule.name, rule));
+    this.spinner.stop();
 
     this.spinner.start('Building list of files to lint...');
     const files = (await readAllFiles(dir)) as string[];
@@ -61,16 +63,13 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     const ruleResults = executeRules(rulesToRun, ruleConfigMap, files);
     this.spinner.stop();
 
-    let results = '';
-
+    this.spinner.start(`Generating ${format}...`);
     const resultFormatters = {
       sarif: generateSarifResults,
       csv: generateCsvResults,
       table: generateTableResults,
     };
-
-    this.spinner.start(`Generating ${format}...`);
-    results = resultFormatters[format](ruleResults);
+    const results = resultFormatters[format](ruleResults);
     this.spinner.stop();
 
     this.log(results);
