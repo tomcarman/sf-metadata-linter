@@ -1,11 +1,14 @@
 import * as fs from 'node:fs';
+import { Messages } from '@salesforce/core';
 import yaml from 'js-yaml';
 import * as yup from 'yup';
 import { ConfigFile } from '../common/types.js';
 
-export async function readConfigFile(configFile: string): Promise<void> {
-  const loadedConfig = yaml.load(fs.readFileSync(configFile, 'utf8'));
+Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
+const messages = Messages.loadMessages('sf-metadata-linter', 'metalint.run');
 
+export async function readConfigFile(configFile: string): Promise<ConfigFile | undefined> {
+  const loadedConfig = yaml.load(fs.readFileSync(configFile, 'utf8'));
   const configSchema = yup.object().shape({
     version: yup.number().required(),
     config: yup.object().shape({
@@ -27,13 +30,10 @@ export async function readConfigFile(configFile: string): Promise<void> {
 
   try {
     await configSchema.validate(loadedConfig);
-    const config = loadedConfig as ConfigFile;
-    // eslint-disable-next-line no-console
-    console.log(config);
+    return loadedConfig as ConfigFile;
   } catch (error) {
     if (error instanceof Error) {
-      // eslint-disable-next-line no-console
-      console.log(error.message);
+      throw messages.createError('error.InvalidConfigFile', [error.message]);
     }
   }
 }

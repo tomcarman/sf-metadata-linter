@@ -6,6 +6,10 @@ Summary of a command.
 
 More information about a command. Don't repeat the summary.
 
+# examples
+
+- <%= config.bin %> <%= command.id %>
+
 # flags.directory.summary
 
 Description of a flag.
@@ -14,14 +18,6 @@ Description of a flag.
 
 More information about a flag. Don't repeat the summary.
 
-# examples
-
-- <%= config.bin %> <%= command.id %>
-
-# error.InvalidDir
-
-You must provide a folder to lint - eg. force-app
-
 # flags.format.summary
 
 Specifies the output format for results.
@@ -29,3 +25,7 @@ Specifies the output format for results.
 # flags.config.summary
 
 YAML config file defining rules and settings.
+
+# error.InvalidConfigFile
+
+The config file is invalid: %s

@@ -5,7 +5,7 @@ import { readConfigFile } from '../../common/config-parser.js';
 import { generateSarifResults } from '../../common/sarif-builder.js';
 import { generateCsvResults } from '../../common/csv-builder.js';
 import { generateTableResults } from '../../common/table-builder.js';
-import { ruleClassMap } from '../../common/types.js';
+import { ruleClassMap, ConfigFile } from '../../common/types.js';
 import * as rulesModule from '../../rules/_rules.js';
 import type { RuleClasses, RuleResults } from '../../common/types.js';
 
@@ -44,9 +44,12 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
 
   public async run(): Promise<MetalintRunResult> {
     const { flags } = await this.parse(MetalintRun);
-    const config = flags['config'];
+    const configFile = flags['config'];
     const dir = flags['directory'];
     const format = flags['format'];
+
+    const config = (await readConfigFile(configFile)) as ConfigFile;
+    this.log('Valid config.json: ', config);
 
     this.spinner.start('Building list of files to lint...');
     const files = (await readAllFiles(dir)) as string[];
@@ -73,8 +76,6 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     this.spinner.start(`Generating ${format}...`);
     results = resultFormatters[format](ruleResults);
     this.spinner.stop();
-
-    await readConfigFile(config);
 
     this.log(results);
 
