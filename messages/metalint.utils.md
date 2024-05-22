@@ -1,3 +1,3 @@
-# error.CantReadDir
+# error.InvalidDirectory
 
-Cant read dir: %s
+Unable to read the directory passed with the --directory flag: %s

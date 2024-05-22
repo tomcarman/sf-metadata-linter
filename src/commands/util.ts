@@ -12,7 +12,7 @@ export async function readAllFiles(dir: string): Promise<string[] | undefined> {
     return fullPathFiles;
   } catch (error) {
     if (error instanceof Error) {
-      throw messages.createError('error.CantReadDir', [error.message]);
+      throw messages.createError('error.InvalidDirectory', [error.message]);
     }
   }
 }
