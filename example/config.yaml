@@ -1,0 +1,22 @@
+---
+version: 1.0
+
+config:
+  csvfilename: sf-metadata-linter-results.csv
+  sariffilename: sf-metadata-linter-results.sarif
+
+rules:
+  - name: field-should-have-a-description
+    active: true
+    priority: 2
+
+  - name: object-should-have-a-description
+    active: true
+    priority: 1
+
+  - name: field-description-minimum-length
+    active: true
+    priority: 2
+    properties:
+      - name: minimumLength
+        value: 35
