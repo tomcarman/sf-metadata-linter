@@ -29,8 +29,6 @@ export abstract class RuleClass {
       case 3:
         this.level = 'note';
         break;
-      default:
-        this.level = 'warning';
     }
   }
 

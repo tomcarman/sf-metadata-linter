@@ -19,7 +19,7 @@ export async function readConfigFile(configFile: string): Promise<ConfigFile | u
       yup.object().shape({
         name: yup.string().required(),
         active: yup.boolean().required(),
-        priority: yup.number().required(),
+        priority: yup.number(),
         property: yup.object().shape({
           name: yup.string(),
           value: yup.mixed(),
