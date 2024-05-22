@@ -16,12 +16,10 @@ export default class FieldDescriptionMinimumLength extends RuleClass {
   public endLine = 1;
 
   public loadRuleProperties(): void {
-    if (!this.ruleProperties) {
-      return;
-    }
-    for (const ruleProperty of this.ruleProperties) {
-      if (ruleProperty.name === 'minimumLength') {
-        this.minimumLength = ruleProperty.value as number;
+    if (this.ruleProperties) {
+      const minimumLength = this.ruleProperties.find((ruleProperty) => ruleProperty.name === 'minimumLength');
+      if (minimumLength) {
+        this.minimumLength = minimumLength.value as number;
       }
     }
   }
