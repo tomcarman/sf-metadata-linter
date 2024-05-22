@@ -52,7 +52,11 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     const files = (await readAllFiles(dir)) as string[];
     this.spinner.stop();
 
-    const rulesToRun = ['field-should-have-a-description', 'object-should-have-a-description'];
+    const rulesToRun = [
+      'field-should-have-a-description',
+      'object-should-have-a-description',
+      'field-description-minimum-length',
+    ];
 
     this.spinner.start('Running rules...');
     const ruleResults = executeRules(rulesToRun, files);

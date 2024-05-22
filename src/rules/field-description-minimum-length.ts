@@ -1,23 +1,16 @@
 import * as fs from 'node:fs';
 import type { Result } from 'sarif';
 import { XMLParser } from 'fast-xml-parser';
-// import type { SfCustomField } from '../common/metadata-types.js';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { SfCustomField } from '../common/metadata-types.js';
 
-export default class FieldDescriptionMinimumLength implements RuleClass {
+export default class FieldDescriptionMinimumLength extends RuleClass {
   public ruleId: string = 'field-description-minimum-length';
   public shortDescriptionText = 'Custom Field Description does not meet the minimum length.';
   public fullDescriptionText = 'A Custom Field should have a description, describing how the field is used.';
   public level: Result.level = 'warning';
   public startLine = 1;
   public endLine = 1;
-  public files: string[] = [];
-  public results: SingleRuleResult[] = [];
-
-  public setFiles(files: string[]): void {
-    this.files = files;
-  }
 
   public execute(): void {
     const customFields = this.files.filter(
@@ -34,18 +27,6 @@ export default class FieldDescriptionMinimumLength implements RuleClass {
         return customFieldContents.description.length < 100;
       }
     });
-
-    //
-
-    //   // eslint-disable-next-line no-console
-    //   console.log(JSON.stringify(customField));
-    //   // console.log(customField.CustomField.visibleLines);
-    // } else {
-    //   // eslint-disable-next-line no-console
-    //   console.log(`Custom field ${customFieldContents.fullName} has no attribute visibleLines`);
-    // }
-
-    // return !file.includes('<description>');
 
     for (const ruleViolation of ruleViolations) {
       this.results.push(new SingleRuleResult(ruleViolation, this.startLine, this.endLine));

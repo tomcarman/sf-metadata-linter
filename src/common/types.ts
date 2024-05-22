@@ -1,16 +1,24 @@
 import type { Result } from 'sarif';
 
 export abstract class RuleClass {
+  public files: string[] = [];
+  public ruleProperties?: RuleProperty[];
+  public results: SingleRuleResult[] = [];
+
   public abstract ruleId: string;
   public abstract shortDescriptionText: string;
   public abstract fullDescriptionText: string;
   public abstract level: Result.level;
   public abstract startLine: number;
   public abstract endLine: number;
-  public abstract files: string[];
-  public abstract results: SingleRuleResult[];
-  public abstract ruleProperties?: RuleProperty[];
-  public abstract setFiles(files: string[]): void;
+
+  public setFiles(files: string[]): void {
+    this.files = files;
+  }
+  public setRuleProperties(ruleProperties: RuleProperty[]): void {
+    this.ruleProperties = ruleProperties;
+  }
+
   public abstract execute(): void;
 }
 
