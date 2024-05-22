@@ -3,5 +3,6 @@ module.exports = {
   root: true,
   rules: {
     header: 'off',
+    'no-console': 'off',
   },
 };
