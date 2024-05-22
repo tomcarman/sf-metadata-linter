@@ -49,13 +49,9 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     const format = flags['format'];
 
     const config = (await readConfigFile(configFile)) as ConfigFile;
-
     const rulesToRun = config.rules.filter((rule) => rule.active).map((rule) => rule.name);
-
     const ruleConfigMap: Map<string, RuleConfig> = new Map();
     config.rules.filter((rule) => rule.active).forEach((rule) => ruleConfigMap.set(rule.name, rule));
-
-    console.log(ruleConfigMap);
 
     this.spinner.start('Building list of files to lint...');
     const files = (await readAllFiles(dir)) as string[];
