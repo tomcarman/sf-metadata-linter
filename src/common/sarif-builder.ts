@@ -4,7 +4,7 @@ import { SarifBuilder, SarifRunBuilder, SarifResultBuilder, SarifRuleBuilder } f
 import type { ConfigFile, RuleResults } from '../common/types.js';
 
 export function generateSarifResults(configFile: ConfigFile, ruleResults: RuleResults): string {
-  const filename = configFile.config.sariffilename || 'metalint-results.sarif';
+  const filename = configFile.config.sarifFilename || 'metalint-results.sarif';
 
   const sarifRun = initSarifRun();
   addRulesToSarifRun(sarifRun, ruleResults);

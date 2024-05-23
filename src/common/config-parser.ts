@@ -7,14 +7,14 @@ import { ConfigFile } from '../common/types.js';
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-metadata-linter', 'metalint.run');
 
-export async function readConfigFile(configFile: string): Promise<ConfigFile | undefined> {
+export async function readConfigFile(configFile: string): Promise<ConfigFile> {
   const loadedConfig = yaml.load(fs.readFileSync(configFile, 'utf8'));
   const configSchema = yup.object().shape({
     version: yup.number().required(),
     config: yup.object().shape({
-      csvfilename: yup.string(),
-      sariffilename: yup.string(),
-      parentdir: yup.string(),
+      csvFilename: yup.string(),
+      sarifFilename: yup.string(),
+      parentDirectory: yup.string(),
     }),
     rules: yup.array().of(
       yup.object().shape({
@@ -33,8 +33,6 @@ export async function readConfigFile(configFile: string): Promise<ConfigFile | u
     await configSchema.validate(loadedConfig);
     return loadedConfig as ConfigFile;
   } catch (error) {
-    if (error instanceof Error) {
-      throw messages.createError('error.InvalidConfigFile', [error.message]);
-    }
+    throw messages.createError('error.InvalidConfigFile', [(error as Error).message]);
   }
 }

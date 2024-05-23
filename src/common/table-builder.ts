@@ -3,9 +3,9 @@ import chalk from 'chalk';
 import type { ConfigFile, RuleResults } from '../common/types.js';
 
 export function generateTableResults(configFile: ConfigFile, ruleResults: RuleResults): string {
-  const parentdir = configFile.config.parentdir;
+  const parentdir = configFile.config.parentDirectory;
 
-  const headerValues = ['ruleId', 'filePath', 'level', 'line', 'col'];
+  const headerValues = ['rule', 'filePath', 'level', 'line', 'col'];
   const headers = headerValues.map((header) => chalk.bold(header));
 
   const table = new Table({
@@ -14,7 +14,7 @@ export function generateTableResults(configFile: ConfigFile, ruleResults: RuleRe
       head: [],
       border: [],
     },
-    colWidths: [40, 80, 10, 10, 10],
+    // colWidths: [38, 60, 10, 10, 10],
   });
 
   for (const ruleId in ruleResults) {

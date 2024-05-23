@@ -2,9 +2,9 @@
 version: 1.0
 
 config:
-  csvfilename: sf-metadata-linter-results.csv
-  sariffilename: sf-metadata-linter-results.sarif
-  parentdir: demo/force-app/main/default/
+  csvFilename: results.csv
+  sarifFilename: results.sarif
+  parentDirectory: demo/force-app/main/default/
 
 rules:
   - name: field-should-have-a-description
@@ -13,7 +13,7 @@ rules:
 
   - name: object-should-have-a-description
     active: true
-    priority: 1
+    priority: 2
 
   - name: field-description-minimum-length
     active: true

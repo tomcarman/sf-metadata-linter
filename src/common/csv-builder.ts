@@ -3,7 +3,7 @@ import { stringify } from 'csv-stringify';
 import type { ConfigFile, RuleResults } from '../common/types.js';
 
 export function generateCsvResults(configFile: ConfigFile, ruleResults: RuleResults): string {
-  const filename = configFile.config.csvfilename || 'metalint-results.csv';
+  const filename = configFile.config.csvFilename || 'metalint-results.csv';
   const writeableStream = fs.createWriteStream(filename);
 
   const columns = [
