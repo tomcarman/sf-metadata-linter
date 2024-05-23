@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import type { RuleResults } from '../common/types.js';
 
 export function generateTableResults(ruleResults: RuleResults): string {
-  const headerValues = ['ruleId', 'filePath', 'level', 'startLn', 'endLn', 'startCol', 'endCol'];
+  const headerValues = ['ruleId', 'filePath', 'level', 'line', 'col'];
   const headers = headerValues.map((header) => chalk.bold(header));
 
   const table = new Table({
@@ -12,7 +12,7 @@ export function generateTableResults(ruleResults: RuleResults): string {
       head: [],
       border: [],
     },
-    colWidths: [40, 100, 10, 10, 10, 10, 10],
+    colWidths: [40, 100, 10, 10, 10],
   });
 
   for (const ruleId in ruleResults) {
@@ -28,10 +28,8 @@ export function generateTableResults(ruleResults: RuleResults): string {
             : rule.level === 'error'
             ? chalk.red(rule.level)
             : rule.level,
-          result.startLine,
-          result.endLine,
-          result.startColumn,
-          result.endColumn
+          result.startLine && result.endLine ? `${result.startLine},${result.endLine}` : '',
+          result.startColumn && result.endColumn ? `${result.startColumn},${result.endColumn}` : ''
         );
         table.push(row);
       }
