@@ -4,6 +4,7 @@ version: 1.0
 config:
   csvfilename: sf-metadata-linter-results.csv
   sariffilename: sf-metadata-linter-results.sarif
+  parentdir: demo/force-app/main/default/
 
 rules:
   - name: field-should-have-a-description

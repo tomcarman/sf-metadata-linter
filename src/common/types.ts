@@ -77,6 +77,7 @@ export type ConfigFile = {
 export type Config = {
   csvfilename: string;
   sariffilename: string;
+  parentdir: string;
 };
 export type RuleConfig = {
   name: string;

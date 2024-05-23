@@ -69,7 +69,7 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
       csv: generateCsvResults,
       table: generateTableResults,
     };
-    const results = resultFormatters[format](ruleResults);
+    const results = resultFormatters[format](config, ruleResults);
     this.spinner.stop();
 
     this.log(results);

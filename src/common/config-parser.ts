@@ -14,6 +14,7 @@ export async function readConfigFile(configFile: string): Promise<ConfigFile | u
     config: yup.object().shape({
       csvfilename: yup.string(),
       sariffilename: yup.string(),
+      parentdir: yup.string(),
     }),
     rules: yup.array().of(
       yup.object().shape({

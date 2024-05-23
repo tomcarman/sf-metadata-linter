@@ -1,9 +1,9 @@
 import fs from 'node:fs';
 import { stringify } from 'csv-stringify';
-import type { RuleResults } from '../common/types.js';
+import type { ConfigFile, RuleResults } from '../common/types.js';
 
-export function generateCsvResults(ruleResults: RuleResults): string {
-  const filename = 'sf-metadata-linter-results.csv'; // TODO - make this a flag
+export function generateCsvResults(configFile: ConfigFile, ruleResults: RuleResults): string {
+  const filename = configFile.config.csvfilename || 'metalint-results.csv';
   const writeableStream = fs.createWriteStream(filename);
 
   const columns = [

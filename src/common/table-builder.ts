@@ -1,8 +1,10 @@
 import Table from 'cli-table3';
 import chalk from 'chalk';
-import type { RuleResults } from '../common/types.js';
+import type { ConfigFile, RuleResults } from '../common/types.js';
 
-export function generateTableResults(ruleResults: RuleResults): string {
+export function generateTableResults(configFile: ConfigFile, ruleResults: RuleResults): string {
+  const parentdir = configFile.config.parentdir;
+
   const headerValues = ['ruleId', 'filePath', 'level', 'line', 'col'];
   const headers = headerValues.map((header) => chalk.bold(header));
 
@@ -12,7 +14,7 @@ export function generateTableResults(ruleResults: RuleResults): string {
       head: [],
       border: [],
     },
-    colWidths: [40, 100, 10, 10, 10],
+    colWidths: [40, 80, 10, 10, 10],
   });
 
   for (const ruleId in ruleResults) {
@@ -22,7 +24,7 @@ export function generateTableResults(ruleResults: RuleResults): string {
         const row = [];
         row.push(
           rule.ruleId,
-          result.filePath,
+          result.filePath.split(parentdir).pop(),
           rule.level === 'warning'
             ? chalk.yellow(rule.level)
             : rule.level === 'error'
@@ -37,6 +39,4 @@ export function generateTableResults(ruleResults: RuleResults): string {
   }
 
   return table.toString();
-
-  // process.stdout.write(table.toString());
 }
