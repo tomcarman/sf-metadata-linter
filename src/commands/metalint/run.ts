@@ -71,11 +71,10 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
       table: generateTableResults,
     };
     const results = resultFormatters[format](config, ruleResults);
+    const summary = printSummary(files, ruleResults);
     this.spinner.stop();
 
     this.log(results);
-
-    const summary = printSummary(files, ruleResults);
     this.log(summary);
 
     return { outcome: results };

@@ -32,17 +32,17 @@ export function printSummary(files: string[], ruleResults: RuleResults): string 
   const passedOutput = (): string => {
     const passed = files.length - warnings - errors;
     return passed > 0
-      ? `${chalk.bold.green('Passed:  ')} ${chalk.bold(passed.toString())} files`
+      ? `${chalk.bold.green('Passed:  ')} ${chalk.bold(passed.toString())} file(s)`
       : `${chalk.bold.green('Passed:')} none`;
   };
   const warningOutput = (): string =>
     warnings > 0
-      ? `${chalk.bold.yellow('Warnings:')} ${chalk.bold(warnings)} in ${chalk.bold(filesWithWarnings.size)} file(s)`
+      ? `${chalk.bold.yellow('Warnings:')} ${chalk.bold(warnings)} across ${chalk.bold(filesWithWarnings.size)} file(s)`
       : `${chalk.bold.yellow('Warnings:')} none`;
 
   const errorOutput = (): string =>
     errors > 0
-      ? `${chalk.bold.red('Errors:  ')} ${chalk.bold(errors)} in ${chalk.bold(filesWithErrors.size)} file(s)`
+      ? `${chalk.bold.red('Errors:  ')} ${chalk.bold(errors)} across ${chalk.bold(filesWithErrors.size)} file(s)`
       : `${chalk.bold.red('Errors:  ')} none`;
 
   const summary: string = `

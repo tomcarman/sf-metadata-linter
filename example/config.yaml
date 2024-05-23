@@ -4,7 +4,7 @@ version: 1.0
 config:
   csvFilename: results.csv
   sarifFilename: results.sarif
-  parentDirectory: demo/force-app/main/default/
+  parentDirectory: force-app/main/default/
 
 rules:
   - name: field-should-have-a-description
