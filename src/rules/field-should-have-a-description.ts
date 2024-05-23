@@ -11,8 +11,6 @@ export default class FieldShouldHaveADescription extends RuleClass {
   public endLine = 1;
 
   public execute(): void {
-    // const rp = this.ruleProperties;
-
     const customFields = this.files.filter(
       (file) => (file.includes('__c') || file.includes('__e')) && file.endsWith('.field-meta.xml')
     );
