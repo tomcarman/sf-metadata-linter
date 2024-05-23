@@ -12,6 +12,11 @@ export abstract class RuleClass {
   public abstract startLine: number;
   public abstract endLine: number;
 
+  public constructor(files: string[]) {
+    this.files = files;
+    console.log('hit standard constructor');
+  }
+
   public setFiles(files: string[]): void {
     this.files = files;
   }
@@ -56,7 +61,7 @@ export type RuleResults = {
 };
 
 export type RuleClasses = {
-  [key: string]: new () => RuleClass;
+  [key: string]: new (files: string[], config?: string) => RuleClass;
 };
 
 export type RuleIdToRuleClassNameMap = {

@@ -71,10 +71,11 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
       table: generateTableResults,
     };
     const results = resultFormatters[format](config, ruleResults);
-    const summary = printSummary(files, ruleResults);
     this.spinner.stop();
 
     this.log(results);
+
+    const summary = printSummary(files, ruleResults);
     this.log(summary);
 
     return { outcome: results };
@@ -87,9 +88,22 @@ function executeRules(rulesToRun: string[], ruleConfigMap: Map<string, RuleConfi
   const ruleResults: RuleResults = {};
 
   for (const ruleId of rulesToRun) {
+    console.log('processing ruleId: ', ruleId);
+
+    /* Todo:
+    - Create a "RuleDefinition" class/file that contains all the metadata for a rule
+      - Include the rule class name - then that can be used for the dynamic import, getting rid of the need for the ruleClassMap? tbc
+      - Include the name, description, default priority, start/end line
+    - Create new RuleOptions type - key/value pairs for rule options AND the priority (replaces RuleProperty)
+    - Set default RuleClass constructor to RuleClass(ruleDefinition, files, options) (also update RuleClasses type). It will:
+      - set the metadata from the ruleDefinition
+      - set the files from the files
+      - set ONLY the priority from the options (as thats the only guaranteed option)
+    - For rules that have options, override the default constructor to set additional options specific to that rule
+    */
+
     const RuleClass = ruleClasses[ruleClassMap[ruleId]];
-    const rule = new RuleClass();
-    rule.setFiles(files);
+    const rule = new RuleClass(files);
     rule.setPriority(ruleConfigMap.get(ruleId)?.priority as number);
     rule.setRuleProperties(ruleConfigMap.get(ruleId)?.properties as RuleProperty[]);
     rule.execute();

@@ -15,6 +15,11 @@ export default class FieldDescriptionMinimumLength extends RuleClass {
   public startLine = 1;
   public endLine = 1;
 
+  public constructor(files: string[]) {
+    super(files);
+    console.log('hit custom constructor');
+  }
+
   public loadRuleProperties(): void {
     if (this.ruleProperties) {
       const minimumLength = this.ruleProperties.find((ruleProperty) => ruleProperty.name === 'minimumLength');
