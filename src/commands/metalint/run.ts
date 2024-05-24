@@ -61,7 +61,9 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     this.spinner.stop();
 
     this.spinner.start('Running rules...');
+    const start = process.hrtime.bigint();
     const ruleResults = executeRules(rulesToRun, ruleConfigMap, files);
+    const timeTaken = process.hrtime.bigint() - start;
     this.spinner.stop();
 
     this.spinner.start(`Generating ${format}...`);
@@ -75,7 +77,7 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
 
     this.log(results);
 
-    const summary = printSummary(files, ruleResults);
+    const summary = printSummary(files, ruleResults, timeTaken);
     this.log(summary);
 
     return { outcome: results };

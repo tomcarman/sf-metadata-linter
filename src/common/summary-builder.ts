@@ -2,7 +2,7 @@
 import chalk from 'chalk';
 import type { RuleResults } from '../common/types.js';
 
-export function printSummary(files: string[], ruleResults: RuleResults): string {
+export function printSummary(files: string[], ruleResults: RuleResults, timeTaken: bigint): string {
   let warnings: number = 0;
   let errors: number = 0;
   const filesWithWarnings = new Set();
@@ -27,7 +27,7 @@ export function printSummary(files: string[], ruleResults: RuleResults): string 
     }
   }
 
-  const metadataScanned = `${chalk.blue(files.length)} metadata files were scanned`;
+  const metadataScanned = `${chalk.bold.blue(files.length)} metadata files were scanned`;
 
   const passedOutput = (): string => {
     const passed = files.length - warnings - errors;
@@ -45,10 +45,14 @@ export function printSummary(files: string[], ruleResults: RuleResults): string 
       ? `${chalk.bold.red('Errors:  ')} ${chalk.bold(errors)} across ${chalk.bold(filesWithErrors.size)} file(s)`
       : `${chalk.bold.red('Errors:  ')} none`;
 
-  const summary: string = `
-  --- Results Summary ---
+  const timeFormatted = (Number(timeTaken) / 1_000_000_000).toFixed(2).toString();
+  const timeTakenOutput = `${chalk.bold.blue(timeFormatted)}${chalk.bold.blue('s')}`;
+  const summaryHeader = chalk.bold('--- Results Summary ---');
 
-  ${metadataScanned}
+  const summary: string = `
+  ${summaryHeader}
+
+  ${metadataScanned} in ${timeTakenOutput}
 
   ${passedOutput()}
   ${warningOutput()}
