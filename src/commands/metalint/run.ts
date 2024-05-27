@@ -44,6 +44,8 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
   };
 
   public async run(): Promise<MetalintRunResult> {
+    const start = process.hrtime.bigint();
+
     const { flags } = await this.parse(MetalintRun);
     const configFile = flags['config'];
     const dir = flags['directory'];
@@ -61,9 +63,7 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     this.spinner.stop();
 
     this.spinner.start('Running rules...');
-    const start = process.hrtime.bigint();
     const ruleResults = executeRules(rulesToRun, ruleConfigMap, files);
-    const timeTaken = process.hrtime.bigint() - start;
     this.spinner.stop();
 
     this.spinner.start(`Generating ${format}...`);
@@ -77,6 +77,7 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
 
     this.log(results);
 
+    const timeTaken = process.hrtime.bigint() - start;
     const summary = printSummary(files, ruleResults, timeTaken);
     this.log(summary);
 
