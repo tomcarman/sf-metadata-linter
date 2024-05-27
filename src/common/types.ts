@@ -2,41 +2,20 @@ import type { Result } from 'sarif';
 
 export abstract class RuleClass {
   public files: string[] = [];
-  public ruleProperties?: RuleProperty[];
+  public level: Result.level;
+  public ruleProperties?: RuleOption[];
   public results: SingleRuleResult[] = [];
 
   public abstract ruleId: string;
   public abstract shortDescriptionText: string;
   public abstract fullDescriptionText: string;
-  public abstract level: Result.level;
   public abstract startLine: number;
   public abstract endLine: number;
 
-  public constructor(files: string[]) {
+  public constructor(files: string[], level: string) {
     this.files = files;
-    console.log('hit standard constructor');
+    this.level = level as Result.level;
   }
-
-  public setFiles(files: string[]): void {
-    this.files = files;
-  }
-  public setRuleProperties(ruleProperties: RuleProperty[]): void {
-    this.ruleProperties = ruleProperties;
-  }
-  public setPriority(priority: number): void {
-    switch (priority) {
-      case 1:
-        this.level = 'error';
-        break;
-      case 2:
-        this.level = 'warning';
-        break;
-      case 3:
-        this.level = 'note';
-        break;
-    }
-  }
-
   public abstract execute(): void;
 }
 
@@ -61,7 +40,7 @@ export type RuleResults = {
 };
 
 export type RuleClasses = {
-  [key: string]: new (files: string[], config?: string) => RuleClass;
+  [key: string]: new (files: string[], level?: string, option?: RuleOption[]) => RuleClass;
 };
 
 export type RuleIdToRuleClassNameMap = {
@@ -87,11 +66,11 @@ export type Config = {
 export type RuleConfig = {
   name: string;
   active: boolean;
-  priority: number;
-  properties?: RuleProperty[] | null;
+  level: string;
+  options?: RuleOption[] | null;
 };
 
-export type RuleProperty = {
+export type RuleOption = {
   name: string;
   value: unknown;
 };

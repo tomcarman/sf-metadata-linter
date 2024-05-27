@@ -6,7 +6,7 @@ import { generateSarifResults } from '../../common/sarif-builder.js';
 import { generateCsvResults } from '../../common/csv-builder.js';
 import { generateTableResults } from '../../common/table-builder.js';
 import { printSummary } from '../../common/summary-builder.js';
-import { ruleClassMap, RuleProperty, RuleConfig } from '../../common/types.js';
+import { ruleClassMap, RuleConfig, RuleOption } from '../../common/types.js';
 import * as rulesModule from '../../rules/_rules.js';
 import type { RuleClasses, RuleResults } from '../../common/types.js';
 
@@ -91,24 +91,11 @@ function executeRules(rulesToRun: string[], ruleConfigMap: Map<string, RuleConfi
   const ruleResults: RuleResults = {};
 
   for (const ruleId of rulesToRun) {
-    console.log('processing ruleId: ', ruleId);
-
-    /* Todo:
-    - Create a "RuleDefinition" class/file that contains all the metadata for a rule
-      - Include the rule class name - then that can be used for the dynamic import, getting rid of the need for the ruleClassMap? tbc
-      - Include the name, description, default priority, start/end line
-    - Create new RuleOptions type - key/value pairs for rule options AND the priority (replaces RuleProperty)
-    - Set default RuleClass constructor to RuleClass(ruleDefinition, files, options) (also update RuleClasses type). It will:
-      - set the metadata from the ruleDefinition
-      - set the files from the files
-      - set ONLY the priority from the options (as thats the only guaranteed option)
-    - For rules that have options, override the default constructor to set additional options specific to that rule
-    */
-
     const RuleClass = ruleClasses[ruleClassMap[ruleId]];
-    const rule = new RuleClass(files);
-    rule.setPriority(ruleConfigMap.get(ruleId)?.priority as number);
-    rule.setRuleProperties(ruleConfigMap.get(ruleId)?.properties as RuleProperty[]);
+    const ruleLevel = ruleConfigMap.get(ruleId)?.level;
+    const ruleOptions = ruleConfigMap.get(ruleId)?.options as RuleOption[];
+    const rule = new RuleClass(files, ruleLevel, ruleOptions);
+
     rule.execute();
     ruleResults[rule.ruleId] = rule;
   }

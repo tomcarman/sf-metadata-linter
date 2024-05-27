@@ -9,15 +9,15 @@ config:
 rules:
   - name: field-should-have-a-description
     active: true
-    priority: 2
+    level: warning
 
   - name: object-should-have-a-description
     active: true
-    priority: 2
+    level: warning
 
   - name: field-description-minimum-length
     active: true
-    priority: 2
-    properties:
+    level: warning
+    options:
       - name: minimumLength
         value: 35
