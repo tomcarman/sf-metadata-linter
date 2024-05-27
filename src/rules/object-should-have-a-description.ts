@@ -3,8 +3,8 @@ import { RuleClass, SingleRuleResult } from '../common/types.js';
 
 export default class ObjectShouldHaveADescription extends RuleClass {
   public ruleId: string = 'object-should-have-a-description';
-  public shortDescriptionText = 'Custom Objects should have description.';
-  public fullDescriptionText = 'Custom Objects should have a description, describing how the object is used.';
+  public shortDescriptionText = 'Custom objects should have description.';
+  public fullDescriptionText = 'Custom objects should have a description, describing how the object is used.';
   public startLine = 1;
   public endLine = 1;
 

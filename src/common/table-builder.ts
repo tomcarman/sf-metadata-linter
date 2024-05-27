@@ -14,7 +14,6 @@ export function generateTableResults(configFile: ConfigFile, ruleResults: RuleRe
       head: [],
       border: [],
     },
-    // colWidths: [38, 60, 10, 10, 10],
   });
 
   for (const ruleId in ruleResults) {
