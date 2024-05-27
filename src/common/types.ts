@@ -74,3 +74,11 @@ export type RuleOption = {
   name: string;
   value: unknown;
 };
+
+export type JsonResults = {
+  ruleId: string;
+  level: string;
+  ruleShortDescription: string;
+  ruleFullDescription: string;
+  results: SingleRuleResult[];
+};

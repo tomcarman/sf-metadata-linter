@@ -8,7 +8,7 @@ const messages = Messages.loadMessages('sf-metadata-linter', 'metalint.utils');
 export async function readAllFiles(dir: string): Promise<string[] | undefined> {
   try {
     const files = await readdir(dir, { recursive: true });
-    const fullPathFiles = files.map((file) => path.join(dir, file));
+    const fullPathFiles = files.filter((file) => file.endsWith('.xml')).map((file) => path.join(dir, file));
     return fullPathFiles;
   } catch (error) {
     if (error instanceof Error) {

@@ -5,16 +5,17 @@ import { readConfigFile } from '../../common/config-parser.js';
 import { generateSarifResults } from '../../common/sarif-builder.js';
 import { generateCsvResults } from '../../common/csv-builder.js';
 import { generateTableResults } from '../../common/table-builder.js';
+import { generateJsonResults } from '../../common/json-cli-builder.js';
 import { printSummary } from '../../common/summary-builder.js';
 import { ruleClassMap, RuleConfig, RuleOption } from '../../common/types.js';
 import * as rulesModule from '../../rules/_rules.js';
-import type { RuleClasses, RuleResults } from '../../common/types.js';
+import type { RuleClasses, RuleResults, JsonResults } from '../../common/types.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-metadata-linter', 'metalint.run');
 
 export type MetalintRunResult = {
-  outcome: string;
+  outcome: JsonResults[];
 };
 
 export default class MetalintRun extends SfCommand<MetalintRunResult> {
@@ -81,7 +82,7 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     const summary = printSummary(files, ruleResults, timeTaken);
     this.log(summary);
 
-    return { outcome: results };
+    return { outcome: generateJsonResults(ruleResults) };
   }
 }
 
