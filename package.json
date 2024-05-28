@@ -13,7 +13,7 @@
     "fast-xml-parser": "^4.4.0",
     "js-yaml": "^4.1.0",
     "node-sarif-builder": "^3.1.0",
-    "yup": "^1.4.0"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@oclif/plugin-command-snapshot": "^5.1.9",

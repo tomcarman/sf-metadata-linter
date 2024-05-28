@@ -1,4 +1,5 @@
 import type { Result } from 'sarif';
+import { RuleOption } from './config-parser.js';
 
 export abstract class RuleClass {
   public files: string[] = [];
@@ -53,27 +54,27 @@ export const ruleClassMap: RuleIdToRuleClassNameMap = {
   'field-description-minimum-length': 'FieldDescriptionMinimumLength',
 };
 
-export type ConfigFile = {
-  version: number;
-  config: Config;
-  rules: RuleConfig[];
-};
-export type Config = {
-  csvFilename: string;
-  sarifFilename: string;
-  parentDirectory: string;
-};
-export type RuleConfig = {
-  name: string;
-  active: boolean;
-  level: string;
-  options?: RuleOption[] | null;
-};
+// export type ConfigFile = {
+//   version: number;
+//   config: Config;
+//   rules: RuleConfig[];
+// };
+// export type Config = {
+//   csvFilename: string;
+//   sarifFilename: string;
+//   parentDirectory: string;
+// };
+// export type RuleConfig = {
+//   name: string;
+//   active: boolean;
+//   level: string;
+//   options?: RuleOption[] | null;
+// };
 
-export type RuleOption = {
-  name: string;
-  value: unknown;
-};
+// export type RuleOption = {
+//   name: string;
+//   value: unknown;
+// };
 
 export type JsonResults = {
   ruleId: string;

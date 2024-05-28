@@ -7,7 +7,8 @@ import { generateCsvResults } from '../../common/csv-builder.js';
 import { generateTableResults } from '../../common/table-builder.js';
 import { generateJsonResults } from '../../common/json-cli-builder.js';
 import { printSummary } from '../../common/summary-builder.js';
-import { ruleClassMap, RuleConfig, RuleOption } from '../../common/types.js';
+import { ruleClassMap } from '../../common/types.js';
+import type { RuleConfig, RuleOption } from '../../common/config-parser.js';
 import * as rulesModule from '../../rules/_rules.js';
 import type { RuleClasses, RuleResults, JsonResults } from '../../common/types.js';
 
@@ -53,7 +54,7 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     const format = flags['format'];
 
     this.spinner.start('Reading config file...');
-    const config = await readConfigFile(configFile);
+    const config = readConfigFile(configFile);
     const rulesToRun = config.rules.filter((rule) => rule.active).map((rule) => rule.name);
     const ruleConfigMap: Map<string, RuleConfig> = new Map();
     config.rules.filter((rule) => rule.active).forEach((rule) => ruleConfigMap.set(rule.name, rule));

@@ -1,9 +1,10 @@
 import fs from 'node:fs';
 import { stringify } from 'csv-stringify';
-import type { ConfigFile, RuleResults } from '../common/types.js';
+import type { RuleResults } from '../common/types.js';
+import type { ConfigFile } from '../common/config-parser.js';
 
 export function generateCsvResults(configFile: ConfigFile, ruleResults: RuleResults): string {
-  const filename = configFile.config.csvFilename || 'metalint-results.csv';
+  const filename = configFile.config?.csvFilename ?? 'metalint-results.csv';
   const writeableStream = fs.createWriteStream(filename);
 
   const columns = [

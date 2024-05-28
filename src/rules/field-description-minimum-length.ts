@@ -1,6 +1,7 @@
 import * as fs from 'node:fs';
 import { XMLParser } from 'fast-xml-parser';
-import { RuleOption, RuleClass, SingleRuleResult } from '../common/types.js';
+import { RuleClass, SingleRuleResult } from '../common/types.js';
+import { RuleOption } from '../common/config-parser.js';
 import { SfCustomField } from '../common/metadata-types.js';
 
 export default class FieldDescriptionMinimumLength extends RuleClass {

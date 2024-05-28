@@ -1,9 +1,10 @@
 import Table from 'cli-table3';
 import chalk from 'chalk';
-import type { ConfigFile, RuleResults } from '../common/types.js';
+import type { RuleResults } from '../common/types.js';
+import type { ConfigFile } from '../common/config-parser.js';
 
 export function generateTableResults(configFile: ConfigFile, ruleResults: RuleResults): string {
-  const parentdir = configFile.config.parentDirectory;
+  const parentdir = configFile.config?.parentDirectory ?? 'default';
 
   const headerValues = ['rule', 'filePath', 'level', 'line', 'col'];
   const headers = headerValues.map((header) => chalk.bold(header));
