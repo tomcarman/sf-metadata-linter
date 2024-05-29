@@ -2,11 +2,7 @@ import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import { readAllFiles } from '../util.js';
 import { readConfigFile } from '../../common/config-parser.js';
-import { generateSarifResults } from '../../common/sarif-builder.js';
-import { generateCsvResults } from '../../common/csv-builder.js';
-import { generateTableResults } from '../../common/table-builder.js';
-import { generateJsonResults } from '../../common/json-cli-builder.js';
-import { printSummary } from '../../common/summary-builder.js';
+import { Formatter } from '../../common/output/formatter.js';
 import { ruleClassMap } from '../../common/types.js';
 import type { RuleConfig, RuleOption } from '../../common/config-parser.js';
 import * as rulesModule from '../../rules/_rules.js';
@@ -69,21 +65,17 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     this.spinner.stop();
 
     this.spinner.start(`Generating ${format}...`);
-    const resultFormatters = {
-      sarif: generateSarifResults,
-      csv: generateCsvResults,
-      table: generateTableResults,
-    };
-    const results = resultFormatters[format](config, ruleResults);
+    const formatter = new Formatter(files, config, ruleResults);
+    const results = formatter.toFormat(format);
     this.spinner.stop();
 
     this.log(results);
 
     const timeTaken = process.hrtime.bigint() - start;
-    const summary = printSummary(files, ruleResults, timeTaken);
+    const summary = formatter.getSummary(timeTaken);
     this.log(summary);
 
-    return { outcome: generateJsonResults(ruleResults) };
+    return { outcome: formatter.getJson() };
   }
 }
 

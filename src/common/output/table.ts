@@ -1,7 +1,7 @@
 import Table from 'cli-table3';
 import chalk from 'chalk';
-import type { RuleResults } from '../common/types.js';
-import type { ConfigFile } from '../common/config-parser.js';
+import type { RuleResults } from '../types.js';
+import type { ConfigFile } from '../config-parser.js';
 
 export function generateTableResults(configFile: ConfigFile, ruleResults: RuleResults): string {
   const parentdir = configFile.config?.parentDirectory ?? 'default';

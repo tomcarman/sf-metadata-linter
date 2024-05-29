@@ -1,8 +1,8 @@
 import * as path from 'node:path';
 import fs from 'node:fs';
 import { SarifBuilder, SarifRunBuilder, SarifResultBuilder, SarifRuleBuilder } from 'node-sarif-builder';
-import type { RuleResults } from '../common/types.js';
-import type { ConfigFile } from '../common/config-parser.js';
+import type { RuleResults } from '../types.js';
+import type { ConfigFile } from '../config-parser.js';
 
 export function generateSarifResults(configFile: ConfigFile, ruleResults: RuleResults): string {
   const filename = configFile.config?.sarifFilename ?? 'metalint-results.sarif';
