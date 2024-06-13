@@ -3,10 +3,8 @@ import { Messages } from '@salesforce/core';
 import { readAllFiles } from '../util.js';
 import { readConfigFile } from '../../common/config-parser.js';
 import { Formatter } from '../../common/output/formatter.js';
-import { ruleClassMap } from '../../common/types.js';
-import type { RuleConfig, RuleOption } from '../../common/config-parser.js';
-import * as rulesModule from '../../rules/_rules.js';
-import type { RuleClasses, RuleResults, JsonResults } from '../../common/types.js';
+import { RulesEngine } from '../../common/rules-engine.js';
+import type { JsonResults } from '../../common/types.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-metadata-linter', 'metalint.run');
@@ -51,9 +49,6 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
 
     this.spinner.start('Reading config file...');
     const config = readConfigFile(configFile);
-    const rulesToRun = config.rules.filter((rule) => rule.active).map((rule) => rule.name);
-    const ruleConfigMap: Map<string, RuleConfig> = new Map();
-    config.rules.filter((rule) => rule.active).forEach((rule) => ruleConfigMap.set(rule.name, rule));
     this.spinner.stop();
 
     this.spinner.start('Building list of files to lint...');
@@ -61,7 +56,9 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     this.spinner.stop();
 
     this.spinner.start('Running rules...');
-    const ruleResults = executeRules(rulesToRun, ruleConfigMap, files);
+    const rulesEngine = new RulesEngine(config, files);
+    rulesEngine.executeRules();
+    const ruleResults = rulesEngine.ruleResults;
     this.spinner.stop();
 
     this.spinner.start(`Generating ${format}...`);
@@ -77,21 +74,4 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
 
     return { outcome: formatter.getJson() };
   }
-}
-
-// TODO move elsewhere?
-function executeRules(rulesToRun: string[], ruleConfigMap: Map<string, RuleConfig>, files: string[]): RuleResults {
-  const ruleClasses = rulesModule as RuleClasses;
-  const ruleResults: RuleResults = {};
-
-  for (const ruleId of rulesToRun) {
-    const RuleClass = ruleClasses[ruleClassMap[ruleId]];
-    const ruleLevel = ruleConfigMap.get(ruleId)?.level;
-    const ruleOptions = ruleConfigMap.get(ruleId)?.options as RuleOption[];
-    const rule = new RuleClass(files, ruleLevel, ruleOptions);
-
-    rule.execute();
-    ruleResults[rule.ruleId] = rule;
-  }
-  return ruleResults;
 }

@@ -1,4 +1,4 @@
-import type { JsonResults, RuleResults } from '../types.js';
+import type { RuleResults, JsonResults } from '../types.js';
 
 export function generateJsonResults(ruleResults: RuleResults): JsonResults[] {
   const jsonResults: JsonResults[] = [];

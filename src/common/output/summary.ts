@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import type { RuleResults } from '../../common/types.js';
+import type { RuleResults } from '../types.js';
 
 export function printSummary(files: string[], ruleResults: RuleResults, timeTaken: bigint): string {
   let warnings: number = 0;
