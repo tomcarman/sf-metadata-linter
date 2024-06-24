@@ -14,6 +14,7 @@ const ruleClassMap: RuleIdToRuleClassNameMap = {
   'field-should-have-a-description': 'FieldShouldHaveADescription',
   'object-should-have-a-description': 'ObjectShouldHaveADescription',
   'field-description-minimum-length': 'FieldDescriptionMinimumLength',
+  'object-description-minimum-length': 'ObjectDescriptionMinimumLength',
 };
 
 export class RulesEngine {

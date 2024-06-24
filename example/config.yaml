@@ -20,4 +20,11 @@ rules:
     level: warning
     options:
       - name: minimumLength
-        value: 35
+        value: 100
+
+  - name: object-description-minimum-length
+    active: true
+    level: warning
+    options:
+      - name: minimumLength
+        value: 10
