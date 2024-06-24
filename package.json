@@ -17,7 +17,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@oclif/plugin-command-snapshot": "^5.1.9",
+    "@oclif/plugin-command-snapshot": "^5.2.3",
     "@salesforce/cli-plugins-testkit": "^5.3.8",
     "@salesforce/dev-scripts": "^9.0.0",
     "@types/js-yaml": "^4.0.9",
