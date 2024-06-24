@@ -1,8 +1,8 @@
 import * as fs from 'node:fs';
 import { XMLParser } from 'fast-xml-parser';
+import type { CustomField } from '@salesforce/types/metadata';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { RuleOption } from '../common/config-parser.js';
-import { SfCustomField } from '../common/metadata-types.js';
 
 export default class FieldDescriptionMinimumLength extends RuleClass {
   public minimumLength = 50; // Default value
@@ -36,10 +36,11 @@ export default class FieldDescriptionMinimumLength extends RuleClass {
     const ruleViolations = customFields.filter((file) => {
       const fileText = fs.readFileSync(file, 'utf-8');
       const parser = new XMLParser({ ignoreDeclaration: true });
-      const customField = parser.parse(fileText) as SfCustomField;
-      const customFieldContents = customField.CustomField;
-      if (customFieldContents.description) {
-        return customFieldContents.description.length < this.minimumLength;
+      const customFieldFile = parser.parse(fileText) as { CustomField: CustomField };
+      const customField = customFieldFile.CustomField;
+
+      if (customField.description) {
+        return customField.description.length < this.minimumLength;
       }
     });
 
