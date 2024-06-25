@@ -47,3 +47,10 @@ export type JsonResults = {
   ruleFullDescription: string;
   results: SingleRuleResult[];
 };
+
+export type Location = {
+  startLine: number;
+  endLine: number;
+  startColumn: number;
+  endColumn: number;
+};

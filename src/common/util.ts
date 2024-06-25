@@ -2,6 +2,8 @@ import * as path from 'node:path';
 import { readdir } from 'node:fs/promises';
 import { Messages } from '@salesforce/core';
 import { XMLParser } from 'fast-xml-parser';
+import indexToPosition from 'index-to-position';
+import type { Location } from './types.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-metadata-linter', 'metalint.utils');
@@ -23,13 +25,20 @@ export function parseMetadataXml<T>(fileString: string, mainNodeName: string): T
   return (parser.parse(fileString) as unknown as { [key: string]: T })[mainNodeName];
 }
 
-export function getLineAndColNumber(fileText: string, value: string): [lineNumber: number, colNumber: number] {
-  const index = fileText.indexOf(value);
-  const fileToIndex = fileText.substring(0, index);
-  const lines = fileToIndex.split('\n');
-  const lineNumber = lines.length;
-  const colNumber = lines[lineNumber - 1].length;
-  return [lineNumber, colNumber];
+export function getLineAndColNumber(fileText: string, value: string): Location {
+  const startIndex = fileText.indexOf(value);
+  const startPosition = indexToPosition(fileText, startIndex, { oneBased: true });
+  const endIndex = startIndex + value.length;
+  const endPosition = indexToPosition(fileText, endIndex, { oneBased: true });
+
+  const location: Location = {
+    startLine: startPosition.line,
+    endLine: endPosition.line,
+    startColumn: startPosition.column,
+    endColumn: endPosition.column,
+  };
+
+  return location;
 }
 
 export function getCustomMetadata(files: string[], types?: string[], excludeNamespaces?: string[]): string[] {

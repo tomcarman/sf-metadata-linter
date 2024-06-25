@@ -2,6 +2,7 @@ import * as fs from 'node:fs';
 import type { CustomField } from '@salesforce/types/metadata';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { parseMetadataXml, getLineAndColNumber } from '../common/util.js';
+import type { Location } from '../common/types.js';
 
 export default class PicklistValuesShouldNotContainDoubleSpaces extends RuleClass {
   public ruleId: string = 'picklist-values-should-not-contain-double-spaces';
@@ -33,9 +34,10 @@ export default class PicklistValuesShouldNotContainDoubleSpaces extends RuleClas
       value?: string
     ): void {
       if (value?.includes('  ')) {
-        const [lineNumber, colNumber] = getLineAndColNumber(fileText, value);
-        this.startLine = this.endLine = lineNumber;
-        this.results.push(new SingleRuleResult(file, this.startLine, this.endLine, colNumber, colNumber));
+        const location: Location = getLineAndColNumber(fileText, value);
+        this.results.push(
+          new SingleRuleResult(file, location.startLine, location.endLine, location.startColumn, location.endColumn)
+        );
       }
     }
   }
