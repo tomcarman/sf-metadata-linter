@@ -1,6 +1,6 @@
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
-import { readAllFiles } from '../util.js';
+import { readAllFiles } from '../../common/util.js';
 import { readConfigFile } from '../../common/config-parser.js';
 import { Formatter } from '../../common/output/formatter.js';
 import { RulesEngine } from '../../common/rules-engine.js';

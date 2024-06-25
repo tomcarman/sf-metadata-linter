@@ -1,6 +1,6 @@
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { RuleOption } from '../common/config-parser.js';
-import { getCustomMetadata } from '../commands/util.js';
+import { getCustomMetadata } from '../common/util.js';
 
 export default class MetadataShouldNotHavePrefix extends RuleClass {
   public prefixes: string[] = [];

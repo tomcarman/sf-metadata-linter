@@ -2,7 +2,7 @@ import * as fs from 'node:fs';
 import type { ValidationRule } from '@salesforce/types/metadata';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { RuleOption } from '../common/config-parser.js';
-import { parseMetadataXml } from '../commands/util.js';
+import { parseMetadataXml } from '../common/util.js';
 
 export default class ValidationRuleDescriptionMinimumLength extends RuleClass {
   public minimumLength = 50; // Default value

@@ -1,7 +1,7 @@
 import * as fs from 'node:fs';
 import type { CustomField } from '@salesforce/types/metadata';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
-import { parseMetadataXml, getLineAndColNumber } from '../commands/util.js';
+import { parseMetadataXml, getLineAndColNumber } from '../common/util.js';
 
 export default class PicklistValuesShouldNotContainDoubleSpaces extends RuleClass {
   public ruleId: string = 'picklist-values-should-not-contain-double-spaces';
