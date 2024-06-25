@@ -27,4 +27,4 @@ rules:
     level: warning
     options:
       - name: minimumLength
-        value: 10
+        value: 100

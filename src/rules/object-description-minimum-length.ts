@@ -1,8 +1,8 @@
 import * as fs from 'node:fs';
-import { XMLParser } from 'fast-xml-parser';
 import type { CustomObject } from '@salesforce/types/metadata';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { RuleOption } from '../common/config-parser.js';
+import { parseMetadataXml } from '../commands/util.js';
 
 export default class ObjectDescriptionMinimumLength extends RuleClass {
   public minimumLength = 50; // Default value
@@ -35,11 +35,9 @@ export default class ObjectDescriptionMinimumLength extends RuleClass {
 
     const ruleViolations = customObjects.filter((file) => {
       const fileText = fs.readFileSync(file, 'utf-8');
-      const parser = new XMLParser({ ignoreDeclaration: true });
-      const customObjectFile = parser.parse(fileText) as { CustomObject: CustomObject };
-      console.log(customObjectFile);
-      const customObject = customObjectFile.CustomObject;
-
+      const customObject = parseMetadataXml<CustomObject>(fileText, 'CustomObject');
+      console.log(customObject);
+      console.log(customObject.description);
       if (customObject.description) {
         return customObject.description.length < this.minimumLength;
       }
