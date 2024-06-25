@@ -79,6 +79,7 @@ rules:
         value: field, fieldSet, listView
       - name: exclude-namespaces
         value: FinServ__
+
   - name: picklist-values-should-not-contain-double-spaces
     active: true
     level: warning
