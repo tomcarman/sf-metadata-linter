@@ -19,6 +19,8 @@ const ruleClassMap: RuleIdToRuleClassNameMap = {
   'object-description-minimum-length': 'ObjectDescriptionMinimumLength',
   'flow-description-minimum-length': 'FlowDescriptionMinimumLength',
   'validation-rule-description-minimum-length': 'ValidationRuleDescriptionMinimumLength',
+  'metadata-should-have-prefix': 'MetadataShouldHavePrefix',
+  'metadata-should-not-have-prefix': 'MetadataShouldNotHavePrefix',
 };
 
 export class RulesEngine {

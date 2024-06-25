@@ -50,3 +50,25 @@ rules:
     options:
       - name: minimumLength
         value: 100
+
+  - name: metadata-should-have-prefix
+    active: true
+    level: warning
+    options:
+      - name: prefixes
+        value: SPW_
+      - name: types
+        value: field, fieldSet, listView
+      - name: exclude-namespaces
+        value: FinServ__
+
+  - name: metadata-should-not-have-prefix
+    active: false
+    level: warning
+    options:
+      - name: prefixes
+        value: SPW_, TEST_
+      - name: types
+        value: field, fieldSet, listView
+      - name: exclude-namespaces
+        value: FinServ__
