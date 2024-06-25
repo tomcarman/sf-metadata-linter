@@ -14,9 +14,11 @@ const ruleClassMap: RuleIdToRuleClassNameMap = {
   'field-should-have-a-description': 'FieldShouldHaveADescription',
   'object-should-have-a-description': 'ObjectShouldHaveADescription',
   'flow-should-have-a-description': 'FlowShouldHaveADescription',
+  'validation-rule-should-have-a-description': 'ValidationRuleShouldHaveADescription',
   'field-description-minimum-length': 'FieldDescriptionMinimumLength',
   'object-description-minimum-length': 'ObjectDescriptionMinimumLength',
   'flow-description-minimum-length': 'FlowDescriptionMinimumLength',
+  'validation-rule-description-minimum-length': 'ValidationRuleDescriptionMinimumLength',
 };
 
 export class RulesEngine {
