@@ -1,6 +1,6 @@
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { RuleOption } from '../common/config-parser.js';
-import { getCustomMetada } from '../commands/util.js';
+import { getCustomMetadata } from '../commands/util.js';
 
 export default class MetadataShouldNotHavePrefix extends RuleClass {
   public prefixes: string[] = [];
@@ -43,7 +43,7 @@ export default class MetadataShouldNotHavePrefix extends RuleClass {
     }
   }
   public execute(): void {
-    const filteredFiles = getCustomMetada(this.files, this.types, this.excludeNamespaces);
+    const filteredFiles = getCustomMetadata(this.files, this.types, this.excludeNamespaces);
     const ruleViolations = [];
 
     for (const file of filteredFiles) {

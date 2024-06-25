@@ -23,50 +23,30 @@ export function parseMetadataXml<T>(fileString: string, mainNodeName: string): T
   return (parser.parse(fileString) as unknown as { [key: string]: T })[mainNodeName];
 }
 
-export function getCustomMetada(files: string[], types?: string[], excludeNamespaces?: string[]): string[] {
-  let filteredFiles = files;
+export function getCustomMetadata(files: string[], types?: string[], excludeNamespaces?: string[]): string[] {
+  const standardMetadataTypes = ['object', 'field', 'tab']; // This list is any metadata type that can be "stanadrd", and needs additional filtering based on suffix.
+  const customMetadataSuffixes = ['__c', '__e', '__b', '__x'];
 
-  const filesToFilterStandard = ['object', 'field', 'tab']; // This list is any metadata type that can be "stanadrd", and needs additional filtering based on suffix.
-  const customSuffixes = ['__c', '__e', '__b', '__x'];
-
-  // Filter metadata files based on the types option
-  if (types && types.length !== 0) {
-    filteredFiles = files.filter((file) => {
-      for (const fileType of types) {
-        if (file.endsWith(`.${fileType}-meta.xml`)) {
-          return true;
-        }
-      }
-    });
-  }
-  // Filter metadata files based on the exclude-namespaces option
-  if (excludeNamespaces && excludeNamespaces.length !== 0) {
-    filteredFiles = filteredFiles.filter((file) => {
-      for (const excludeNamespace of excludeNamespaces) {
-        if (!file.includes(excludeNamespace)) {
-          return true;
-        }
-      }
-    });
-  }
-
-  // Filter out any standard metadata files
-  filteredFiles = filteredFiles.filter((file) => {
-    let matched = false;
-    for (const fileType of filesToFilterStandard) {
-      if (file.endsWith(`.${fileType}-meta.xml`)) {
-        matched = true;
-        for (const suffix of customSuffixes) {
-          if (file.includes(suffix)) {
-            return true;
-          }
-        }
-      }
+  return files.filter((file) => {
+    // Filter based on the types option
+    if (types && types.length !== 0) {
+      const typeMatch = types.some((type) => file.endsWith(`.${type}-meta.xml`));
+      if (!typeMatch) return false;
     }
-    if (!matched) {
-      return true;
+
+    // Filter based on the exclude-namespaces option
+    if (excludeNamespaces && excludeNamespaces.length !== 0) {
+      const namespaceExcluded = excludeNamespaces.some((namespace) => file.includes(namespace));
+      if (namespaceExcluded) return false;
     }
+
+    // Filter out standard metadata
+    const standardMetadata = standardMetadataTypes.some((fileType) => file.endsWith(`.${fileType}-meta.xml`));
+    if (standardMetadata) {
+      return customMetadataSuffixes.some((suffix) => file.includes(suffix));
+    }
+
+    // If none of the above conditions matched, the file passes the filter (e.g. it's a custom metadata file defined by its extension - .listView-meta.xml, .layout-meta.xml etc)
+    return true;
   });
-
-  return filteredFiles;
 }
