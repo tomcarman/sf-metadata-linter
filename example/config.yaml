@@ -15,6 +15,10 @@ rules:
     active: true
     level: warning
 
+  - name: flow-should-have-a-description
+    active: true
+    level: warning
+
   - name: field-description-minimum-length
     active: true
     level: warning
@@ -23,6 +27,13 @@ rules:
         value: 100
 
   - name: object-description-minimum-length
+    active: true
+    level: warning
+    options:
+      - name: minimumLength
+        value: 100
+
+  - name: flow-description-minimum-length
     active: true
     level: warning
     options:

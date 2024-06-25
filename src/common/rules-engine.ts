@@ -13,8 +13,10 @@ export type RuleIdToRuleClassNameMap = {
 const ruleClassMap: RuleIdToRuleClassNameMap = {
   'field-should-have-a-description': 'FieldShouldHaveADescription',
   'object-should-have-a-description': 'ObjectShouldHaveADescription',
+  'flow-should-have-a-description': 'FlowShouldHaveADescription',
   'field-description-minimum-length': 'FieldDescriptionMinimumLength',
   'object-description-minimum-length': 'ObjectDescriptionMinimumLength',
+  'flow-description-minimum-length': 'FlowDescriptionMinimumLength',
 };
 
 export class RulesEngine {
