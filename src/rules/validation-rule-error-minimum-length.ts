@@ -1,8 +1,9 @@
 import * as fs from 'node:fs';
 import type { ValidationRule } from '@salesforce/types/metadata';
+import type { Location } from '../common/types.js';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { RuleOption } from '../common/config-parser.js';
-import { parseMetadataXml } from '../common/util.js';
+import { parseMetadataXml, getLineAndColNumber } from '../common/util.js';
 
 export default class ValidationRuleErrorMinimumLength extends RuleClass {
   public minimumLength = 50; // Default value
@@ -31,16 +32,15 @@ export default class ValidationRuleErrorMinimumLength extends RuleClass {
   public execute(): void {
     const validationRules = this.files.filter((file) => file.endsWith('.validationRule-meta.xml'));
 
-    const ruleViolations = validationRules.filter((file) => {
+    for (const file of validationRules) {
       const fileText = fs.readFileSync(file, 'utf-8');
       const validationRule = parseMetadataXml<ValidationRule>(fileText, 'ValidationRule');
-      if (validationRule.errorMessage) {
-        return validationRule.errorMessage.length < this.minimumLength;
+      if (validationRule.errorMessage && validationRule.errorMessage.length < this.minimumLength) {
+        const location: Location = getLineAndColNumber(fileText, validationRule.errorMessage);
+        this.results.push(
+          new SingleRuleResult(file, location.startLine, location.endLine, location.startColumn, location.endColumn)
+        );
       }
-    });
-
-    for (const ruleViolation of ruleViolations) {
-      this.results.push(new SingleRuleResult(ruleViolation, this.startLine, this.endLine));
     }
   }
 }

@@ -1,8 +1,9 @@
 import * as fs from 'node:fs';
 import type { Flow } from '@salesforce/types/metadata';
+import type { Location } from '../common/types.js';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { RuleOption } from '../common/config-parser.js';
-import { parseMetadataXml } from '../common/util.js';
+import { parseMetadataXml, getLineAndColNumber } from '../common/util.js';
 
 export default class FlowDescriptionMinimumLength extends RuleClass {
   public minimumLength = 50; // Default value
@@ -31,16 +32,15 @@ export default class FlowDescriptionMinimumLength extends RuleClass {
   public execute(): void {
     const flows = this.files.filter((file) => file.endsWith('.flow-meta.xml'));
 
-    const ruleViolations = flows.filter((file) => {
+    for (const file of flows) {
       const fileText = fs.readFileSync(file, 'utf-8');
       const flow = parseMetadataXml<Flow>(fileText, 'Flow');
-      if (flow.description) {
-        return flow.description.length < this.minimumLength;
+      if (flow.description && flow.description.length < this.minimumLength) {
+        const location: Location = getLineAndColNumber(fileText, flow.description);
+        this.results.push(
+          new SingleRuleResult(file, location.startLine, location.endLine, location.startColumn, location.endColumn)
+        );
       }
-    });
-
-    for (const ruleViolation of ruleViolations) {
-      this.results.push(new SingleRuleResult(ruleViolation, this.startLine, this.endLine));
     }
   }
 }

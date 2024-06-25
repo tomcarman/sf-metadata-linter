@@ -1,8 +1,9 @@
 import * as fs from 'node:fs';
 import type { CustomField } from '@salesforce/types/metadata';
+import type { Location } from '../common/types.js';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { RuleOption } from '../common/config-parser.js';
-import { parseMetadataXml } from '../common/util.js';
+import { parseMetadataXml, getLineAndColNumber } from '../common/util.js';
 
 export default class FieldDescriptionMinimumLength extends RuleClass {
   public minimumLength = 50; // Default value
@@ -33,16 +34,15 @@ export default class FieldDescriptionMinimumLength extends RuleClass {
       (file) => (file.includes('__c') || file.includes('__e')) && file.endsWith('.field-meta.xml')
     );
 
-    const ruleViolations = customFields.filter((file) => {
+    for (const file of customFields) {
       const fileText = fs.readFileSync(file, 'utf-8');
       const customField = parseMetadataXml<CustomField>(fileText, 'CustomField');
-      if (customField.description) {
-        return customField.description.length < this.minimumLength;
+      if (customField.description && customField.description.length < this.minimumLength) {
+        const location: Location = getLineAndColNumber(fileText, customField.description);
+        this.results.push(
+          new SingleRuleResult(file, location.startLine, location.endLine, location.startColumn, location.endColumn)
+        );
       }
-    });
-
-    for (const ruleViolation of ruleViolations) {
-      this.results.push(new SingleRuleResult(ruleViolation, this.startLine, this.endLine));
     }
   }
 }
