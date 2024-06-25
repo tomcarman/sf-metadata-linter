@@ -51,6 +51,13 @@ rules:
       - name: minimumLength
         value: 100
 
+  - name: validation-rule-error-minimum-length
+    active: true
+    level: warning
+    options:
+      - name: minimumLength
+        value: 100
+
   - name: metadata-should-have-prefix
     active: true
     level: warning
