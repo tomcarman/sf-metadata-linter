@@ -23,6 +23,15 @@ export function parseMetadataXml<T>(fileString: string, mainNodeName: string): T
   return (parser.parse(fileString) as unknown as { [key: string]: T })[mainNodeName];
 }
 
+export function getLineAndColNumber(fileText: string, value: string): [lineNumber: number, colNumber: number] {
+  const index = fileText.indexOf(value);
+  const fileToIndex = fileText.substring(0, index);
+  const lines = fileToIndex.split('\n');
+  const lineNumber = lines.length;
+  const colNumber = lines[lineNumber - 1].length;
+  return [lineNumber, colNumber];
+}
+
 export function getCustomMetadata(files: string[], types?: string[], excludeNamespaces?: string[]): string[] {
   const standardMetadataTypes = ['object', 'field', 'tab']; // This list is any metadata type that can be "stanadrd", and needs additional filtering based on suffix.
   const customMetadataSuffixes = ['__c', '__e', '__b', '__x'];
