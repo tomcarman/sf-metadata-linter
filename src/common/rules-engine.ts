@@ -21,6 +21,7 @@ const ruleClassMap: RuleIdToRuleClassNameMap = {
   'validation-rule-description-minimum-length': 'ValidationRuleDescriptionMinimumLength',
   'metadata-should-have-prefix': 'MetadataShouldHavePrefix',
   'metadata-should-not-have-prefix': 'MetadataShouldNotHavePrefix',
+  'validation-rule-error-minimum-length': 'ValidationRuleErrorMinimumLength',
 };
 
 export class RulesEngine {

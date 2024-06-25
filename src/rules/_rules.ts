@@ -8,6 +8,7 @@ import FlowDescriptionMinimumLength from './flow-description-minimum-length.js';
 import ValidationRuleDescriptionMinimumLength from './validation-rule-description-minimum-length.js';
 import MetadataShouldHavePrefix from './metadata-should-have-prefix.js';
 import MetadataShouldNotHavePrefix from './metadata-should-not-have-prefix.js';
+import ValidationRuleErrorMinimumLength from './validation-rule-error-minimum-length.js';
 export {
   FieldShouldHaveADescription,
   ObjectShouldHaveADescription,
@@ -19,4 +20,5 @@ export {
   ValidationRuleDescriptionMinimumLength,
   MetadataShouldHavePrefix,
   MetadataShouldNotHavePrefix,
+  ValidationRuleErrorMinimumLength,
 };
