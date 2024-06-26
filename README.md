@@ -120,7 +120,6 @@ Different output formats are available for the results, defined by the `--format
 ![table-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/cf8b4f94-4cd3-40f4-b5d0-adfa5f54dfae)
 
 <br>
-<br>
 
 ### SARIF
 
@@ -132,6 +131,7 @@ Different output formats are available for the results, defined by the `--format
 <br>
 
 #### Example SARIF integration with GitHub Advanced Security, results inline in a pull request
+
 <img src="https://github.com/tomcarman/sf-metadata-linter/assets/1554713/ac485881-c63a-43cb-9ad9-4946f621cc5b" width="800">
 
 <br>
