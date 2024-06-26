@@ -2,6 +2,7 @@ import * as path from 'node:path';
 import { readdir } from 'node:fs/promises';
 import { Messages } from '@salesforce/core';
 import { XMLParser } from 'fast-xml-parser';
+import { encode } from 'html-entities';
 import indexToPosition from 'index-to-position';
 import type { Location } from './types.js';
 
@@ -26,9 +27,10 @@ export function parseMetadataXml<T>(fileString: string, mainNodeName: string): T
 }
 
 export function getLineAndColNumber(fileText: string, value: string): Location {
-  const startIndex = fileText.indexOf(value);
+  const encodedValue = encode(value);
+  const startIndex = fileText.indexOf(encodedValue);
   const startPosition = indexToPosition(fileText, startIndex, { oneBased: true });
-  const endIndex = startIndex + value.length;
+  const endIndex = startIndex + encodedValue.length;
   const endPosition = indexToPosition(fileText, endIndex, { oneBased: true });
 
   const location: Location = {

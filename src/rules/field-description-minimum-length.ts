@@ -35,6 +35,7 @@ export default class FieldDescriptionMinimumLength extends RuleClass {
     );
 
     for (const file of customFields) {
+      console.log('Processing file:', file);
       const fileText = fs.readFileSync(file, 'utf-8');
       const customField = parseMetadataXml<CustomField>(fileText, 'CustomField');
       if (customField.description && customField.description.length < this.minimumLength) {
@@ -43,6 +44,7 @@ export default class FieldDescriptionMinimumLength extends RuleClass {
           new SingleRuleResult(file, location.startLine, location.endLine, location.startColumn, location.endColumn)
         );
       }
+      console.log('Processed file:', file);
     }
   }
 }
