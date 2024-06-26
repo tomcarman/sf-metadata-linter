@@ -6,8 +6,8 @@ import { parseMetadataXml, getLineAndColNumber } from '../common/util.js';
 
 export default class PicklistValuesShouldNotContainDoubleSpaces extends RuleClass {
   public ruleId: string = 'picklist-values-should-not-contain-double-spaces';
-  public shortDescriptionText = 'Picklist values should not contain double spaces.';
-  public fullDescriptionText = "Picklist values should not contain double spaces eg. 'Offer  Made'.";
+  public shortDescriptionText = 'Picklist labels and values should not contain double spaces.';
+  public fullDescriptionText = "Picklist labales and values should not contain double spaces eg. 'Offer  Made'.";
   public startLine = 1;
   public endLine = 1;
 
