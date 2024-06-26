@@ -34,7 +34,7 @@ export default class PicklistValuesShouldNotContainDoubleSpaces extends RuleClas
       value?: string
     ): void {
       if (value?.includes('  ')) {
-        const location: Location = getLineAndColNumber(fileText, value);
+        const location: Location = getLineAndColNumber(this.ruleId, file, fileText, value);
         this.results.push(
           new SingleRuleResult(file, location.startLine, location.endLine, location.startColumn, location.endColumn)
         );

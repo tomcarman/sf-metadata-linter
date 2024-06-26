@@ -36,7 +36,7 @@ export default class FlowDescriptionMinimumLength extends RuleClass {
       const fileText = fs.readFileSync(file, 'utf-8');
       const flow = parseMetadataXml<Flow>(fileText, 'Flow');
       if (flow.description && flow.description.length < this.minimumLength) {
-        const location: Location = getLineAndColNumber(fileText, flow.description);
+        const location: Location = getLineAndColNumber(this.ruleId, file, fileText, flow.description);
         this.results.push(
           new SingleRuleResult(file, location.startLine, location.endLine, location.startColumn, location.endColumn)
         );

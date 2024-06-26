@@ -38,7 +38,7 @@ export default class ObjectDescriptionMinimumLength extends RuleClass {
       const fileText = fs.readFileSync(file, 'utf-8');
       const customObject = parseMetadataXml<CustomObject>(fileText, 'CustomObject');
       if (customObject.description && customObject.description.length < this.minimumLength) {
-        const location: Location = getLineAndColNumber(fileText, customObject.description);
+        const location: Location = getLineAndColNumber(this.ruleId, file, fileText, customObject.description);
         this.results.push(
           new SingleRuleResult(file, location.startLine, location.endLine, location.startColumn, location.endColumn)
         );

@@ -4,6 +4,7 @@ import { Messages } from '@salesforce/core';
 import { XMLParser } from 'fast-xml-parser';
 import { encode } from 'html-entities';
 import indexToPosition from 'index-to-position';
+import { warningsCache } from '../commands/metalint/run.js';
 import type { Location } from './types.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
@@ -26,20 +27,31 @@ export function parseMetadataXml<T>(fileString: string, mainNodeName: string): T
   return (parser.parse(fileString) as unknown as { [key: string]: T })[mainNodeName];
 }
 
-export function getLineAndColNumber(fileText: string, value: string): Location {
-  const encodedValue = encode(value);
-  const startIndex = fileText.indexOf(encodedValue);
-  const startPosition = indexToPosition(fileText, startIndex, { oneBased: true });
-  const endIndex = startIndex + encodedValue.length;
-  const endPosition = indexToPosition(fileText, endIndex, { oneBased: true });
+export function normaliseNewlines(fileText: string): string {
+  return fileText.replace(/\r\n/g, '\n');
+}
 
-  const location: Location = {
-    startLine: startPosition.line,
-    endLine: endPosition.line,
-    startColumn: startPosition.column,
-    endColumn: endPosition.column,
-  };
+export function getLineAndColNumber(ruleId: string, file: string, fileText: string, value: string): Location {
+  let location: Location;
 
+  try {
+    // Metdata can contain windows-stye \r\n newlines, which get lost when parsing/casting the metadata, so we need to normalise the file text
+    const normalisedFileText = normaliseNewlines(fileText);
+    const encodedValue = encode(value);
+    const startIndex = normalisedFileText.indexOf(encodedValue);
+    const startPosition = indexToPosition(normalisedFileText, startIndex, { oneBased: true });
+    const endIndex = startIndex + encodedValue.length;
+    const endPosition = indexToPosition(normalisedFileText, endIndex, { oneBased: true });
+    location = {
+      startLine: startPosition.line,
+      endLine: endPosition.line,
+      startColumn: startPosition.column,
+      endColumn: endPosition.column,
+    };
+  } catch (error) {
+    warningsCache.push(messages.createWarning('warning.UnableToFindViolationLocation', [ruleId, file, value]));
+    location = { startLine: 0, endLine: 0, startColumn: 0, endColumn: 0 };
+  }
   return location;
 }
 

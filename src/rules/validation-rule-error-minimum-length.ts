@@ -36,7 +36,7 @@ export default class ValidationRuleErrorMinimumLength extends RuleClass {
       const fileText = fs.readFileSync(file, 'utf-8');
       const validationRule = parseMetadataXml<ValidationRule>(fileText, 'ValidationRule');
       if (validationRule.errorMessage && validationRule.errorMessage.length < this.minimumLength) {
-        const location: Location = getLineAndColNumber(fileText, validationRule.errorMessage);
+        const location: Location = getLineAndColNumber(this.ruleId, file, fileText, validationRule.errorMessage);
         this.results.push(
           new SingleRuleResult(file, location.startLine, location.endLine, location.startColumn, location.endColumn)
         );
