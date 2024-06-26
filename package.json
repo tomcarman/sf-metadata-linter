@@ -2,7 +2,7 @@
   "name": "sf-metadata-linter",
   "description": "Salesforce Metadata Linter",
   "author": "@tomcarman",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "dependencies": {
     "@oclif/core": "^3.26.2",
     "@salesforce/core": "^7.2.0",
@@ -77,7 +77,6 @@
     "docs": "sf-docs",
     "format": "wireit",
     "lint": "wireit",
-    "postinstall": "yarn husky install",
     "postpack": "shx rm -f oclif.manifest.json oclif.lock",
     "prepack": "sf-prepack",
     "test": "wireit",
@@ -192,5 +191,22 @@
     }
   },
   "exports": "./lib/index.js",
-  "type": "module"
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "sf-metadata-linter": "bin/dev.js"
+  },
+  "directories": {
+    "example": "example",
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomcarman/sf-metadata-linter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tomcarman/sf-metadata-linter/issues"
+  },
+  "homepage": "https://github.com/tomcarman/sf-metadata-linter#readme"
 }
