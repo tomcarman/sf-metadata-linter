@@ -1,6 +1,7 @@
 {
   "name": "sf-metadata-linter",
-  "description": "Salesforce metadata linter",
+  "description": "Salesforce Metadata Linter",
+  "author": "@tomcarman",
   "version": "1.0.0",
   "dependencies": {
     "@oclif/core": "^3.26.2",
@@ -47,7 +48,10 @@
     "sf",
     "sf-plugin",
     "sfdx",
-    "sfdx-plugin"
+    "sfdx-plugin",
+    "sf cli",
+    "sf metadata",
+    "salesforce metadata"
   ],
   "license": "BSD-3-Clause",
   "oclif": {
@@ -58,11 +62,8 @@
       "@oclif/plugin-help"
     ],
     "topics": {
-      "hello": {
-        "description": "Commands to say hello."
-      },
       "metalint": {
-        "description": "description for metalint"
+        "description": "Salesforce Metadata Linter"
       }
     },
     "flexibleTaxonomy": true
@@ -191,6 +192,5 @@
     }
   },
   "exports": "./lib/index.js",
-  "type": "module",
-  "author": "@tomcarman"
+  "type": "module"
 }
