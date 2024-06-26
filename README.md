@@ -12,6 +12,8 @@ tbc
 
 tbc
 
+<br>
+
 ## Usage
 
 ### sf metalint run
@@ -39,6 +41,7 @@ EXAMPLES
   $ sf metalint run --config /path/to/my/config.yaml --directory forceapp/ --format sarif
 ```
 
+<br>
 
 ## Output formats
 
@@ -66,8 +69,11 @@ Several different output formats are available for the results, defined by the `
 
 ![csv-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/b35d5dcd-e9ad-4e1f-95dc-7a199159eb5f)
 
+<br>
+
 ## Config
 
+<br>
 
 ## Rules
 
