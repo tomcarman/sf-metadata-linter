@@ -1,12 +1,12 @@
+<br>
 <p align="center">
   <img src="https://github.com/tomcarman/sf-metadata-linter/assets/1554713/394bea11-ab9a-48bf-8ab5-494652a79bdf" width="400px" align="center" alt="sf metadata linter logo" />
 <!--   <h1 align="center">sf metadata linter</h1> -->
-  <hr>
+<!--   <hr> -->
   <p align="center">
     <a href="https://github.com/salesforcecli">sf cli</a> plugin to lint metadata.
   </p>
 </p>
-
 <p align="center">
 <a href="https://www.npmjs.com/package/sf-metadata-linter" rel="nofollow"><img src="https://img.shields.io/npm/v/sf-metadata-linter.svg?label=sf-metadata-linter" alt="npm"></a>
 <a href="https://raw.githubusercontent.com/salesforcecli/sf-metadata-linter/main/LICENSE.txt" rel="nofollow"><img src="https://img.shields.io/badge/License-BSD%203--Clause-brightgreen.svg" alt="license"></a>
