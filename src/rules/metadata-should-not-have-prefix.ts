@@ -37,9 +37,9 @@ export default class MetadataShouldNotHavePrefix extends RuleClass {
     if (this.types.length > 0) {
       return `Metadata should not have a prefix of: ${this.prefixes.join(
         ', '
-      )}. This applies to metadata of types ${this.types.join(', ')}`;
+      )}. This applies to metadata of types: ${this.types.join(', ')}`;
     } else {
-      return `Metadata should not be prefixed with any of the following:${this.prefixes.join(', ')}`;
+      return `Metadata should not be prefixed with any of the following: ${this.prefixes.join(', ')}`;
     }
   }
   public execute(): void {
