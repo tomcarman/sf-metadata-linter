@@ -4,8 +4,8 @@ import type { Location } from '../common/types.js';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { parseMetadataXml, getLineAndColNumber } from '../common/util.js';
 
-export default class PicklistValuesShouldNotContainDoubleSpaces extends RuleClass {
-  public ruleId: string = 'picklist-values-should-not-contain-double-spaces';
+export default class PicklistsShouldNotContainDoubleSpaces extends RuleClass {
+  public ruleId: string = 'picklists-should-not-contain-double-spaces';
   public shortDescriptionText = 'Picklist labels and values should not contain double spaces.';
   public fullDescriptionText = "Picklist labales and values should not contain double spaces eg. 'Offer  Made'.";
   public startLine = 1;
@@ -32,7 +32,7 @@ export default class PicklistValuesShouldNotContainDoubleSpaces extends RuleClas
     });
 
     function checkForDoubleSpace(
-      this: PicklistValuesShouldNotContainDoubleSpaces,
+      this: PicklistsShouldNotContainDoubleSpaces,
       file: string,
       fileText: string,
       value?: string

@@ -9,7 +9,7 @@ import ValidationRuleDescriptionMinimumLength from './validation-rule-descriptio
 import MetadataShouldHavePrefix from './metadata-should-have-prefix.js';
 import MetadataShouldNotHavePrefix from './metadata-should-not-have-prefix.js';
 import ValidationRuleErrorMinimumLength from './validation-rule-error-minimum-length.js';
-import PicklistValuesShouldNotContainDoubleSpaces from './picklist-values-should-not-contain-double-spaces.js';
+import PicklistsShouldNotContainDoubleSpaces from './picklists-should-not-contain-double-spaces.js';
 export {
   FieldShouldHaveADescription,
   ObjectShouldHaveADescription,
@@ -22,5 +22,5 @@ export {
   MetadataShouldHavePrefix,
   MetadataShouldNotHavePrefix,
   ValidationRuleErrorMinimumLength,
-  PicklistValuesShouldNotContainDoubleSpaces,
+  PicklistsShouldNotContainDoubleSpaces,
 };

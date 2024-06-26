@@ -4,7 +4,7 @@ version: 1.0
 config:
   csvFilename: results.csv
   sarifFilename: results.sarif
-  parentDirectory: force-app/main/default/
+  parentDirectory: demo/demo-app/main/default/
 
 rules:
   - name: field-should-have-a-description
@@ -59,7 +59,7 @@ rules:
         value: 100
 
   - name: metadata-should-have-prefix
-    active: true
+    active: false
     level: warning
     options:
       - name: prefixes
@@ -70,7 +70,7 @@ rules:
         value: FinServ__
 
   - name: metadata-should-not-have-prefix
-    active: false
+    active: true
     level: warning
     options:
       - name: prefixes
@@ -80,6 +80,6 @@ rules:
       - name: exclude-namespaces
         value: FinServ__
 
-  - name: picklist-values-should-not-contain-double-spaces
+  - name: picklists-should-not-contain-double-spaces
     active: true
-    level: warning
+    level: error

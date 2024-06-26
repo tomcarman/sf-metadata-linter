@@ -68,6 +68,7 @@ export default class MetalintRun extends SfCommand<MetalintRunResult> {
     const formatter = new Formatter(files, config, ruleResults);
     const results = formatter.toFormat(format);
     this.spinner.stop();
+    this.log('\n');
     this.log(results);
 
     const timeTaken = process.hrtime.bigint() - start;
