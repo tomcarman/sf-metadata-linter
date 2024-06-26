@@ -4,55 +4,55 @@ version: 1.0
 config:
   csvFilename: results.csv
   sarifFilename: results.sarif
-  parentDirectory: demo/demo-app/main/default/
+  parentDirectory: force-app/main/default/
 
 rules:
   - name: field-should-have-a-description
-    active: false
+    active: true
     level: warning
 
   - name: object-should-have-a-description
-    active: false
+    active: true
     level: warning
 
   - name: flow-should-have-a-description
-    active: false
+    active: true
     level: warning
 
   - name: validation-rule-should-have-a-description
-    active: false
+    active: true
     level: warning
 
   - name: field-description-minimum-length
-    active: false
+    active: true
     level: warning
     options:
       - name: minimumLength
         value: 100
 
   - name: object-description-minimum-length
-    active: false
+    active: true
     level: warning
     options:
       - name: minimumLength
         value: 100
 
   - name: flow-description-minimum-length
-    active: false
+    active: true
     level: warning
     options:
       - name: minimumLength
         value: 100
 
   - name: validation-rule-description-minimum-length
-    active: false
+    active: true
     level: warning
     options:
       - name: minimumLength
         value: 100
 
   - name: validation-rule-error-minimum-length
-    active: false
+    active: true
     level: warning
     options:
       - name: minimumLength
@@ -63,25 +63,25 @@ rules:
     level: warning
     options:
       - name: prefixes
-        value: SPW_
+        value: ACME_
       - name: types
         value: field, fieldSet, listView
       - name: exclude-namespaces
-        value: FinServ__
+        value: FinServ__, et4ae5__
 
   - name: metadata-should-not-have-prefix
     active: false
     level: warning
     options:
       - name: prefixes
-        value: SPW_, TEST_
+        value: ACME_, TEST_
       - name: types
         value: field, fieldSet, listView
       - name: exclude-namespaces
-        value: FinServ__
+        value: FinServ__, et4ae5__
 
   - name: picklists-should-not-contain-double-spaces
-    active: false
+    active: true
     level: error
 
   - name: value-set-should-not-contain-double-spaces
