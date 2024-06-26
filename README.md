@@ -42,6 +42,30 @@ EXAMPLES
 
 ## Output formats
 
+Several different output formats are available for the results, defined by the `--format` flag.
+
+### Table
+
+* This is the default output format, and what is used as default when no other format is supplied.
+* Not all fields are included (eg. rule full description) in order to save space.
+* A summary of the results is also displayed - this is shown regardless of output format.
+
+![table-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/5b285a7d-651f-4aed-b715-1add2622d8e8)
+
+
+### SARIF
+
+* [SARIF (Static Analysis Results Interchange Format)](https://sarifweb.azurewebsites.net/#Specification) is an OASIS approved standardised format for static analysis tools.
+* Its supported by DevOps tools - eg. GitHub, Azure DevOps, so static analysis results can be viewed inline within code.
+
+![sarif-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/31944661-7c9e-4a73-834d-857b9df6bc8d)
+
+### CSV
+
+* Results can be outputted to a CSV - useful for one-off audits etc.
+
+![csv-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/b35d5dcd-e9ad-4e1f-95dc-7a199159eb5f)
+
 ## Config
 
 
