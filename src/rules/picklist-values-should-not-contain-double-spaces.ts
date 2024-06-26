@@ -17,7 +17,6 @@ export default class PicklistValuesShouldNotContainDoubleSpaces extends RuleClas
     );
 
     customFields.forEach((file) => {
-      console.log('Processing file:', file);
       const fileText = fs.readFileSync(file, 'utf-8');
       const customField = parseMetadataXml<CustomField>(fileText, 'CustomField');
       if (customField.type && ['Picklist', 'MultiselectPicklist'].includes(customField.type)) {
