@@ -17,12 +17,17 @@ export default class PicklistValuesShouldNotContainDoubleSpaces extends RuleClas
     );
 
     customFields.forEach((file) => {
+      console.log('Processing file:', file);
       const fileText = fs.readFileSync(file, 'utf-8');
       const customField = parseMetadataXml<CustomField>(fileText, 'CustomField');
       if (customField.type && ['Picklist', 'MultiselectPicklist'].includes(customField.type)) {
-        customField.valueSet?.valueSetDefinition?.value.forEach((value) => {
-          checkForDoubleSpace.call(this, file, fileText, value.label);
-          checkForDoubleSpace.call(this, file, fileText, value.fullName);
+        // Sometimes picklists contain a single value(!) - so check if array and cast if not.
+        const values = Array.isArray(customField.valueSet?.valueSetDefinition?.value)
+          ? customField.valueSet?.valueSetDefinition?.value
+          : [customField.valueSet?.valueSetDefinition?.value];
+        values.forEach((value) => {
+          checkForDoubleSpace.call(this, file, fileText, value?.label);
+          checkForDoubleSpace.call(this, file, fileText, value?.fullName);
         });
       }
     });
@@ -33,7 +38,7 @@ export default class PicklistValuesShouldNotContainDoubleSpaces extends RuleClas
       fileText: string,
       value?: string
     ): void {
-      if (value?.includes('  ')) {
+      if (value?.toString().includes('  ')) {
         const location: Location = getLineAndColNumber(this.ruleId, file, fileText, value);
         this.results.push(
           new SingleRuleResult(file, location.startLine, location.endLine, location.startColumn, location.endColumn)
