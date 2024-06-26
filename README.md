@@ -4,7 +4,7 @@
 
 # Rules
 
-_See the [documentation](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules) for a full description of each rule._
+**See the [documentation](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules) for a full description of the rules.**
 
 | rule                                                                                                                                                            | description                                                                                                                                                                                                        |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
