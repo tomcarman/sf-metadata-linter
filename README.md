@@ -107,12 +107,23 @@ Different output formats are available for the results, defined by the `--format
 
 ![table-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/cf8b4f94-4cd3-40f4-b5d0-adfa5f54dfae)
 
+<br>
+<br>
+
 ### SARIF
 
 - [SARIF (Static Analysis Results Interchange Format)](https://sarifweb.azurewebsites.net/#Specification) is an OASIS approved standardised format for static analysis tools.
 - Its supported by DevOps tools - eg. GitHub, Azure DevOps, so static analysis results can be viewed inline within code.
 
 ![sarif-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/31944661-7c9e-4a73-834d-857b9df6bc8d)
+
+<br>
+
+#### Example SARIF integration with GitHub Advanced Security, results inline in a pull request
+<img src="https://github.com/tomcarman/sf-metadata-linter/assets/1554713/ac485881-c63a-43cb-9ad9-4946f621cc5b" width="800">
+
+<br>
+<br>
 
 ### CSV
 
@@ -121,3 +132,7 @@ Different output formats are available for the results, defined by the `--format
 ![csv-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/b35d5dcd-e9ad-4e1f-95dc-7a199159eb5f)
 
 <br>
+
+## Adding new rules
+
+TBC
