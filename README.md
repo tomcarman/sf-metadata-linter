@@ -2,7 +2,50 @@
 
 [![NPM](https://img.shields.io/npm/v/sf-metadata-linter.svg?label=sf-metadata-linter)](https://www.npmjs.com/package/sf-metadata-linter) [![Downloads/week](https://img.shields.io/npm/dw/sf-metadata-linter.svg)](https://npmjs.org/package/sf-metadata-linter) [![License](https://img.shields.io/badge/License-BSD%203--Clause-brightgreen.svg)](https://raw.githubusercontent.com/salesforcecli/sf-metadata-linter/main/LICENSE.txt)
 
-# Rules
+Custom plugin for the [Salesforce CLI](https://github.com/salesforcecli) to "lint" metadata and to check it meets a customisable ruleset.
+
+## Installation
+
+tbc
+
+### Updating
+
+tbc
+
+## Usage
+
+### sf metalint run
+
+Run the linter against a set of Salesforce metadata files
+
+```
+USAGE
+  $ sf metalint run --config ruleset.yaml --directory forceapp/
+
+FLAGS
+  -c, --config=<value>  (required) Path to a config.yaml file that defines the rules and options for the linter.
+  -d, --directory=<value> (required) Path to a directory containing Salesforce metadata.
+  -f, --format=[csv|sarif|table] (optional) Output format of the results (defaults to table which is displayed in the CLI in not specified)
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  Run the linter against a set of Salesforce metadata files
+
+EXAMPLES
+  $ $ sf metalint run --config /path/to/my/config.yaml --directory forceapp/
+  $ sf metalint run --config /path/to/my/config.yaml --directory forceapp/ --format csv
+  $ sf metalint run --config /path/to/my/config.yaml --directory forceapp/ --format sarif
+```
+
+
+## Output formats
+
+## Config
+
+
+## Rules
 
 **See the [documentation](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules) for a full description of the rules.**
 
