@@ -52,7 +52,7 @@ DESCRIPTION
   Run the linter against a set of Salesforce metadata files
 
 EXAMPLES
-  $ $ sf metalint run --config /path/to/my/config.yaml --directory forceapp/
+  $ sf metalint run --config /path/to/my/config.yaml --directory forceapp/
   $ sf metalint run --config /path/to/my/config.yaml --directory forceapp/ --format csv
   $ sf metalint run --config /path/to/my/config.yaml --directory forceapp/ --format sarif
 ```
