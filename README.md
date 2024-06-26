@@ -4,6 +4,8 @@
 
 # Rules
 
+_See the (documentation)[https://github.com/tomcarman/sf-metadata-linter/wiki/Rules] for a full description of each rule._
+
 | rule                                                                                                                                                            | description                                                                                                                                                                                                        |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [object-should-have-a-description](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#object-should-have-a-description)                                 | Custom objects should have a description, describing how the object is used.                                                                                                                                       |
