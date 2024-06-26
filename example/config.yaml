@@ -8,51 +8,51 @@ config:
 
 rules:
   - name: field-should-have-a-description
-    active: true
+    active: false
     level: warning
 
   - name: object-should-have-a-description
-    active: true
+    active: false
     level: warning
 
   - name: flow-should-have-a-description
-    active: true
+    active: false
     level: warning
 
   - name: validation-rule-should-have-a-description
-    active: true
+    active: false
     level: warning
 
   - name: field-description-minimum-length
-    active: true
+    active: false
     level: warning
     options:
       - name: minimumLength
         value: 100
 
   - name: object-description-minimum-length
-    active: true
+    active: false
     level: warning
     options:
       - name: minimumLength
         value: 100
 
   - name: flow-description-minimum-length
-    active: true
+    active: false
     level: warning
     options:
       - name: minimumLength
         value: 100
 
   - name: validation-rule-description-minimum-length
-    active: true
+    active: false
     level: warning
     options:
       - name: minimumLength
         value: 100
 
   - name: validation-rule-error-minimum-length
-    active: true
+    active: false
     level: warning
     options:
       - name: minimumLength
@@ -70,7 +70,7 @@ rules:
         value: FinServ__
 
   - name: metadata-should-not-have-prefix
-    active: true
+    active: false
     level: warning
     options:
       - name: prefixes
@@ -81,5 +81,9 @@ rules:
         value: FinServ__
 
   - name: picklists-should-not-contain-double-spaces
+    active: false
+    level: error
+
+  - name: value-set-should-not-contain-double-spaces
     active: true
     level: error

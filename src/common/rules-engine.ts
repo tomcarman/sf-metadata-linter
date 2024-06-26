@@ -23,6 +23,7 @@ const ruleClassMap: RuleIdToRuleClassNameMap = {
   'metadata-should-not-have-prefix': 'MetadataShouldNotHavePrefix',
   'validation-rule-error-minimum-length': 'ValidationRuleErrorMinimumLength',
   'picklists-should-not-contain-double-spaces': 'PicklistsShouldNotContainDoubleSpaces',
+  'value-set-should-not-contain-double-spaces': 'ValueSetShouldNotContainDoubleSpaces',
 };
 
 export class RulesEngine {
