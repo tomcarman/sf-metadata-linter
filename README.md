@@ -63,7 +63,8 @@ EXAMPLES
 | [validation-rule-error-minimum-length](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#validation-rule-error-minimum-length)                         | A Validation Rule should have a description, describing how the Validation Rule is used. The description should be at least `{option.minimumLength}` characters long.                                              |
 | [metadata-should-have-prefix](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#metadata-should-have-prefix)                                           | All metata must have an API name prefix of one of the following: `{option.prefixes}`<br><br>or<br><br>Metadata of types: `{option.types}` should have one of the following prefixes: `{option.prefixes}`           |
 | [metadata-should-not-have-prefix](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#metadata-should-not-have-prefix)                                   | <br>Metadata should not be prefixed with any of the following: `{option.prefixes}`<br><br>or<br><br>Metadata should not have a prefix of: `{option.prefixes}`. This applies to metadata of types: `{option.types}` |
-| [picklist-values-should-not-contain-double-spaces](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#picklist-values-should-not-contain-double-spaces) | Picklist labels and values should not contain double spaces eg. `Offer  Made`.                                                                                                                                    |
+| [picklist-values-should-not-contain-double-spaces](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#picklist-values-should-not-contain-double-spaces) | Picklist labels and values should not contain double spaces eg. `Offer  Made`.                                                                                                                                     |
+| [value-set-should-not-contain-double-spaces](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#value-set-should-not-contain-double-spaces)             | Value Set labels and values should not contain double spaces eg. `Offer  Made`.                                                                                                                                    |
 
 <br>
 
@@ -75,21 +76,20 @@ An example config file is available in this repo: https://github.com/tomcarman/s
 
 ### Global Settings
 
-| Name | Description | Example |
-| --- | --- | --- |
-| csvFilename | The name of the file when outputting to CSV. | `results.csv` |
-| sarifFilename | The name of the file when outputting to SARIF. | `results.sarif` |
+| Name            | Description                                                                                                                                                                         | Example                   |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| csvFilename     | The name of the file when outputting to CSV.                                                                                                                                        | `results.csv`             |
+| sarifFilename   | The name of the file when outputting to SARIF.                                                                                                                                      | `results.sarif`           |
 | parentDirectory | This is the path above the specific metadata folders (eg. classes, flows, objects etc). If supplied, it will strip this from the results when rending the CLI table (saving space). | `force-app/main/default/` |
-
 
 ### Rule Settings
 
 All rules support the following:
 
-| Name | Description | Example |
-| --- | --- | --- |
-| active | (boolean) Controls if the rule is run or not. | `true` or `false` |
-| level | (enum) The level of the rule. | `info`, `warning`, or `error` |
+| Name   | Description                                   | Example                       |
+| ------ | --------------------------------------------- | ----------------------------- |
+| active | (boolean) Controls if the rule is run or not. | `true` or `false`             |
+| level  | (enum) The level of the rule.                 | `info`, `warning`, or `error` |
 
 Some rules can be customised with additional options, see the [rule documentation](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules) for further information.
 
@@ -101,23 +101,22 @@ Different output formats are available for the results, defined by the `--format
 
 ### Table
 
-* This is the default output format, and what is used as default when no other format is supplied.
-* Not all fields are included (eg. rule full description) in order to save space.
-* A summary of the results is also displayed - this is shown regardless of output format.
+- This is the default output format, and what is used as default when no other format is supplied.
+- Not all fields are included (eg. rule full description) in order to save space.
+- A summary of the results is also displayed - this is shown regardless of output format.
 
 ![table-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/cf8b4f94-4cd3-40f4-b5d0-adfa5f54dfae)
 
-
 ### SARIF
 
-* [SARIF (Static Analysis Results Interchange Format)](https://sarifweb.azurewebsites.net/#Specification) is an OASIS approved standardised format for static analysis tools.
-* Its supported by DevOps tools - eg. GitHub, Azure DevOps, so static analysis results can be viewed inline within code.
+- [SARIF (Static Analysis Results Interchange Format)](https://sarifweb.azurewebsites.net/#Specification) is an OASIS approved standardised format for static analysis tools.
+- Its supported by DevOps tools - eg. GitHub, Azure DevOps, so static analysis results can be viewed inline within code.
 
 ![sarif-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/31944661-7c9e-4a73-834d-857b9df6bc8d)
 
 ### CSV
 
-* Results can be outputted to a CSV - useful for one-off audits etc.
+- Results can be outputted to a CSV - useful for one-off audits etc.
 
 ![csv-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/b35d5dcd-e9ad-4e1f-95dc-7a199159eb5f)
 
