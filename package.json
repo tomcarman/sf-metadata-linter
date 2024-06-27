@@ -2,7 +2,7 @@
   "name": "sf-metadata-linter",
   "description": "Salesforce Metadata Linter",
   "author": "@tomcarman",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "dependencies": {
     "@oclif/core": "^3.26.2",
     "@salesforce/core": "^7.2.0",
