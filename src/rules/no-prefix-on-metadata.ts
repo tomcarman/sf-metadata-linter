@@ -8,7 +8,7 @@ export default class NoPrefixOnMetadata extends RuleClass {
   public excludeNamespaces: string[] = [];
 
   public ruleId: string = 'no-prefix-on-metadata';
-  public shortDescriptionText = 'Metadata should not have a prefix.';
+  public shortDescriptionText = 'Metadata API names should not have a prefix.';
   public startLine = 1;
   public endLine = 1;
 
@@ -35,11 +35,13 @@ export default class NoPrefixOnMetadata extends RuleClass {
 
   public get fullDescriptionText(): string {
     if (this.types.length > 0) {
-      return `Metadata should not have a prefix of: ${this.prefixes.join(
+      return `Metadata API names should not have a prefix of: ${this.prefixes.join(
         ', '
-      )}. This applies to metadata of types: ${this.types.join(', ')}`;
+      )}. This applies to metadata of types: ${this.types.join(', ')}. Remove the prefix from the API name.`;
     } else {
-      return `Metadata should not be prefixed with any of the following: ${this.prefixes.join(', ')}`;
+      return `Metadata API names should not be prefixed with any of the following: ${this.prefixes.join(
+        ', '
+      )}. Remove the prefix from the API name.`;
     }
   }
   public execute(): void {

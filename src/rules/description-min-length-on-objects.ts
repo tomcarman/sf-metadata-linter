@@ -26,7 +26,7 @@ export default class DescriptionMinLengthOnObjects extends RuleClass {
     return `Custom object description does not meet the minimum length (${this.minimumLength})`;
   }
   public get fullDescriptionText(): string {
-    return `A custom object should have a description, describing how the object is used. The description should be at least ${this.minimumLength} characters long.`;
+    return `Custom object descriptions should be at least ${this.minimumLength} characters long. Update the 'Description' field on the custom object.`;
   }
 
   public execute(): void {

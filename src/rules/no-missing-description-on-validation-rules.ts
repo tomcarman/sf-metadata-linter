@@ -3,8 +3,9 @@ import { RuleClass, SingleRuleResult } from '../common/types.js';
 
 export default class NoMissingDescriptionOnValidationRules extends RuleClass {
   public ruleId: string = 'no-missing-description-on-validation-rules';
-  public shortDescriptionText = 'Validation rules should have description.';
-  public fullDescriptionText = 'Validation rules should have a description, describing how the rule is used.';
+  public shortDescriptionText = 'Validation rules should have a description.';
+  public fullDescriptionText =
+    "Validation rules should have a description describing the purpose of the validation rule. Populate the 'Description' field on the validation rule.";
   public startLine = 1;
   public endLine = 1;
 

@@ -8,7 +8,7 @@ export default class NoMissingPrefixOnMetadata extends RuleClass {
   public excludeNamespaces: string[] = [];
 
   public ruleId: string = 'no-missing-prefix-on-metadata';
-  public shortDescriptionText = 'Metadata should have a prefix.';
+  public shortDescriptionText = 'Metadata API names should have a prefix.';
   public startLine = 1;
   public endLine = 1;
 
@@ -37,9 +37,13 @@ export default class NoMissingPrefixOnMetadata extends RuleClass {
     if (this.types.length > 0) {
       return `Metadata of types: ${this.types.join(
         ', '
-      )} should have one of the following prefixes: ${this.prefixes.join(', ')}`;
+      )} should have one of the following prefixes: ${this.prefixes.join(
+        ', '
+      )}. Update the API name to include one the accepted prefixes.`;
     } else {
-      return `All metata must have a prefix of one of the following: ${this.prefixes.join(', ')}`;
+      return `All metata must have an API name prefix of one of the following: ${this.prefixes.join(
+        ', '
+      )}. Update the API name to include the prefix.`;
     }
   }
 

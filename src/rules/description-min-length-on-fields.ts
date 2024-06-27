@@ -23,10 +23,10 @@ export default class DescriptionMinLengthOnFields extends RuleClass {
   }
 
   public get shortDescriptionText(): string {
-    return `Custom field description does not meet the minimum length (${this.minimumLength})`;
+    return `Custom field descriptions should be at least ${this.minimumLength} characters long.`;
   }
   public get fullDescriptionText(): string {
-    return `A custom field should have a description, describing how the field is used. The description should be at least ${this.minimumLength} characters long.`;
+    return `Custom field descriptions should be at least ${this.minimumLength} characters long. Update the 'Description' field on the custom field.`;
   }
 
   public execute(): void {

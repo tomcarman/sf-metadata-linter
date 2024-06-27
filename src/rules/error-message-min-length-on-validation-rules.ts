@@ -23,10 +23,10 @@ export default class ErrorMessageMinLengthOnValidationRules extends RuleClass {
   }
 
   public get shortDescriptionText(): string {
-    return `Validation rule error message does not meet the minimum length (${this.minimumLength})`;
+    return `Validation rule error messages should be at least ${this.minimumLength} characters long.`;
   }
   public get fullDescriptionText(): string {
-    return `A validation rule should have a clear error message, describing how the user should resolve the error. The error message should be at least ${this.minimumLength} characters long.`;
+    return `Validation rule error messages should be at least ${this.minimumLength} characters long, and describe how the user should resolve the validation error. Update the 'Error Message' field on the Validation rule.`;
   }
 
   public execute(): void {

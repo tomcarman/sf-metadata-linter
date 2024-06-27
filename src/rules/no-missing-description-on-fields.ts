@@ -3,8 +3,9 @@ import { RuleClass, SingleRuleResult } from '../common/types.js';
 
 export default class NoMissingDescriptionOnFields extends RuleClass {
   public ruleId: string = 'no-missing-description-on-fields';
-  public shortDescriptionText = 'Custom fields should have description.';
-  public fullDescriptionText = 'Custom fields should have a description, describing how the field is used.';
+  public shortDescriptionText = 'Custom fields should have a description.';
+  public fullDescriptionText =
+    "Custom fields should have a description describing the purpose of the field. Populate the 'Description' field on the custom field.";
   public startLine = 1;
   public endLine = 1;
 

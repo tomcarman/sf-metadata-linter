@@ -23,10 +23,10 @@ export default class DescriptionMinLengthOnValidationRules extends RuleClass {
   }
 
   public get shortDescriptionText(): string {
-    return `Validation rule description does not meet the minimum length (${this.minimumLength})`;
+    return `Validation rule descriptions should be at least ${this.minimumLength} characters long.`;
   }
   public get fullDescriptionText(): string {
-    return `A validation rule should have a description, describing how the rule is used. The description should be at least ${this.minimumLength} characters long.`;
+    return `Validation rule descriptions should be at least ${this.minimumLength} characters long. Update the 'Description' field on the Validation rule.`;
   }
 
   public execute(): void {

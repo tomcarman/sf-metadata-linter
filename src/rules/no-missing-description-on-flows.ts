@@ -5,8 +5,9 @@ import { parseMetadataXml } from '../common/util.js';
 
 export default class NoMissingDescriptionOnFlows extends RuleClass {
   public ruleId: string = 'no-missing-description-on-flows';
-  public shortDescriptionText = 'Flows should have description.';
-  public fullDescriptionText = 'Flows should have a description, describing how the Flow is used.';
+  public shortDescriptionText = 'Flows should have a description.';
+  public fullDescriptionText =
+    "Flows should have a description describing the purpose of the flow. Populate the 'Description' field on the flow.";
   public startLine = 1;
   public endLine = 1;
 

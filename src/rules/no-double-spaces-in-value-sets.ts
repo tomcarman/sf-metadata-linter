@@ -6,8 +6,9 @@ import { parseMetadataXml, getLineAndColNumber } from '../common/util.js';
 
 export default class NoDoublesSpacesInValueSets extends RuleClass {
   public ruleId: string = 'no-double-spaces-in-value-sets';
-  public shortDescriptionText = 'Value Set labels and values should not contain double spaces.';
-  public fullDescriptionText = "Value Set labels and values should not contain double spaces eg. 'Offer  Made'.";
+  public shortDescriptionText = "Value set labels and values should not contain double spaces eg. 'Offer  Made'.";
+  public fullDescriptionText =
+    "Value set labels and values should not contain double spaces eg. 'Offer  Made'. Remove the double space from the label and/or value.";
   public startLine = 1;
   public endLine = 1;
 

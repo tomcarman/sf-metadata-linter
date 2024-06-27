@@ -23,10 +23,10 @@ export default class DescriptionMinLengthOnFlows extends RuleClass {
   }
 
   public get shortDescriptionText(): string {
-    return `Flow description does not meet the minimum length (${this.minimumLength})`;
+    return `Flow descriptions should be at least ${this.minimumLength} characters long.`;
   }
   public get fullDescriptionText(): string {
-    return `A Flow should have a description, describing how the Flow is used. The description should be at least ${this.minimumLength} characters long.`;
+    return `Flow descriptions should be at least ${this.minimumLength} characters long. Update the 'Description' field on the flow.`;
   }
 
   public execute(): void {

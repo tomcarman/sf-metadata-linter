@@ -3,8 +3,9 @@ import { RuleClass, SingleRuleResult } from '../common/types.js';
 
 export default class NoMissingDescriptionOnObjects extends RuleClass {
   public ruleId: string = 'no-missing-description-on-objects';
-  public shortDescriptionText = 'Custom objects should have description.';
-  public fullDescriptionText = 'Custom objects should have a description, describing how the object is used.';
+  public shortDescriptionText = 'Custom objects should have a description.`';
+  public fullDescriptionText =
+    "Custom objects should have a description describing the purpose of the object. Populate the 'Description' field on the custom object.";
   public startLine = 1;
   public endLine = 1;
 
