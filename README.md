@@ -14,6 +14,10 @@
 
 <br>
 
+![demo](docs/cli-demo.gif)
+
+<br>
+
 ## Installation
 
 Assuming you already have the [sf cli](https://developer.salesforce.com/tools/salesforcecli) installed, the plugin can be installed by running:
@@ -83,7 +87,7 @@ EXAMPLES
 
 ## Config
 
-Configuring which rules run, their level, and other options, is managed via a config file thats passed into the linter when executing.
+Configuring which rules run, their level and other options, is managed via a config file that is passed into the linter when executing.
 
 An example config file is available in this repo: https://github.com/tomcarman/sf-metadata-linter/blob/main/example/config.yaml
 
@@ -146,24 +150,18 @@ Different output formats are available for the results, defined by the `--format
 
 ### Table
 
-- This is the default output format, and what is used as default when no other format is supplied.
+- This is the default output format and what is used when no other format is supplied.
 - Not all fields are included (eg. rule full description) in order to save space.
-- A summary of the results is also displayed - this is shown regardless of output format.
 
-![table-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/cf8b4f94-4cd3-40f4-b5d0-adfa5f54dfae)
+![table-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/faaae375-e1c8-4959-a5ff-cb0d5812a7c0)
 
 <br>
 
 ### SARIF
 
-- [SARIF (Static Analysis Results Interchange Format)](https://sarifweb.azurewebsites.net/#Specification) is an OASIS approved standardised format for static analysis tools.
-- Its supported by DevOps tools - eg. GitHub, Azure DevOps, so static analysis results can be viewed inline within code.
-
-![sarif-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/31944661-7c9e-4a73-834d-857b9df6bc8d)
-
-<br>
-
-#### Example SARIF integration with GitHub Advanced Security, results inline in a pull request
+- [SARIF (Static Analysis Results Interchange Format)](https://sarifweb.azurewebsites.net/#Specification) is standardised format for static analysis tools.
+- It's supported by various DevOps tools - eg. GitHub, Azure DevOps.
+- The SARIF output can be used when running the linter as part of CI/CD pipelines. The results can be shown inline in pull requests.
 
 <img src="https://github.com/tomcarman/sf-metadata-linter/assets/1554713/ac485881-c63a-43cb-9ad9-4946f621cc5b" width="800">
 
