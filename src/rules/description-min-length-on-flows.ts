@@ -5,10 +5,10 @@ import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { RuleOption } from '../common/config-parser.js';
 import { parseMetadataXml, getLineAndColNumber } from '../common/util.js';
 
-export default class FlowDescriptionMinimumLength extends RuleClass {
+export default class DescriptionMinLengthOnFlows extends RuleClass {
   public minimumLength = 50; // Default value
 
-  public ruleId: string = 'flow-description-minimum-length';
+  public ruleId: string = 'description-min-length-on-flows';
   public startLine = 1;
   public endLine = 1;
 

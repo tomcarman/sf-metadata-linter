@@ -5,10 +5,10 @@ import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { RuleOption } from '../common/config-parser.js';
 import { parseMetadataXml, getLineAndColNumber } from '../common/util.js';
 
-export default class ValidationRuleErrorMinimumLength extends RuleClass {
+export default class DescriptionMinLengthOnValidationRules extends RuleClass {
   public minimumLength = 50; // Default value
 
-  public ruleId: string = 'validation-rule-error-minimum-length';
+  public ruleId: string = 'description-min-length-on-validation-rules';
   public startLine = 1;
   public endLine = 1;
 
@@ -23,10 +23,10 @@ export default class ValidationRuleErrorMinimumLength extends RuleClass {
   }
 
   public get shortDescriptionText(): string {
-    return `Validation rule error message does not meet the minimum length (${this.minimumLength})`;
+    return `Validation rule description does not meet the minimum length (${this.minimumLength})`;
   }
   public get fullDescriptionText(): string {
-    return `A validation rule should have a clear error message, describing how the user should resolve the error. The error message should be at least ${this.minimumLength} characters long.`;
+    return `A validation rule should have a description, describing how the rule is used. The description should be at least ${this.minimumLength} characters long.`;
   }
 
   public execute(): void {
@@ -35,8 +35,8 @@ export default class ValidationRuleErrorMinimumLength extends RuleClass {
     for (const file of validationRules) {
       const fileText = fs.readFileSync(file, 'utf-8');
       const validationRule = parseMetadataXml<ValidationRule>(fileText, 'ValidationRule');
-      if (validationRule.errorMessage && validationRule.errorMessage.length < this.minimumLength) {
-        const location: Location = getLineAndColNumber(this.ruleId, file, fileText, validationRule.errorMessage);
+      if (validationRule.description && validationRule.description.length < this.minimumLength) {
+        const location: Location = getLineAndColNumber(this.ruleId, file, fileText, validationRule.description);
         this.results.push(
           new SingleRuleResult(file, location.startLine, location.endLine, location.startColumn, location.endColumn)
         );

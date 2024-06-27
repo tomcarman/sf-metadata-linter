@@ -4,8 +4,8 @@ import type { Location } from '../common/types.js';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { parseMetadataXml, getLineAndColNumber } from '../common/util.js';
 
-export default class ValueSetShouldNotContainDoubleSpaces extends RuleClass {
-  public ruleId: string = 'value-set-should-not-contain-double-spaces';
+export default class NoDoublesSpacesInValueSets extends RuleClass {
+  public ruleId: string = 'no-double-spaces-in-value-sets';
   public shortDescriptionText = 'Value Set labels and values should not contain double spaces.';
   public fullDescriptionText = "Value Set labels and values should not contain double spaces eg. 'Offer  Made'.";
   public startLine = 1;
@@ -40,7 +40,7 @@ export default class ValueSetShouldNotContainDoubleSpaces extends RuleClass {
     }
 
     function checkForDoubleSpace(
-      this: ValueSetShouldNotContainDoubleSpaces,
+      this: NoDoublesSpacesInValueSets,
       file: string,
       fileText: string,
       value?: string

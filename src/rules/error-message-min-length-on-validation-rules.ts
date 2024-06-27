@@ -1,14 +1,14 @@
 import * as fs from 'node:fs';
-import type { CustomField } from '@salesforce/types/metadata';
+import type { ValidationRule } from '@salesforce/types/metadata';
 import type { Location } from '../common/types.js';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { RuleOption } from '../common/config-parser.js';
 import { parseMetadataXml, getLineAndColNumber } from '../common/util.js';
 
-export default class FieldDescriptionMinimumLength extends RuleClass {
+export default class ErrorMessageMinLengthOnValidationRules extends RuleClass {
   public minimumLength = 50; // Default value
 
-  public ruleId: string = 'field-description-minimum-length';
+  public ruleId: string = 'error-message-min-length-on-validation-rules';
   public startLine = 1;
   public endLine = 1;
 
@@ -23,22 +23,20 @@ export default class FieldDescriptionMinimumLength extends RuleClass {
   }
 
   public get shortDescriptionText(): string {
-    return `Custom field description does not meet the minimum length (${this.minimumLength})`;
+    return `Validation rule error message does not meet the minimum length (${this.minimumLength})`;
   }
   public get fullDescriptionText(): string {
-    return `A custom field should have a description, describing how the field is used. The description should be at least ${this.minimumLength} characters long.`;
+    return `A validation rule should have a clear error message, describing how the user should resolve the error. The error message should be at least ${this.minimumLength} characters long.`;
   }
 
   public execute(): void {
-    const customFields = this.files.filter(
-      (file) => (file.includes('__c') || file.includes('__e')) && file.endsWith('.field-meta.xml')
-    );
+    const validationRules = this.files.filter((file) => file.endsWith('.validationRule-meta.xml'));
 
-    for (const file of customFields) {
+    for (const file of validationRules) {
       const fileText = fs.readFileSync(file, 'utf-8');
-      const customField = parseMetadataXml<CustomField>(fileText, 'CustomField');
-      if (customField.description && customField.description.length < this.minimumLength) {
-        const location: Location = getLineAndColNumber(this.ruleId, file, fileText, customField.description);
+      const validationRule = parseMetadataXml<ValidationRule>(fileText, 'ValidationRule');
+      if (validationRule.errorMessage && validationRule.errorMessage.length < this.minimumLength) {
+        const location: Location = getLineAndColNumber(this.ruleId, file, fileText, validationRule.errorMessage);
         this.results.push(
           new SingleRuleResult(file, location.startLine, location.endLine, location.startColumn, location.endColumn)
         );

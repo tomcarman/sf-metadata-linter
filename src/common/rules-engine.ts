@@ -11,19 +11,19 @@ export type RuleIdToRuleClassNameMap = {
 };
 
 const ruleClassMap: RuleIdToRuleClassNameMap = {
-  'field-should-have-a-description': 'FieldShouldHaveADescription',
-  'object-should-have-a-description': 'ObjectShouldHaveADescription',
-  'flow-should-have-a-description': 'FlowShouldHaveADescription',
-  'validation-rule-should-have-a-description': 'ValidationRuleShouldHaveADescription',
-  'field-description-minimum-length': 'FieldDescriptionMinimumLength',
-  'object-description-minimum-length': 'ObjectDescriptionMinimumLength',
-  'flow-description-minimum-length': 'FlowDescriptionMinimumLength',
-  'validation-rule-description-minimum-length': 'ValidationRuleDescriptionMinimumLength',
-  'metadata-should-have-prefix': 'MetadataShouldHavePrefix',
-  'metadata-should-not-have-prefix': 'MetadataShouldNotHavePrefix',
-  'validation-rule-error-minimum-length': 'ValidationRuleErrorMinimumLength',
-  'picklists-should-not-contain-double-spaces': 'PicklistsShouldNotContainDoubleSpaces',
-  'value-set-should-not-contain-double-spaces': 'ValueSetShouldNotContainDoubleSpaces',
+  'no-missing-description-on-fields': 'NoMissingDescriptionOnFields',
+  'no-missing-description-on-objects': 'NoMissingDescriptionOnObjects',
+  'no-missing-description-on-flows': 'NoMissingDescriptionOnFlows',
+  'no-missing-description-on-validation-rules': 'NoMissingDescriptionOnValidationRules',
+  'description-min-length-on-fields': 'DescriptionMinLengthOnFields',
+  'description-min-length-on-objects': 'DescriptionMinLengthOnObjects',
+  'description-min-length-on-flows': 'DescriptionMinLengthOnFlows',
+  'description-min-length-on-validation-rules': 'DescriptionMinLengthOnValidationRules',
+  'no-missing-prefix-on-metadata': 'NoMissingPrefixOnMetadata',
+  'no-prefix-on-metadata': 'NoPrefixOnMetadata',
+  'error-message-min-length-on-validation-rules': 'ErrorMessageMinLengthOnValidationRules',
+  'no-double-spaces-in-picklist-fields': 'NoDoubleSpacesInPicklistFields',
+  'no-double-spaces-in-value-sets': 'NoDoublesSpacesInValueSets',
 };
 
 export class RulesEngine {

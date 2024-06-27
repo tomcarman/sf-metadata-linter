@@ -1,8 +1,8 @@
 import * as fs from 'node:fs';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 
-export default class ValidationRuleShouldHaveADescription extends RuleClass {
-  public ruleId: string = 'validation-rule-should-have-a-description';
+export default class NoMissingDescriptionOnValidationRules extends RuleClass {
+  public ruleId: string = 'no-missing-description-on-validation-rules';
   public shortDescriptionText = 'Validation rules should have description.';
   public fullDescriptionText = 'Validation rules should have a description, describing how the rule is used.';
   public startLine = 1;

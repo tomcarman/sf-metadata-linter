@@ -3,8 +3,8 @@ import type { Flow } from '@salesforce/types/metadata';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { parseMetadataXml } from '../common/util.js';
 
-export default class FlowShouldHaveADescription extends RuleClass {
-  public ruleId: string = 'flow-should-have-a-description';
+export default class NoMissingDescriptionOnFlows extends RuleClass {
+  public ruleId: string = 'no-missing-description-on-flows';
   public shortDescriptionText = 'Flows should have description.';
   public fullDescriptionText = 'Flows should have a description, describing how the Flow is used.';
   public startLine = 1;

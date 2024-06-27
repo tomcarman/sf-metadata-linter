@@ -2,22 +2,22 @@ import { RuleClass, SingleRuleResult } from '../common/types.js';
 import { RuleOption } from '../common/config-parser.js';
 import { getCustomMetadata } from '../common/util.js';
 
-export default class MetadataShouldNotHavePrefix extends RuleClass {
+export default class NoMissingPrefixOnMetadata extends RuleClass {
   public prefixes: string[] = [];
   public types: string[] = [];
   public excludeNamespaces: string[] = [];
 
-  public ruleId: string = 'metadata-should-not-have-prefix';
-  public shortDescriptionText = 'Metadata should not have a prefix.';
+  public ruleId: string = 'no-missing-prefix-on-metadata';
+  public shortDescriptionText = 'Metadata should have a prefix.';
   public startLine = 1;
   public endLine = 1;
 
   public constructor(files: string[], level: string, options: RuleOption[]) {
     super(files, level);
     if (options) {
-      const prefixes = options.find((ruleOption) => ruleOption.name === 'prefixes');
-      if (prefixes) {
-        const prefixesString = prefixes.value as string;
+      const prefix = options.find((ruleOption) => ruleOption.name === 'prefixes');
+      if (prefix) {
+        const prefixesString = prefix.value as string;
         this.prefixes = prefixesString.split(/\s*,\s*/);
       }
       const types = options.find((ruleOption) => ruleOption.name === 'types');
@@ -35,13 +35,14 @@ export default class MetadataShouldNotHavePrefix extends RuleClass {
 
   public get fullDescriptionText(): string {
     if (this.types.length > 0) {
-      return `Metadata should not have a prefix of: ${this.prefixes.join(
+      return `Metadata of types: ${this.types.join(
         ', '
-      )}. This applies to metadata of types: ${this.types.join(', ')}`;
+      )} should have one of the following prefixes: ${this.prefixes.join(', ')}`;
     } else {
-      return `Metadata should not be prefixed with any of the following: ${this.prefixes.join(', ')}`;
+      return `All metata must have a prefix of one of the following: ${this.prefixes.join(', ')}`;
     }
   }
+
   public execute(): void {
     const filteredFiles = getCustomMetadata(this.files, this.types, this.excludeNamespaces);
     const ruleViolations = [];
@@ -49,7 +50,7 @@ export default class MetadataShouldNotHavePrefix extends RuleClass {
     for (const file of filteredFiles) {
       const filename = file.substring(file.lastIndexOf('/') + 1);
       for (const prefix of this.prefixes) {
-        if (filename.startsWith(prefix)) {
+        if (!filename.startsWith(prefix)) {
           ruleViolations.push(file);
         }
       }

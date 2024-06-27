@@ -1,8 +1,8 @@
 import * as fs from 'node:fs';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 
-export default class ObjectShouldHaveADescription extends RuleClass {
-  public ruleId: string = 'object-should-have-a-description';
+export default class NoMissingDescriptionOnObjects extends RuleClass {
+  public ruleId: string = 'no-missing-description-on-objects';
   public shortDescriptionText = 'Custom objects should have description.';
   public fullDescriptionText = 'Custom objects should have a description, describing how the object is used.';
   public startLine = 1;

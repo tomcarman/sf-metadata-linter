@@ -7,59 +7,59 @@ config:
   parentDirectory: force-app/main/default/
 
 rules:
-  - name: field-should-have-a-description
+  - name: no-missing-description-on-fields
     active: true
     level: warning
 
-  - name: object-should-have-a-description
+  - name: no-missing-description-on-objects
     active: true
     level: warning
 
-  - name: flow-should-have-a-description
+  - name: no-missing-description-on-flows
     active: true
     level: warning
 
-  - name: validation-rule-should-have-a-description
+  - name: no-missing-description-on-validation-rules
     active: true
     level: warning
 
-  - name: field-description-minimum-length
-    active: true
-    level: warning
-    options:
-      - name: minimumLength
-        value: 100
-
-  - name: object-description-minimum-length
+  - name: description-min-length-on-fields
     active: true
     level: warning
     options:
       - name: minimumLength
         value: 100
 
-  - name: flow-description-minimum-length
+  - name: description-min-length-on-objects
     active: true
     level: warning
     options:
       - name: minimumLength
         value: 100
 
-  - name: validation-rule-description-minimum-length
+  - name: description-min-length-on-flows
     active: true
     level: warning
     options:
       - name: minimumLength
         value: 100
 
-  - name: validation-rule-error-minimum-length
+  - name: description-min-length-on-validation-rules
     active: true
     level: warning
     options:
       - name: minimumLength
         value: 100
 
-  - name: metadata-should-have-prefix
-    active: false
+  - name: error-message-min-length-on-validation-rules
+    active: true
+    level: warning
+    options:
+      - name: minimumLength
+        value: 100
+
+  - name: no-missing-prefix-on-metadata
+    active: true
     level: warning
     options:
       - name: prefixes
@@ -69,8 +69,8 @@ rules:
       - name: exclude-namespaces
         value: FinServ__, et4ae5__
 
-  - name: metadata-should-not-have-prefix
-    active: false
+  - name: no-prefix-on-metadata
+    active: true
     level: warning
     options:
       - name: prefixes
@@ -80,10 +80,10 @@ rules:
       - name: exclude-namespaces
         value: FinServ__, et4ae5__
 
-  - name: picklists-should-not-contain-double-spaces
+  - name: no-double-spaces-in-picklist-fields
     active: true
     level: error
 
-  - name: value-set-should-not-contain-double-spaces
+  - name: no-double-spaces-in-value-sets
     active: true
     level: error

@@ -1,8 +1,8 @@
 import * as fs from 'node:fs';
 import { RuleClass, SingleRuleResult } from '../common/types.js';
 
-export default class FieldShouldHaveADescription extends RuleClass {
-  public ruleId: string = 'field-should-have-a-description';
+export default class NoMissingDescriptionOnFields extends RuleClass {
+  public ruleId: string = 'no-missing-description-on-fields';
   public shortDescriptionText = 'Custom fields should have description.';
   public fullDescriptionText = 'Custom fields should have a description, describing how the field is used.';
   public startLine = 1;
