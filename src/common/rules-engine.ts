@@ -35,7 +35,7 @@ export class RulesEngine {
 
   public constructor(config: ConfigFile, files: string[]) {
     this.files = files;
-    this.ruleResults = {}; // is best place to init?
+    this.ruleResults = {};
     this.rulesToRun = config.rules.filter((rule) => rule.active).map((rule) => rule.name);
     this.ruleConfigMap = new Map();
     config.rules.filter((rule) => rule.active).forEach((rule) => this.ruleConfigMap.set(rule.name, rule));

@@ -1,6 +1,5 @@
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages, StructuredMessage } from '@salesforce/core';
-// import type { StructuredMessage } from '@salesforce/core';
 import { readAllFiles } from '../../common/util.js';
 import { readConfigFile } from '../../common/config-parser.js';
 import { Formatter } from '../../common/output/formatter.js';
