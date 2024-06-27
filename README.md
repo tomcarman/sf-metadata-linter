@@ -61,22 +61,23 @@ EXAMPLES
 
 ## Rules
 
-**See the [documentation](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules) for a full description of the rules.**
+**See the [wiki documentation](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules) for a full description of the rules.**
 
-| rule                                                                                                                                                    | description                                                                                                                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [no-missing-description-on-objects](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#no-missing-description-on-objects)                       | Custom objects should have a description, describing how the object is used.                                                                                                                                       |
-| [description-min-length-on-objects](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#description-min-length-on-objects)                       | A custom object should have a description, describing how the object is used. The description should be at least `{option.minimumLength}` characters long.                                                         |
-| [no-missing-description-on-fields](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#no-missing-description-on-fields)                         | Custom fields should have a description, describing how the field is used.                                                                                                                                         |
-| [description-min-length-on-fields](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#description-min-length-on-fields)                         | A custom field should have a description, describing how the field is used. The description should be at least `{option.minimumLength}` characters long.                                                           |
-| [no-missing-description-on-flows](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#no-missing-description-on-flows)                           | Flows should have a description, describing how the Flow is used.                                                                                                                                                  |
-| [description-min-length-on-flows](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#description-min-length-on-flows)                           | A Flow should have a description, describing how the flow is used. The description should be at least `{option.minimumLength}` characters long.                                                                    |
-| [description-min-length-on-validation-rules](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#description-min-length-on-validation-rules)     | A Validation Rule should have a description, describing how the Validation Rule is used. The description should be at least `{option.minimumLength}` characters long.                                              |
-| [error-message-min-length-on-validation-rules](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#error-message-min-length-on-validation-rules) | A Validation Rule should have a description, describing how the Validation Rule is used. The description should be at least `{option.minimumLength}` characters long.                                              |
-| [no-missing-prefix-on-metadata](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#no-missing-prefix-on-metadata)                               | All metata must have an API name prefix of one of the following: `{option.prefixes}`<br><br>or<br><br>Metadata of types: `{option.types}` should have one of the following prefixes: `{option.prefixes}`           |
-| [no-prefix-on-metadata](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#no-prefix-on-metadata)                                               | <br>Metadata should not be prefixed with any of the following: `{option.prefixes}`<br><br>or<br><br>Metadata should not have a prefix of: `{option.prefixes}`. This applies to metadata of types: `{option.types}` |
-| [no-double-spaces-in-picklist-fields](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#no-double-spaces-in-picklist-fields)                   | Picklist labels and values should not contain double spaces eg. `Offer  Made`.                                                                                                                                     |
-| [no-double-spaces-in-value-sets](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules#no-double-spaces-in-value-sets)                             | Value Set labels and values should not contain double spaces eg. `Offer  Made`.                                                                                                                                    |
+| Rule | Purpose |
+| --- | --- |
+| [no-missing-description-on-objects.ts](https://github.com/tomcarman/sf-metadata-linter/blob/main/src/rules/no-missing-description-on-objects.ts) | Checks that the "Description" field is populated on custom objects. |
+| [no-missing-description-on-fields.ts](https://github.com/tomcarman/sf-metadata-linter/blob/main/src/rules/no-missing-description-on-fields.ts) | Checks that the "Description" field is populated on custom fields. |
+| [no-missing-description-on-flows.ts](https://github.com/tomcarman/sf-metadata-linter/blob/main/src/rules/no-missing-description-on-flows.ts) | Checks that the "Description" field is populated on flows. |
+| [no-missing-description-on-validation-rules.ts](https://github.com/tomcarman/sf-metadata-linter/blob/main/src/rules/no-missing-description-on-validation-rules.ts) | Checks that the "Description" field is populated on validation rules. |
+| [description-min-length-on-objects.ts](https://github.com/tomcarman/sf-metadata-linter/blob/main/src/rules/description-min-length-on-objects.ts) | Checks that the "Description" field on custom objects meets a minimum length. |
+| [description-min-length-on-fields.ts](https://github.com/tomcarman/sf-metadata-linter/blob/main/src/rules/description-min-length-on-fields.ts) | Checks that the "Description" field on custom fields meets a minimum length. |
+| [description-min-length-on-flows.ts](https://github.com/tomcarman/sf-metadata-linter/blob/main/src/rules/description-min-length-on-flows.ts) | Checks that the "Description" field on flows meets a minimum length. |
+| [description-min-length-on-validation-rules.ts](https://github.com/tomcarman/sf-metadata-linter/blob/main/src/rules/description-min-length-on-validation-rules.ts) | Checks that the "Description" field on validation rules meets a minimum length. |
+| [error-message-min-length-on-validation-rules.ts](https://github.com/tomcarman/sf-metadata-linter/blob/main/src/rules/error-message-min-length-on-validation-rules.ts) | Checks that the "Error Message" field on validation rules meets a minimum length. |
+| [no-missing-prefix-on-metadata.ts](https://github.com/tomcarman/sf-metadata-linter/blob/main/src/rules/no-missing-prefix-on-metadata.ts) | Checks for a given prefix on API names of metadata. |
+| [no-prefix-on-metadata.ts](https://github.com/tomcarman/sf-metadata-linter/blob/main/src/rules/no-missing-on-metadata.ts) | Blocks a given prefix on API names of metadata. |
+| [no-double-spaces-in-picklist-fields.ts](https://github.com/tomcarman/sf-metadata-linter/blob/main/src/rules/no-double-spaces-in-picklist-fields.ts) | Checks for unintended double spaces in picklist labels and values. |
+| [no-double-spaces-in-value-sets.ts](https://github.com/tomcarman/sf-metadata-linter/blob/main/src/rules/no-double-spaces-in-value-sets.ts) | Checks for unintended double spaces in value set labels and values. |
 
 <br>
 
@@ -88,11 +89,21 @@ An example config file is available in this repo: https://github.com/tomcarman/s
 
 ### Global Settings
 
+
 | Name            | Description                                                                                                                                                                         | Example                   |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
 | csvFilename     | The name of the file when outputting to CSV.                                                                                                                                        | `results.csv`             |
 | sarifFilename   | The name of the file when outputting to SARIF.                                                                                                                                      | `results.sarif`           |
 | parentDirectory | This is the path above the specific metadata folders (eg. classes, flows, objects etc). If supplied, it will strip this from the results when rending the CLI table (saving space). | `force-app/main/default/` |
+
+Example
+
+```
+config:
+  csvFilename: results.csv
+  sarifFilename: results.sarif
+  parentDirectory: force-app/main/default/
+````
 
 ### Rule Settings
 
@@ -103,7 +114,29 @@ All rules support the following:
 | active | (boolean) Controls if the rule is run or not. | `true` or `false`             |
 | level  | (enum) The level of the rule.                 | `info`, `warning`, or `error` |
 
+Example
+
+```
+rules:
+  - name: no-missing-description-on-fields
+    active: true
+    level: warning
+```
+
+#### Rule Options
+
 Some rules can be customised with additional options, see the [rule documentation](https://github.com/tomcarman/sf-metadata-linter/wiki/Rules) for further information.
+
+Example 
+
+```
+  - name: description-min-length-on-fields
+    active: true
+    level: warning
+    options:
+      - name: minimumLength
+        value: 100
+```
 
 <br>
 
@@ -141,7 +174,21 @@ Different output formats are available for the results, defined by the `--format
 
 - Results can be outputted to a CSV - useful for one-off audits etc.
 
-![csv-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/b35d5dcd-e9ad-4e1f-95dc-7a199159eb5f)
+```
+ruleId,filePath,ruleShortDescription,level,startLine,endLine,startColumn,endColumn,ruleFullDescription
+no-missing-description-on-fields,objects/Account/fields/Status__c.field-meta.xml,Custom fields should have description.,warning,1,1,,,"Custom fields should have a description, describing how the field is used."
+no-missing-description-on-fields,objects/Account/fields/VIP Client__c.field-meta.xml,Custom fields should have description.,warning,1,1,,,"Custom fields should have a description, describing how the field is used."
+no-missing-description-on-validation-rules,objects/Account/validationRules/Past_Meeting.validationRule-meta.xml,Validation rules should have description.,warning,1,1,,,"Validation rules should have a description, describing how the rule is used."
+description-min-length-on-fields,objects/Account/fields/Information__c.field-meta.xml,Custom field description does not meet the minimum length (100),warning,4,4,18,40,"A custom field should have a description, describing how the field is used. The description should be at least 100 characters long."
+error-message-min-length-on-validation-rules,objects/Account/validationRules/Past_Meeting.validationRule-meta.xml,Validation rule error message does not meet the minimum length (100),warning,6,6,19,35,"A validation rule should have a clear error message, describing how the user should resolve the error. The error message should be at least 100 characters long."
+no-missing-prefix-on-metadata,objects/Account/fields/Information__c.field-meta.xml,Metadata should have a prefix.,warning,1,1,,,"Metadata of types: field, fieldSet, listView should have one of the following prefixes: ACME_"
+no-missing-prefix-on-metadata,objects/Account/fields/Status__c.field-meta.xml,Metadata should have a prefix.,warning,1,1,,,"Metadata of types: field, fieldSet, listView should have one of the following prefixes: ACME_"
+no-missing-prefix-on-metadata,objects/Account/fields/VIP Client__c.field-meta.xml,Metadata should have a prefix.,warning,1,1,,,"Metadata of types: field, fieldSet, listView should have one of the following prefixes: ACME_"
+no-double-spaces-in-picklist-fields,objects/Account/fields/Status__c.field-meta.xml,Picklist labels and values should not contain double spaces.,error,25,25,27,41,Picklist labels and values should not contain double spaces eg. 'Offer  Made'.
+
+```
+
+<!--![csv-output](https://github.com/tomcarman/sf-metadata-linter/assets/1554713/b35d5dcd-e9ad-4e1f-95dc-7a199159eb5f)-->
 
 <br>
 
