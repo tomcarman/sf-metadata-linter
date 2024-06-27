@@ -8,51 +8,51 @@ config:
 
 rules:
   - name: no-missing-description-on-fields
-    active: true
+    active: false
     level: warning
 
   - name: no-missing-description-on-objects
-    active: true
+    active: false
     level: warning
 
   - name: no-missing-description-on-flows
-    active: true
+    active: false
     level: warning
 
   - name: no-missing-description-on-validation-rules
-    active: true
+    active: false
     level: warning
 
   - name: description-min-length-on-fields
-    active: true
+    active: false
     level: warning
     options:
       - name: minimumLength
         value: 100
 
   - name: description-min-length-on-objects
-    active: true
+    active: false
     level: warning
     options:
       - name: minimumLength
         value: 100
 
   - name: description-min-length-on-flows
-    active: true
+    active: false
     level: warning
     options:
       - name: minimumLength
         value: 100
 
   - name: description-min-length-on-validation-rules
-    active: true
+    active: false
     level: warning
     options:
       - name: minimumLength
         value: 100
 
   - name: error-message-min-length-on-validation-rules
-    active: true
+    active: false
     level: warning
     options:
       - name: minimumLength
@@ -70,7 +70,7 @@ rules:
         value: FinServ__, et4ae5__
 
   - name: no-prefix-on-metadata
-    active: true
+    active: false
     level: warning
     options:
       - name: prefixes
@@ -81,9 +81,13 @@ rules:
         value: FinServ__, et4ae5__
 
   - name: no-double-spaces-in-picklist-fields
-    active: true
+    active: false
     level: error
 
   - name: no-double-spaces-in-value-sets
-    active: true
+    active: false
     level: error
+
+  - name: no-dml-in-flow-for-loop
+    active: true
+    level: warning

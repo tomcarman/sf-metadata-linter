@@ -24,6 +24,7 @@ const ruleClassMap: RuleIdToRuleClassNameMap = {
   'error-message-min-length-on-validation-rules': 'ErrorMessageMinLengthOnValidationRules',
   'no-double-spaces-in-picklist-fields': 'NoDoubleSpacesInPicklistFields',
   'no-double-spaces-in-value-sets': 'NoDoublesSpacesInValueSets',
+  'no-dml-in-flow-for-loop': 'NoDmlInFlowForLoop',
 };
 
 export class RulesEngine {

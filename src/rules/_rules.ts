@@ -11,6 +11,8 @@ import NoPrefixOnMetadata from './no-prefix-on-metadata.js';
 import ErrorMessageMinLengthOnValidationRules from './error-message-min-length-on-validation-rules.js';
 import NoDoubleSpacesInPicklistFields from './no-double-spaces-in-picklist-fields.js';
 import NoDoublesSpacesInValueSets from './no-double-spaces-in-value-sets.js';
+import NoDmlInFlowForLoop from './no-dml-in-flow-for-loop.js';
+
 export {
   NoMissingDescriptionOnFields,
   NoMissingDescriptionOnObjects,
@@ -25,4 +27,5 @@ export {
   ErrorMessageMinLengthOnValidationRules,
   NoDoubleSpacesInPicklistFields,
   NoDoublesSpacesInValueSets,
+  NoDmlInFlowForLoop,
 };
