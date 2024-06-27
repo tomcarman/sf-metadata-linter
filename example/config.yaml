@@ -59,7 +59,7 @@ rules:
         value: 100
 
   - name: no-missing-prefix-on-metadata
-    active: true
+    active: false
     level: warning
     options:
       - name: prefixes
