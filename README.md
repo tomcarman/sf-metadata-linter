@@ -4,7 +4,7 @@
 <!--   <h1 align="center">sf metadata linter</h1> -->
 <!--   <hr> -->
   <p align="center">
-    <a href="https://github.com/salesforcecli">sf cli</a> plugin to lint metadata.
+    <a href="https://github.com/salesforcecli">sf cli</a> plugin to lint metadata
   </p>
 </p>
 <p align="center">
