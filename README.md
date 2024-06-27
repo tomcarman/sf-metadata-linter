@@ -22,7 +22,9 @@
 
 Assuming you already have the [sf cli](https://developer.salesforce.com/tools/salesforcecli) installed, the plugin can be installed by running:
 
-`sf plugins install sf-metadata-linter`
+```
+sf plugins install sf-metadata-linter
+```
 
 Note: You'll be prompted that this is not officially code-signed by Salesforce - like any custom plugin. You can just accept this when prompted, or alternatively you can [whitelist it](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_allowlist.htm)
 
@@ -30,7 +32,9 @@ Note: You'll be prompted that this is not officially code-signed by Salesforce -
 
 The plugin can be updated to the latest version using
 
-`sf plugins update`
+```
+sf plugins update
+```
 
 <br>
 
