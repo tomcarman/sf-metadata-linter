@@ -59,7 +59,7 @@ export class FlowNodeWrapper {
     this.addNextValueConnector(nodeType);
     this.addNoMoreValuesConnector(nodeType);
     this.addWaitEventConnectors(nodeType);
-    this.addDecisionConnectors(nodeType);
+    this.addRuleConnectors(nodeType);
     this.addScheduledPaths(nodeType);
   }
 
@@ -106,7 +106,7 @@ export class FlowNodeWrapper {
       });
     }
   }
-  private addDecisionConnectors(nodeType: NodeType): void {
+  private addRuleConnectors(nodeType: NodeType): void {
     if (hasRules(nodeType)) {
       nodeType.rules.forEach((rule) => {
         if (rule.connector) {
