@@ -26,42 +26,8 @@ export default class NoDmlInFlowForLoop extends RuleClass {
         for (const connector of node.connectors) {
           console.log('   Connector Type: ' + connector.type);
           console.log('       Connects to :' + connector.targetReference);
-          // console.log('      Type: ' + connector.type);
-          // console.log('      Connects To: ' + connector.targetReference);
         }
       }
     }
   }
 }
-
-// const nodes: FlowNode[] = [];
-
-// for (const p in flow) {
-//   if (Object.prototype.hasOwnProperty.call(flow, p)) {
-//     if(p === 'processType') {
-//       const propertyValue = flow[p];
-//       if (propertyValue !== undefined) {
-//         const processType: FlowProcessType = propertyValue;
-//         console.log('Process Type: ' + processType);
-//       }
-//     } else if (p === 'recordLookups') {
-//       const propertyValue = flow[p];
-//       if (propertyValue !== undefined) {
-//         console.log('Record Lookups: ', propertyValue);
-//         const recordLookups: FlowRecordLookup[] = Array.isArray(propertyValue)
-//         ? propertyValue
-//         : [propertyValue];
-//         recordLookups.forEach((recordLookup) => {
-//           nodes.push(recordLookup);
-//         });
-//       }
-//     }
-//   }
-// }
-
-// for (const node of nodes) {
-//   console.log('Node: ', node);
-// }
-// }
-// }
-// }
