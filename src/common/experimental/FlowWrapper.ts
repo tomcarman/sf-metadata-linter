@@ -9,7 +9,7 @@ export class FlowWrapper {
   public constructor(flow: Flow) {
     this.flowName = flow.fullName ?? '';
 
-    const properties: Array<keyof Flow> = [
+    const nodeProperties: Array<keyof Flow> = [
       'assignments',
       'collectionProcessors',
       'customErrors',
@@ -30,7 +30,7 @@ export class FlowWrapper {
       'steps',
       'start',
     ];
-    properties.forEach((property) => {
+    nodeProperties.forEach((property) => {
       if (flow[property] !== undefined) {
         if (Array.isArray(flow[property])) {
           (flow[property] as NodeType[]).forEach((node) => {
