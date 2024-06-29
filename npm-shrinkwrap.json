@@ -10,7 +10,7 @@
       "license": "BSD-3-Clause",
       "dependencies": {
         "@oclif/core": "^3.26.2",
-        "@salesforce/core": "^7.2.0",
+        "@salesforce/core": "^7.4.1",
         "@salesforce/sf-plugins-core": "^9.1.1",
         "@salesforce/types": "^1.2.0",
         "@types/sarif": "^2.1.7",
@@ -3538,38 +3538,37 @@
       }
     },
     "node_modules/@salesforce/core": {
-      "version": "7.3.9",
-      "resolved": "https://registry.npmjs.org/@salesforce/core/-/core-7.3.9.tgz",
-      "integrity": "sha512-eJqDiA5b7wU50Ee/xjmGzSnHrNVJ8S77B7enfX30gm7gxU3i3M3QeBdiV6XAOPLSIL96DseofP6Tv6c+rljlKA==",
-      "license": "BSD-3-Clause",
+      "version": "7.4.1",
+      "resolved": "https://registry.npmjs.org/@salesforce/core/-/core-7.4.1.tgz",
+      "integrity": "sha512-ccYs7uL4GYjdOcc44trfRnaz69kG0jU0aoT0qjPkIel8oVOyEoXaoDCG0A+2diqmicDp5uWK0pNs+tdWNj2mcQ==",
       "dependencies": {
         "@jsforce/jsforce-node": "^3.2.0",
-        "@salesforce/kit": "^3.1.1",
+        "@salesforce/kit": "^3.1.2",
         "@salesforce/schemas": "^1.9.0",
         "@salesforce/ts-types": "^2.0.9",
-        "ajv": "^8.13.0",
+        "ajv": "^8.15.0",
         "change-case": "^4.1.2",
+        "fast-levenshtein": "^3.0.0",
         "faye": "^1.4.0",
         "form-data": "^4.0.0",
         "js2xmlparser": "^4.0.1",
         "jsonwebtoken": "9.0.2",
         "jszip": "3.10.1",
         "pino": "^8.21.0",
-        "pino-abstract-transport": "^1.1.0",
+        "pino-abstract-transport": "^1.2.0",
         "pino-pretty": "^10.3.1",
         "proper-lockfile": "^4.1.2",
         "semver": "^7.6.2",
-        "ts-retry-promise": "^0.7.1"
+        "ts-retry-promise": "^0.8.1"
       },
       "engines": {
         "node": ">=18.0.0"
       }
     },
     "node_modules/@salesforce/core/node_modules/ajv": {
-      "version": "8.13.0",
-      "resolved": "https://registry.npmjs.org/ajv/-/ajv-8.13.0.tgz",
-      "integrity": "sha512-PRA911Blj99jR5RMeTunVbNXMF6Lp4vZXnk5GQjcnUWUTsrXtekg/pnmFFI2u/I36Y/2bITGS30GZCXei6uNkA==",
-      "license": "MIT",
+      "version": "8.16.0",
+      "resolved": "https://registry.npmjs.org/ajv/-/ajv-8.16.0.tgz",
+      "integrity": "sha512-F0twR8U1ZU67JIEtekUcLkXkoO5mMMmgGD8sK/xUFzJ805jxHQl92hImFAqqXMyMYjSPOyUPAwHYhB72g5sTXw==",
       "dependencies": {
         "fast-deep-equal": "^3.1.3",
         "json-schema-traverse": "^1.0.0",
@@ -3579,15 +3578,6 @@
       "funding": {
         "type": "github",
         "url": "https://github.com/sponsors/epoberezkin"
-      }
-    },
-    "node_modules/@salesforce/core/node_modules/ts-retry-promise": {
-      "version": "0.7.1",
-      "resolved": "https://registry.npmjs.org/ts-retry-promise/-/ts-retry-promise-0.7.1.tgz",
-      "integrity": "sha512-NhHOCZ2AQORvH42hOPO5UZxShlcuiRtm7P2jIq2L2RY3PBxw2mLnUsEdHrIslVBFya1v5aZmrR55lWkzo13LrQ==",
-      "license": "MIT",
-      "engines": {
-        "node": ">=6"
       }
     },
     "node_modules/@salesforce/dev-config": {
@@ -3679,6 +3669,54 @@
       },
       "funding": {
         "url": "https://github.com/sponsors/typicode"
+      }
+    },
+    "node_modules/@salesforce/dev-scripts/node_modules/marked": {
+      "version": "4.3.0",
+      "resolved": "https://registry.npmjs.org/marked/-/marked-4.3.0.tgz",
+      "integrity": "sha512-PRsaiG84bK+AMvxziE/lCFss8juXjNaWzVbN5tXAm4XjeaS9NAHhop+PjQxz2A9h8Q4M/xGmzP8vqNwy6JeK0A==",
+      "dev": true,
+      "bin": {
+        "marked": "bin/marked.js"
+      },
+      "engines": {
+        "node": ">= 12"
+      }
+    },
+    "node_modules/@salesforce/dev-scripts/node_modules/minimatch": {
+      "version": "9.0.5",
+      "resolved": "https://registry.npmjs.org/minimatch/-/minimatch-9.0.5.tgz",
+      "integrity": "sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==",
+      "dev": true,
+      "dependencies": {
+        "brace-expansion": "^2.0.1"
+      },
+      "engines": {
+        "node": ">=16 || 14 >=14.17"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/isaacs"
+      }
+    },
+    "node_modules/@salesforce/dev-scripts/node_modules/typedoc": {
+      "version": "0.25.13",
+      "resolved": "https://registry.npmjs.org/typedoc/-/typedoc-0.25.13.tgz",
+      "integrity": "sha512-pQqiwiJ+Z4pigfOnnysObszLiU3mVLWAExSPf+Mu06G/qsc3wzbuM56SZQvONhHLncLUhYzOVkjFFpFfL5AzhQ==",
+      "dev": true,
+      "dependencies": {
+        "lunr": "^2.3.9",
+        "marked": "^4.3.0",
+        "minimatch": "^9.0.3",
+        "shiki": "^0.14.7"
+      },
+      "bin": {
+        "typedoc": "bin/typedoc"
+      },
+      "engines": {
+        "node": ">= 16"
+      },
+      "peerDependencies": {
+        "typescript": "4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x"
       }
     },
     "node_modules/@salesforce/kit": {
@@ -7632,7 +7670,6 @@
       "version": "3.0.0",
       "resolved": "https://registry.npmjs.org/fast-levenshtein/-/fast-levenshtein-3.0.0.tgz",
       "integrity": "sha512-hKKNajm46uNmTlhHSyZkmToAc56uZJwYq7yrciZjqOxnlfQwERDQJmHPUp7m1m9wx8vgOe8IaCKZ5Kv2k1DdCQ==",
-      "dev": true,
       "license": "MIT",
       "dependencies": {
         "fastest-levenshtein": "^1.0.7"
@@ -7679,7 +7716,6 @@
       "version": "1.0.16",
       "resolved": "https://registry.npmjs.org/fastest-levenshtein/-/fastest-levenshtein-1.0.16.tgz",
       "integrity": "sha512-eRnCtTTtGZFpQCwhJiUOuxPQWRXVKYDn0b2PeHfXL6/Zi53SLAzAHfVhVWK2AryC/WH05kGfxhFIPvTF0SXQzg==",
-      "dev": true,
       "license": "MIT",
       "engines": {
         "node": ">= 4.9.1"
@@ -7940,7 +7976,9 @@
       "dev": true,
       "license": "MIT",
       "optional": true,
-      "os": ["darwin"],
+      "os": [
+        "darwin"
+      ],
       "engines": {
         "node": "^8.16.0 || ^10.6.0 || >=11.0.0"
       }
@@ -9575,7 +9613,9 @@
       "resolved": "https://registry.npmjs.org/jsonparse/-/jsonparse-1.3.1.tgz",
       "integrity": "sha512-POQXvpdL69+CluYsillJ7SUhKvytYjW9vG/GKpnf+xP8UWgYEM/RaMzHHofbALDiKbbP1W8UEYmgGl39WkPZsg==",
       "dev": true,
-      "engines": ["node >= 0.2.0"],
+      "engines": [
+        "node >= 0.2.0"
+      ],
       "license": "MIT"
     },
     "node_modules/JSONStream": {
@@ -10229,7 +10269,9 @@
       "resolved": "https://registry.npmjs.org/mime/-/mime-4.0.3.tgz",
       "integrity": "sha512-KgUb15Oorc0NEKPbvfa0wRU+PItIEZmiv+pyAO2i0oTIVTJhlzMclU7w4RXWQrSOVH5ax/p/CkIO7KI4OyFJTQ==",
       "dev": true,
-      "funding": ["https://github.com/sponsors/broofa"],
+      "funding": [
+        "https://github.com/sponsors/broofa"
+      ],
       "license": "MIT",
       "bin": {
         "mime": "bin/cli.js"
@@ -13199,7 +13241,6 @@
       "version": "0.8.1",
       "resolved": "https://registry.npmjs.org/ts-retry-promise/-/ts-retry-promise-0.8.1.tgz",
       "integrity": "sha512-+AHPUmAhr5bSRRK5CurE9kNH8gZlEHnCgusZ0zy2bjfatUBDX0h6vGQjiT0YrGwSDwRZmU+bapeX6mj55FOPvg==",
-      "dev": true,
       "license": "MIT",
       "engines": {
         "node": ">=6"
@@ -13370,25 +13411,25 @@
       }
     },
     "node_modules/typedoc": {
-      "version": "0.25.13",
-      "resolved": "https://registry.npmjs.org/typedoc/-/typedoc-0.25.13.tgz",
-      "integrity": "sha512-pQqiwiJ+Z4pigfOnnysObszLiU3mVLWAExSPf+Mu06G/qsc3wzbuM56SZQvONhHLncLUhYzOVkjFFpFfL5AzhQ==",
+      "version": "0.23.28",
+      "resolved": "https://registry.npmjs.org/typedoc/-/typedoc-0.23.28.tgz",
+      "integrity": "sha512-9x1+hZWTHEQcGoP7qFmlo4unUoVJLB0H/8vfO/7wqTnZxg4kPuji9y3uRzEu0ZKez63OJAUmiGhUrtukC6Uj3w==",
       "dev": true,
-      "license": "Apache-2.0",
+      "peer": true,
       "dependencies": {
         "lunr": "^2.3.9",
-        "marked": "^4.3.0",
-        "minimatch": "^9.0.3",
-        "shiki": "^0.14.7"
+        "marked": "^4.2.12",
+        "minimatch": "^7.1.3",
+        "shiki": "^0.14.1"
       },
       "bin": {
         "typedoc": "bin/typedoc"
       },
       "engines": {
-        "node": ">= 16"
+        "node": ">= 14.14"
       },
       "peerDependencies": {
-        "typescript": "4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x"
+        "typescript": "4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x"
       }
     },
     "node_modules/typedoc-plugin-missing-exports": {
@@ -13407,6 +13448,7 @@
       "integrity": "sha512-PRsaiG84bK+AMvxziE/lCFss8juXjNaWzVbN5tXAm4XjeaS9NAHhop+PjQxz2A9h8Q4M/xGmzP8vqNwy6JeK0A==",
       "dev": true,
       "license": "MIT",
+      "peer": true,
       "bin": {
         "marked": "bin/marked.js"
       },
@@ -13415,16 +13457,16 @@
       }
     },
     "node_modules/typedoc/node_modules/minimatch": {
-      "version": "9.0.4",
-      "resolved": "https://registry.npmjs.org/minimatch/-/minimatch-9.0.4.tgz",
-      "integrity": "sha512-KqWh+VchfxcMNRAJjj2tnsSJdNbHsVgnkBhTNrW7AjVo6OvLtxw8zfT9oLw1JSohlFzJ8jCoTgaoXvJ+kHt6fw==",
+      "version": "7.4.6",
+      "resolved": "https://registry.npmjs.org/minimatch/-/minimatch-7.4.6.tgz",
+      "integrity": "sha512-sBz8G/YjVniEz6lKPNpKxXwazJe4c19fEfV2GDMX6AjFz+MX9uDWIZW8XreVhkFW3fkIdTv/gxWr/Kks5FFAVw==",
       "dev": true,
-      "license": "ISC",
+      "peer": true,
       "dependencies": {
         "brace-expansion": "^2.0.1"
       },
       "engines": {
-        "node": ">=16 || 14 >=14.17"
+        "node": ">=10"
       },
       "funding": {
         "url": "https://github.com/sponsors/isaacs"
@@ -13567,7 +13609,10 @@
       "resolved": "https://registry.npmjs.org/uuid/-/uuid-9.0.1.tgz",
       "integrity": "sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==",
       "dev": true,
-      "funding": ["https://github.com/sponsors/broofa", "https://github.com/sponsors/ctavan"],
+      "funding": [
+        "https://github.com/sponsors/broofa",
+        "https://github.com/sponsors/ctavan"
+      ],
       "license": "MIT",
       "bin": {
         "uuid": "dist/bin/uuid"
@@ -13731,7 +13776,10 @@
       "integrity": "sha512-WNAXEw2cJs1nSRNJNRcPypARZNumgtsRTJFTNpd6turCA6JZ6cEwl4ZU3C1IHc/3IaXoPu9LdxcI5TBTdD6/pg==",
       "dev": true,
       "license": "Apache-2.0",
-      "workspaces": ["vscode-extension", "website"],
+      "workspaces": [
+        "vscode-extension",
+        "website"
+      ],
       "dependencies": {
         "braces": "^3.0.2",
         "chokidar": "^3.5.3",
