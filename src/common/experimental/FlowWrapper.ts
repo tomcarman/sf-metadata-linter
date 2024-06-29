@@ -1,5 +1,6 @@
 import { Flow } from '@salesforce/types/metadata';
-import { NodeType, FlowNodeWrapper } from './FlowNodeWrapper.js';
+import { FlowNodeWrapper } from './FlowNodeWrapper.js';
+import { NodeType } from './FlowNodeTypes.js';
 
 export class FlowWrapper {
   public flowName: string;

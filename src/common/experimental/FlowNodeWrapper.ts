@@ -1,44 +1,16 @@
+import { FlowConnector } from '@salesforce/types/metadata';
 import {
-  FlowAssignment,
-  FlowCollectionProcessor,
-  FlowCustomError,
-  FlowRecordRollback,
-  FlowScreen,
-  FlowSubflow,
-  FlowTransform,
-  FlowConnector,
-  FlowActionCall,
-  FlowApexPluginCall,
-  FlowOrchestratedStage,
-  FlowRecordCreate,
-  FlowRecordDelete,
-  FlowRecordLookup,
-  FlowRecordUpdate,
-  FlowWait,
-  FlowDecision,
-  FlowLoop,
-  FlowStep,
-  FlowStart,
-} from '@salesforce/types/metadata';
+  NodeType,
+  NodeWithConnector,
+  NodeWithFaultConnector,
+  NodeWithDefaultConnector,
+  NodeWithNextValueConnector,
+  NodeWithNoMoreValuesConnector,
+  NodeWithWaitEvents,
+  NodeWithRules,
+  NodeWithScheduledPaths,
+} from './FlowNodeTypes.js';
 
-export type NodeType = NodeWithConnector | NodeWithFaultConnector | FlowWait | FlowDecision | FlowLoop | FlowStep;
-type NodeWithConnector =
-  | FlowAssignment
-  | FlowCollectionProcessor
-  | FlowCustomError
-  | FlowRecordRollback
-  | FlowScreen
-  | FlowSubflow
-  | FlowTransform
-  | FlowStart;
-type NodeWithFaultConnector =
-  | FlowActionCall
-  | FlowApexPluginCall
-  | FlowOrchestratedStage
-  | FlowRecordCreate
-  | FlowRecordDelete
-  | FlowRecordLookup
-  | FlowRecordUpdate;
 type Connector = FlowConnector & {
   type: string;
 };
@@ -106,6 +78,7 @@ export class FlowNodeWrapper {
       });
     }
   }
+
   private addRuleConnectors(nodeType: NodeType): void {
     if (hasRules(nodeType)) {
       nodeType.rules.forEach((rule) => {
@@ -115,6 +88,7 @@ export class FlowNodeWrapper {
       });
     }
   }
+
   private addScheduledPaths(nodeType: NodeType): void {
     if (hasScheduledPaths(nodeType)) {
       nodeType.scheduledPaths.forEach((path) => {
@@ -128,9 +102,10 @@ export class FlowNodeWrapper {
 
 const hasConnector = (node: NodeType): node is NodeWithConnector => 'connector' in node;
 const hasFaultConnector = (node: NodeWithConnector): node is NodeWithFaultConnector => 'faultConnector' in node;
-const hasDefaultConnector = (node: NodeType): node is FlowWait | FlowDecision => 'defaultConnector' in node;
-const hasNextValueConnector = (node: NodeType): node is FlowLoop => 'nextValueConnector' in node;
-const hasNoMoreValuesConnector = (node: NodeType): node is FlowLoop => 'noMoreValuesConnector' in node;
-const hasWaitEvents = (node: NodeType): node is FlowWait => 'waitEvents' in node;
-const hasRules = (node: NodeType): node is FlowDecision => 'rules' in node;
-const hasScheduledPaths = (node: NodeType): node is FlowStart => 'scheduledPaths' in node;
+const hasDefaultConnector = (node: NodeType): node is NodeWithDefaultConnector => 'defaultConnector' in node;
+const hasNextValueConnector = (node: NodeType): node is NodeWithNextValueConnector => 'nextValueConnector' in node;
+const hasNoMoreValuesConnector = (node: NodeType): node is NodeWithNoMoreValuesConnector =>
+  'noMoreValuesConnector' in node;
+const hasWaitEvents = (node: NodeType): node is NodeWithWaitEvents => 'waitEvents' in node;
+const hasRules = (node: NodeType): node is NodeWithRules => 'rules' in node;
+const hasScheduledPaths = (node: NodeType): node is NodeWithScheduledPaths => 'scheduledPaths' in node;
