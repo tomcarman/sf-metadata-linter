@@ -9,7 +9,7 @@ export class FlowWrapper {
   public elements: FlowElementWrapper[] = [];
 
   public constructor(flow: Flow) {
-    this.flowName = flow.fullName ?? '';
+    this.flowName = flow.label ?? '';
 
     const flowNodes: Array<keyof Flow> = [
       'assignments',
@@ -44,7 +44,6 @@ export class FlowWrapper {
     ];
 
     flowNodes.forEach((property) => {
-      console.log('prop ', property);
       if (flow[property] !== undefined) {
         if (Array.isArray(flow[property])) {
           (flow[property] as AnyFlowNode[]).forEach((node) => {
@@ -57,7 +56,6 @@ export class FlowWrapper {
     });
 
     flowElements.forEach((property) => {
-      console.log('prop elem ', property);
       if (flow[property] !== undefined) {
         if (Array.isArray(flow[property])) {
           (flow[property] as unknown as AnyFlowElement[]).forEach((node) => {
