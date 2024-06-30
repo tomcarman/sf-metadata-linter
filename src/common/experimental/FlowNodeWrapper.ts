@@ -1,77 +1,75 @@
-import { FlowConnector } from '@salesforce/types/metadata';
-import {
-  NodeType,
-  NodeWithConnector,
-  NodeWithFaultConnector,
-  NodeWithDefaultConnector,
-  NodeWithNextValueConnector,
-  NodeWithNoMoreValuesConnector,
-  NodeWithWaitEvents,
-  NodeWithRules,
-  NodeWithScheduledPaths,
-} from './FlowNodeTypes.js';
+import type { FlowConnector } from '@salesforce/types/metadata';
+import { arrayify } from '../util.js';
+import type { AnyFlowNode } from './FlowNodeTypes.js';
 
 type Connector = FlowConnector & {
   type: string;
 };
 
 export class FlowNodeWrapper {
+  public type: string;
   public name: string;
+  public node: AnyFlowNode;
   public connectors: Connector[] = [];
 
-  public constructor(nodeType: NodeType) {
-    this.name = nodeType.name ?? '';
-    this.handleConnectors(nodeType);
+  public constructor(typeOfNode: string, node: AnyFlowNode) {
+    this.type = typeOfNode;
+    this.name = node.name ?? '';
+    this.node = node;
+    this.handleConnectors(node);
   }
 
-  private handleConnectors(nodeType: NodeType): void {
-    this.addStandardConnectors(nodeType);
-    this.addFaultConnector(nodeType);
-    this.addDefaultConnector(nodeType);
-    this.addNextValueConnector(nodeType);
-    this.addNoMoreValuesConnector(nodeType);
-    this.addWaitEventConnectors(nodeType);
-    this.addRuleConnectors(nodeType);
-    this.addScheduledPaths(nodeType);
+  private handleConnectors(node: AnyFlowNode): void {
+    this.addStandardConnector(node);
+    this.addFaultConnector(node);
+    this.addDefaultConnector(node);
+    this.addNextValueConnector(node);
+    this.addNoMoreValuesConnector(node);
+    this.addWaitEventConnectors(node);
+    this.addRuleConnectors(node);
+    this.addScheduledPaths(node);
   }
 
   private addConnector(connectorType: string, connector: FlowConnector): void {
     this.connectors.push({ type: connectorType, ...connector });
   }
 
-  private addStandardConnectors(nodeType: NodeType): void {
-    if (hasConnector(nodeType) && nodeType.connector) {
-      const connectors: FlowConnector[] = Array.isArray(nodeType.connector) ? nodeType.connector : [nodeType.connector];
-      connectors.forEach((connector) => this.addConnector('connector', connector));
+  private addStandardConnector(node: AnyFlowNode): void {
+    if ('connector' in node && node.connector) {
+      this.addConnector('connector', node.connector);
+    }
+    if ('connectors' in node && node.connectors) {
+      arrayify(node.connectors).forEach((connector) => this.addConnector('connector', connector));
     }
   }
 
-  private addFaultConnector(nodeType: NodeType): void {
-    if (hasFaultConnector(nodeType) && nodeType.faultConnector) {
-      this.addConnector('faultConnector', nodeType.faultConnector);
+  private addFaultConnector(node: AnyFlowNode): void {
+    if ('faultConnector' in node && node.faultConnector) {
+      this.addConnector('faultConnector', node.faultConnector);
     }
   }
 
-  private addDefaultConnector(nodeType: NodeType): void {
-    if (hasDefaultConnector(nodeType) && nodeType.defaultConnector) {
-      this.addConnector('defaultConnector', nodeType.defaultConnector);
+  private addDefaultConnector(node: AnyFlowNode): void {
+    if ('defaultConnector' in node && node.defaultConnector) {
+      this.addConnector('defaultConnector', node.defaultConnector);
     }
   }
 
-  private addNextValueConnector(nodeType: NodeType): void {
-    if (hasNextValueConnector(nodeType) && nodeType.nextValueConnector) {
-      this.addConnector('nextValueConnector', nodeType.nextValueConnector);
+  private addNextValueConnector(node: AnyFlowNode): void {
+    if ('nextValueConnector' in node && node.nextValueConnector) {
+      this.addConnector('nextValueConnector', node.nextValueConnector);
     }
   }
 
-  private addNoMoreValuesConnector(nodeType: NodeType): void {
-    if (hasNoMoreValuesConnector(nodeType) && nodeType.noMoreValuesConnector) {
-      this.addConnector('noMoreValuesConnector', nodeType.noMoreValuesConnector);
+  private addNoMoreValuesConnector(node: AnyFlowNode): void {
+    if ('noMoreValuesConnector' in node && node.noMoreValuesConnector) {
+      this.addConnector('noMoreValuesConnector', node.noMoreValuesConnector);
     }
   }
-  private addWaitEventConnectors(nodeType: NodeType): void {
-    if (hasWaitEvents(nodeType)) {
-      nodeType.waitEvents.forEach((waitEvent) => {
+
+  private addWaitEventConnectors(node: AnyFlowNode): void {
+    if ('waitEvents' in node && node.waitEvents) {
+      arrayify(node.waitEvents).forEach((waitEvent) => {
         if (waitEvent.connector) {
           this.addConnector('connector', waitEvent.connector);
         }
@@ -79,19 +77,20 @@ export class FlowNodeWrapper {
     }
   }
 
-  private addRuleConnectors(nodeType: NodeType): void {
-    if (hasRules(nodeType)) {
-      nodeType.rules.forEach((rule) => {
-        if (rule.connector) {
+  private addRuleConnectors(node: AnyFlowNode): void {
+    // Narrow type with 'fields', as both FlowRule and FlowScreenRule can be assigned to node.rules
+    if ('rules' in node && node.rules && !('fields' in node)) {
+      arrayify(node.rules).forEach((rule) => {
+        if ('connector' in rule && rule.connector) {
           this.addConnector('connector', rule.connector);
         }
       });
     }
   }
 
-  private addScheduledPaths(nodeType: NodeType): void {
-    if (hasScheduledPaths(nodeType)) {
-      nodeType.scheduledPaths.forEach((path) => {
+  private addScheduledPaths(node: AnyFlowNode): void {
+    if ('scheduledPaths' in node && node.scheduledPaths) {
+      arrayify(node.scheduledPaths).forEach((path) => {
         if (path.connector) {
           this.addConnector('connector', path.connector);
         }
@@ -99,13 +98,3 @@ export class FlowNodeWrapper {
     }
   }
 }
-
-const hasConnector = (node: NodeType): node is NodeWithConnector => 'connector' in node;
-const hasFaultConnector = (node: NodeWithConnector): node is NodeWithFaultConnector => 'faultConnector' in node;
-const hasDefaultConnector = (node: NodeType): node is NodeWithDefaultConnector => 'defaultConnector' in node;
-const hasNextValueConnector = (node: NodeType): node is NodeWithNextValueConnector => 'nextValueConnector' in node;
-const hasNoMoreValuesConnector = (node: NodeType): node is NodeWithNoMoreValuesConnector =>
-  'noMoreValuesConnector' in node;
-const hasWaitEvents = (node: NodeType): node is NodeWithWaitEvents => 'waitEvents' in node;
-const hasRules = (node: NodeType): node is NodeWithRules => 'rules' in node;
-const hasScheduledPaths = (node: NodeType): node is NodeWithScheduledPaths => 'scheduledPaths' in node;

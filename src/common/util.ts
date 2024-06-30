@@ -31,6 +31,12 @@ export function normaliseNewlines(fileText: string): string {
   return fileText.replace(/\r\n/g, '\n');
 }
 
+// Many of the @salesforce/types/metadata types (correctly) assign metadata values to arrays,
+// but when parsing xml, if there is only one element, the parser does not know it should be an array.
+export function arrayify<T>(input: T[] | T): T[] {
+  return Array.isArray(input) ? input : [input];
+}
+
 export function getLineAndColNumber(ruleId: string, file: string, fileText: string, value: string): Location {
   let location: Location;
 

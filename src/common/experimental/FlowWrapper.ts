@@ -1,15 +1,17 @@
 import { Flow } from '@salesforce/types/metadata';
 import { FlowNodeWrapper } from './FlowNodeWrapper.js';
-import { NodeType } from './FlowNodeTypes.js';
+import { FlowElementWrapper } from './FlowElementWrapper.js';
+import { AnyFlowNode, AnyFlowElement } from './FlowNodeTypes.js';
 
 export class FlowWrapper {
   public flowName: string;
   public nodes: FlowNodeWrapper[] = [];
+  public elements: FlowElementWrapper[] = [];
 
   public constructor(flow: Flow) {
     this.flowName = flow.fullName ?? '';
 
-    const nodeProperties: Array<keyof Flow> = [
+    const flowNodes: Array<keyof Flow> = [
       'assignments',
       'collectionProcessors',
       'customErrors',
@@ -30,14 +32,39 @@ export class FlowWrapper {
       'steps',
       'start',
     ];
-    nodeProperties.forEach((property) => {
+
+    const flowElements: Array<keyof Flow> = [
+      'choices',
+      'constants',
+      'dynamicChoiceSets',
+      'formulas',
+      'stages',
+      'textTemplates',
+      'variables',
+    ];
+
+    flowNodes.forEach((property) => {
+      console.log('prop ', property);
       if (flow[property] !== undefined) {
         if (Array.isArray(flow[property])) {
-          (flow[property] as NodeType[]).forEach((node) => {
-            this.nodes.push(new FlowNodeWrapper(node));
+          (flow[property] as AnyFlowNode[]).forEach((node) => {
+            this.nodes.push(new FlowNodeWrapper(property, node));
           });
         } else {
-          this.nodes.push(new FlowNodeWrapper(flow[property] as NodeType));
+          this.nodes.push(new FlowNodeWrapper(property, flow[property] as AnyFlowNode));
+        }
+      }
+    });
+
+    flowElements.forEach((property) => {
+      console.log('prop elem ', property);
+      if (flow[property] !== undefined) {
+        if (Array.isArray(flow[property])) {
+          (flow[property] as unknown as AnyFlowElement[]).forEach((node) => {
+            this.elements.push(new FlowElementWrapper(property, node));
+          });
+        } else {
+          this.elements.push(new FlowElementWrapper(property, flow[property] as AnyFlowElement));
         }
       }
     });
