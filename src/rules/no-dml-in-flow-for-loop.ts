@@ -25,6 +25,7 @@ export default class NoDmlInFlowForLoop extends RuleClass {
       // console.log(JSON.stringify(flowWrapper, null, 2));
       const paths = getPaths(flowWrapper);
       console.log('Flow: ', flow.label);
+      console.log('Paths: ', paths.length);
       console.log('Paths: ', paths);
     }
   }

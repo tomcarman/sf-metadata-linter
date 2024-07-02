@@ -30,17 +30,24 @@ export function walk(flow: FlowWrapper): void {
   }
 }
 
-export function getPaths(flow: FlowWrapper): string[][] {
+type PathEntry = {
+  nodeName: string;
+  nodeType: string;
+  nodeLocation?: [number, number];
+  connectorLabel?: string;
+};
+
+export function getPaths(flow: FlowWrapper): PathEntry[][] {
   const nodesMap: { [key: string]: FlowNodeWrapper } = {};
   flow.nodes.forEach((node) => {
     nodesMap[node.name] = node;
     // console.log(node.name);
     // console.log(node.connectors);
   });
-  const paths: string[][] = [];
+  const paths: PathEntry[][] = [];
   const visited: { [key: string]: number } = {};
 
-  function explore(currentNode: string, path: string[], visitedLoops: Set<string>): void {
+  function explore(currentNode: string, path: PathEntry[], visitedLoops: Set<string>, connectorLabel?: string): void {
     if (visited[currentNode]) {
       visited[currentNode]++;
     } else {
@@ -48,7 +55,13 @@ export function getPaths(flow: FlowWrapper): string[][] {
     }
 
     const node = nodesMap[currentNode];
-    path.push(currentNode);
+    const currentPathEntry: PathEntry = {
+      nodeName: node.name,
+      nodeType: node.type,
+      nodeLocation: node.location,
+      connectorLabel,
+    };
+    path.push(currentPathEntry);
 
     if (!node || node.connectors.length === 0) {
       paths.push([...path]);
@@ -58,16 +71,16 @@ export function getPaths(flow: FlowWrapper): string[][] {
     let isTerminator = false;
     for (const connector of node.connectors) {
       if (connector.type === 'Terminator') {
-        paths.push([...path, `${connector.connectionLabel} Terminator`]);
+        paths.push([...path, { nodeName: 'END', nodeType: 'Terminator', connectorLabel: connector.connectionLabel }]);
         isTerminator = true;
       } else if (connector.type === 'nextValueConnector') {
         if (!visitedLoops.has(currentNode)) {
           visitedLoops.add(currentNode);
-          explore(connector.targetReference, path, visitedLoops);
+          explore(connector.targetReference, [...path], visitedLoops, connector.connectionLabel);
           visitedLoops.delete(currentNode);
         }
       } else if (!visited[connector.targetReference] || visited[connector.targetReference] < 2) {
-        explore(connector.targetReference, path, visitedLoops);
+        explore(connector.targetReference, [...path], visitedLoops, connector.connectionLabel);
       }
     }
 
