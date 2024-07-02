@@ -32,6 +32,7 @@ export class FlowNodeWrapper {
     this.addWaitEventConnectors(node);
     this.addRuleConnectors(node);
     this.addScheduledPaths(node);
+    this.addTerminatorWhenMissingDefaultConnector(node);
   }
 
   private buildTerminators(): void {
@@ -48,6 +49,14 @@ export class FlowNodeWrapper {
     const connectorType = 'Terminator';
     const connector: FlowConnector = { targetReference: '', processMetadataValues: [{ name: '' }] };
     this.connectors.push({ type: connectorType, ...connector, connectionLabel });
+  }
+
+  private addTerminatorWhenMissingDefaultConnector(node: AnyFlowNode): void {
+    if (this.type === 'decisions') {
+      if ('defaultConnectorLabel' in node && !('defaultConnector' in node)) {
+        this.addTerminator(node.defaultConnectorLabel);
+      }
+    }
   }
 
   private addStandardConnector(node: AnyFlowNode): void {

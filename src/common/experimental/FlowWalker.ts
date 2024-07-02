@@ -30,66 +30,131 @@ export function walk(flow: FlowWrapper): void {
   }
 }
 
-export function getPaths(flow: FlowWrapper): void {
-  console.log('\nGetting paths for flow: ', flow.flowName);
+export function getPaths(flow: FlowWrapper): string[][] {
+  const nodesMap: { [key: string]: FlowNodeWrapper } = {};
+  flow.nodes.forEach((node) => {
+    nodesMap[node.name] = node;
+    // console.log(node.name);
+    // console.log(node.connectors);
+  });
+  const paths: string[][] = [];
+  const visited: { [key: string]: number } = {};
 
-  const paths: Array<Array<[string, string?]>> = [];
-  const visitedConnections = new Set<string>();
-
-  function explore(node: FlowNodeWrapper, path: Array<[string, string?]>): void {
-    console.log('\nExploring node: ', node.name);
-    console.log('(previously explored connections: ', visitedConnections, ')');
-    console.log('Current path: ', path);
-
-    if (node.connectors.length === 0) {
-      console.log('Node has no connectors, adding to paths');
-      path.push([node.name]);
-      paths.push([...path]);
+  function explore(currentNode: string, path: string[], visitedLoops: Set<string>): void {
+    if (visited[currentNode]) {
+      visited[currentNode]++;
     } else {
-      console.log('Looking for connectors...');
+      visited[currentNode] = 1;
+    }
 
-      for (const connector of node.connectors) {
-        if (!visitedConnections.has(node.name + connector.targetReference)) {
-          console.log('Connector: ', connector);
-          console.log('Targets: ', connector.targetReference);
-          console.log('Adding to path: ', [node.name, connector.connectionLabel]);
-          path.push([node.name, connector.connectionLabel]);
+    const node = nodesMap[currentNode];
+    path.push(currentNode);
 
-          if (connector.type === 'Terminator') {
-            console.log('Terminator found, adding to paths');
-            path.push(['END']);
-            paths.push([...path]);
-          } else {
-            if (connector.type === 'nextValueConnector') {
-              visitedConnections.add(node.name + connector.targetReference);
-            }
-            // visitedConnections.add(node.name+connector.type+connector.targetReference);
-            const targetNode = flow.nodes.find((x) => x.name === connector.targetReference);
-            if (targetNode) {
-              console.log('Found target node: ', targetNode.name);
-              explore(targetNode, path);
-            } else {
-              paths.push([...path]);
-            }
-          }
+    if (!node || node.connectors.length === 0) {
+      paths.push([...path]);
+      path.pop();
+      return;
+    }
+    let isTerminator = false;
+    for (const connector of node.connectors) {
+      if (connector.type === 'Terminator') {
+        paths.push([...path, `${connector.connectionLabel} Terminator`]);
+        isTerminator = true;
+      } else if (connector.type === 'nextValueConnector') {
+        if (!visitedLoops.has(currentNode)) {
+          visitedLoops.add(currentNode);
+          explore(connector.targetReference, path, visitedLoops);
+          visitedLoops.delete(currentNode);
         }
+      } else if (!visited[connector.targetReference] || visited[connector.targetReference] < 2) {
+        explore(connector.targetReference, path, visitedLoops);
       }
     }
 
-    console.log('Backtracking...');
+    if (isTerminator && node.connectors.length === 0) {
+      paths.push([...path]);
+    }
+
     path.pop();
-  }
 
-  explore(flow.nodes.find((x) => x.type === 'start') as FlowNodeWrapper, []);
+    if (visited[currentNode] > 1) {
+      visited[currentNode]--;
+    } else {
+      delete visited[currentNode];
+    }
+  } // End explore
 
-  return printPaths(paths);
+  explore('Start', [], new Set<string>());
+
+  // printPaths(paths);
+
+  return paths;
 }
 
-function printPaths(paths: Array<Array<[string, string?]>>): void {
-  if (paths) {
-    console.log(paths);
-  }
-}
+// function printPaths(paths: string[][]): void {
+//   if (paths) {
+//     console.log('All Paths: ', paths);
+//   }
+// }
+
+// export function getPaths(flow: FlowWrapper): void {
+//   console.log('\nGetting paths for flow: ', flow.flowName);
+
+//   const paths: Array<Array<[string, string?]>> = [];
+//   const visitedConnections = new Set<string>();
+
+//   function explore(node: FlowNodeWrapper, path: Array<[string, string?]>): void {
+//     console.log('\nExploring node: ', node.name);
+//     console.log('(previously explored connections: ', visitedConnections, ')');
+//     console.log('Current path: ', path);
+
+//     if (node.connectors.length === 0) {
+//       console.log('Node has no connectors, adding to paths');
+//       path.push([node.name]);
+//       paths.push([...path]);
+//     } else {
+//       console.log('Looking for connectors...');
+
+//       for (const connector of node.connectors) {
+//         if (!visitedConnections.has(node.name+connector.type+connector.targetReference)) {
+//           console.log('Connector: ', connector);
+//           console.log('Targets: ', connector.targetReference);
+//           console.log('Adding to path: ', [node.name, connector.connectionLabel]);
+//           path.push([node.name, connector.connectionLabel]);
+
+//           // if (connector.type === 'Terminator') {
+//           //   console.log('Terminator found, adding to paths');
+//           //   path.push(['END']);
+//           //   paths.push([...path]);
+//           // } else {
+//           if (connector.type === 'nextValueConnector') {
+//             visitedConnections.add(node.name+connector.type+connector.targetReference);
+//           }
+//           const targetNode = flow.nodes.find((x) => x.name === connector.targetReference);
+//           if (targetNode) {
+//             console.log('Found target node: ', targetNode.name);
+//             explore(targetNode, path);
+//           } else {
+//             paths.push([...path]);
+//           }
+//         }
+//       }
+//     }
+//     console.log('Backtracking...');
+//     path.pop();
+//   }
+
+//   explore(flow.nodes.find((x) => x.type === 'start') as FlowNodeWrapper, []);
+
+//   return printPaths(paths);
+
+// }
+
+// function printPaths(paths: Array<Array<[string, string?]>>): void {
+//   if (paths) {
+//     console.log('All Paths: ', paths);
+//   }
+// }
 
 function printNode(node: FlowNodeWrapper): void {
   console.log('\n\n--- NODE ---');

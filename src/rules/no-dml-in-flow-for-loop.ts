@@ -22,7 +22,10 @@ export default class NoDmlInFlowForLoop extends RuleClass {
       const flowWrapper = new FlowWrapper(flow);
 
       // walk(flowWrapper);
-      getPaths(flowWrapper);
+      // console.log(JSON.stringify(flowWrapper, null, 2));
+      const paths = getPaths(flowWrapper);
+      console.log('Flow: ', flow.label);
+      console.log('Paths: ', paths);
     }
   }
 }
