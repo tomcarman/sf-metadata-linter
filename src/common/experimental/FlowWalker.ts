@@ -104,70 +104,58 @@ export function getPaths(flow: FlowWrapper): PathEntry[][] {
   return paths;
 }
 
-// function printPaths(paths: string[][]): void {
-//   if (paths) {
-//     console.log('All Paths: ', paths);
-//   }
-// }
+export function generateMermaid(nodes: FlowNodeWrapper[]): void {
+  console.log('\n\nGenerating Mermaid flow...');
+  console.log(generateMermaidFlow(nodes));
+  console.log('\n\nGenerating State flow...');
+  console.log(generateStateDiagram(nodes));
+}
 
-// export function getPaths(flow: FlowWrapper): void {
-//   console.log('\nGetting paths for flow: ', flow.flowName);
+export function generateMermaidFlow(nodes: FlowNodeWrapper[]): string {
+  let mermaid = 'flowchart TD\n';
 
-//   const paths: Array<Array<[string, string?]>> = [];
-//   const visitedConnections = new Set<string>();
+  nodes.sort((a, b) => {
+    const aLocation = a.location ? a.location[1] : 0;
+    const bLocation = b.location ? b.location[1] : 0;
+    return aLocation - bLocation;
+  });
 
-//   function explore(node: FlowNodeWrapper, path: Array<[string, string?]>): void {
-//     console.log('\nExploring node: ', node.name);
-//     console.log('(previously explored connections: ', visitedConnections, ')');
-//     console.log('Current path: ', path);
+  nodes.forEach((node) => {
+    node.connectors.forEach((connection) => {
+      const source = node.name.replace(/ /g, '_');
+      const target = connection.targetReference.replace(/ /g, '_');
+      const label = connection.connectionLabel ? `|"${connection.connectionLabel}"|` : '';
 
-//     if (node.connectors.length === 0) {
-//       console.log('Node has no connectors, adding to paths');
-//       path.push([node.name]);
-//       paths.push([...path]);
-//     } else {
-//       console.log('Looking for connectors...');
+      if (connection.type === 'Terminator') {
+        mermaid += `    ${source}["${node.name}"] --> ${label} ${source}_end["End"]\n`;
+      } else {
+        mermaid += `    ${source}["${node.name}"] --> ${label} ${target}["${
+          nodes.find((n) => n.name === connection.targetReference)?.name
+        }"]\n`;
+      }
+    });
+  });
 
-//       for (const connector of node.connectors) {
-//         if (!visitedConnections.has(node.name+connector.type+connector.targetReference)) {
-//           console.log('Connector: ', connector);
-//           console.log('Targets: ', connector.targetReference);
-//           console.log('Adding to path: ', [node.name, connector.connectionLabel]);
-//           path.push([node.name, connector.connectionLabel]);
+  return mermaid;
+}
 
-//           // if (connector.type === 'Terminator') {
-//           //   console.log('Terminator found, adding to paths');
-//           //   path.push(['END']);
-//           //   paths.push([...path]);
-//           // } else {
-//           if (connector.type === 'nextValueConnector') {
-//             visitedConnections.add(node.name+connector.type+connector.targetReference);
-//           }
-//           const targetNode = flow.nodes.find((x) => x.name === connector.targetReference);
-//           if (targetNode) {
-//             console.log('Found target node: ', targetNode.name);
-//             explore(targetNode, path);
-//           } else {
-//             paths.push([...path]);
-//           }
-//         }
-//       }
-//     }
-//     console.log('Backtracking...');
-//     path.pop();
-//   }
+function generateStateDiagram(nodes: FlowNodeWrapper[]): string {
+  let mermaid = 'stateDiagram-v2\n';
 
-//   explore(flow.nodes.find((x) => x.type === 'start') as FlowNodeWrapper, []);
+  nodes.forEach((node) => {
+    node.connectors.forEach((connection) => {
+      const source = node.name.replace(/ /g, '_');
+      const target = connection.targetReference.replace(/ /g, '_');
+      const label = connection.connectionLabel ? `: ${connection.connectionLabel}` : '';
 
-//   return printPaths(paths);
+      if (connection.type !== 'Terminator') {
+        mermaid += `    ${source} --> ${target}${label}\n`;
+      }
+    });
+  });
 
-// }
-
-// function printPaths(paths: Array<Array<[string, string?]>>): void {
-//   if (paths) {
-//     console.log('All Paths: ', paths);
-//   }
-// }
+  return mermaid;
+}
 
 function printNode(node: FlowNodeWrapper): void {
   console.log('\n\n--- NODE ---');

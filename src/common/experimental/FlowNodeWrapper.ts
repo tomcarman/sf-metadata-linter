@@ -11,14 +11,14 @@ export class FlowNodeWrapper {
   public type: string;
   public name: string;
   public location?: [number, number];
-  public data: AnyFlowNode;
+  // public data: AnyFlowNode;
   public connectors: Connector[] = [];
 
   public constructor(typeOfNode: string, node: AnyFlowNode) {
     this.type = typeOfNode;
     this.name = typeOfNode === 'start' ? 'Start' : node.name ?? 'Unknown Node Name';
     this.location = [node.locationX, node.locationY];
-    this.data = node;
+    // this.data = node;
     this.buildConnections(node);
     this.buildTerminators();
   }

@@ -3,8 +3,7 @@ import type { Flow } from '@salesforce/types/metadata';
 import { RuleClass } from '../common/types.js';
 import { parseMetadataXml } from '../common/util.js';
 import { FlowWrapper } from '../common/experimental/FlowWrapper.js';
-// import { walk, getPaths } from '../common/experimental/FlowWalker.js';
-import { getPaths } from '../common/experimental/FlowWalker.js';
+import { generateMermaid, getPaths } from '../common/experimental/FlowWalker.js';
 
 export default class NoDmlInFlowForLoop extends RuleClass {
   public ruleId: string = 'no-missing-description-on-fields';
@@ -20,13 +19,11 @@ export default class NoDmlInFlowForLoop extends RuleClass {
       const fileText = fs.readFileSync(file, 'utf-8');
       const flow = parseMetadataXml<Flow>(fileText, 'Flow');
       const flowWrapper = new FlowWrapper(flow);
-
+      // console.dir(flowWrapper.nodes, { depth: null });
       // walk(flowWrapper);
-      // console.log(JSON.stringify(flowWrapper, null, 2));
       const paths = getPaths(flowWrapper);
-      console.log('Flow: ', flow.label);
       console.log('Paths: ', paths.length);
-      console.log('Paths: ', paths);
+      generateMermaid(flowWrapper.nodes);
     }
   }
 }
