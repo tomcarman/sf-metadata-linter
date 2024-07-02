@@ -4,22 +4,26 @@ import type { AnyFlowNode } from './FlowNodeTypes.js';
 
 type Connector = FlowConnector & {
   type: string;
+  connectionLabel?: string;
 };
 
 export class FlowNodeWrapper {
   public type: string;
   public name: string;
-  public node: AnyFlowNode;
+  public location?: [number, number];
+  public data: AnyFlowNode;
   public connectors: Connector[] = [];
 
   public constructor(typeOfNode: string, node: AnyFlowNode) {
     this.type = typeOfNode;
-    this.name = node.name ?? '';
-    this.node = node;
-    this.handleConnectors(node);
+    this.name = typeOfNode === 'start' ? 'Start' : node.name ?? 'Unknown Node Name';
+    this.location = [node.locationX, node.locationY];
+    this.data = node;
+    this.buildConnections(node);
+    this.buildTerminators();
   }
 
-  private handleConnectors(node: AnyFlowNode): void {
+  private buildConnections(node: AnyFlowNode): void {
     this.addStandardConnector(node);
     this.addFaultConnector(node);
     this.addDefaultConnector(node);
@@ -30,13 +34,26 @@ export class FlowNodeWrapper {
     this.addScheduledPaths(node);
   }
 
-  private addConnector(connectorType: string, connector: FlowConnector): void {
-    this.connectors.push({ type: connectorType, ...connector });
+  private buildTerminators(): void {
+    if (this.connectors.length === 0) {
+      this.addTerminator();
+    }
+  }
+
+  private addConnector(connectorType: string, connector: FlowConnector, connectionLabel?: string): void {
+    this.connectors.push({ type: connectorType, ...connector, connectionLabel });
+  }
+
+  private addTerminator(connectionLabel?: string): void {
+    const connectorType = 'Terminator';
+    const connector: FlowConnector = { targetReference: '', processMetadataValues: [{ name: '' }] };
+    this.connectors.push({ type: connectorType, ...connector, connectionLabel });
   }
 
   private addStandardConnector(node: AnyFlowNode): void {
     if ('connector' in node && node.connector) {
-      this.addConnector('connector', node.connector);
+      const connectionLabel = this.type === 'start' ? 'Run Immediately' : undefined;
+      this.addConnector('connector', node.connector, connectionLabel);
     }
     if ('connectors' in node && node.connectors) {
       arrayify(node.connectors).forEach((connector) => this.addConnector('connector', connector));
@@ -51,27 +68,34 @@ export class FlowNodeWrapper {
 
   private addDefaultConnector(node: AnyFlowNode): void {
     if ('defaultConnector' in node && node.defaultConnector) {
-      this.addConnector('defaultConnector', node.defaultConnector);
+      this.addConnector('defaultConnector', node.defaultConnector, node.defaultConnectorLabel);
     }
   }
 
   private addNextValueConnector(node: AnyFlowNode): void {
     if ('nextValueConnector' in node && node.nextValueConnector) {
-      this.addConnector('nextValueConnector', node.nextValueConnector);
+      this.addConnector('nextValueConnector', node.nextValueConnector, 'For Each');
+      if (!('noMoreValuesConnector' in node)) {
+        // Does not have a noMoreValuesConnector
+        this.addTerminator('After Last');
+      }
     }
   }
 
   private addNoMoreValuesConnector(node: AnyFlowNode): void {
     if ('noMoreValuesConnector' in node && node.noMoreValuesConnector) {
-      this.addConnector('noMoreValuesConnector', node.noMoreValuesConnector);
+      this.addConnector('noMoreValuesConnector', node.noMoreValuesConnector, 'After Last');
     }
   }
 
   private addWaitEventConnectors(node: AnyFlowNode): void {
     if ('waitEvents' in node && node.waitEvents) {
       arrayify(node.waitEvents).forEach((waitEvent) => {
+        const connectionLabel = waitEvent.name ? waitEvent.label : undefined;
         if (waitEvent.connector) {
-          this.addConnector('connector', waitEvent.connector);
+          this.addConnector('connector', waitEvent.connector, connectionLabel);
+        } else {
+          this.addTerminator(connectionLabel);
         }
       });
     }
@@ -82,7 +106,9 @@ export class FlowNodeWrapper {
     if ('rules' in node && node.rules && !('fields' in node)) {
       arrayify(node.rules).forEach((rule) => {
         if ('connector' in rule && rule.connector) {
-          this.addConnector('connector', rule.connector);
+          this.addConnector('connector', rule.connector, rule.label);
+        } else {
+          this.addTerminator(rule.label);
         }
       });
     }
@@ -92,7 +118,9 @@ export class FlowNodeWrapper {
     if ('scheduledPaths' in node && node.scheduledPaths) {
       arrayify(node.scheduledPaths).forEach((path) => {
         if (path.connector) {
-          this.addConnector('connector', path.connector);
+          const connectionLabel =
+            path.label ?? (path.pathType === 'AsyncAfterCommit' ? 'Run Asynchronously' : undefined);
+          this.addConnector('connector', path.connector, connectionLabel);
         }
       });
     }

@@ -3,7 +3,8 @@ import type { Flow } from '@salesforce/types/metadata';
 import { RuleClass } from '../common/types.js';
 import { parseMetadataXml } from '../common/util.js';
 import { FlowWrapper } from '../common/experimental/FlowWrapper.js';
-import { walk } from '../common/experimental/FlowWalker.js';
+// import { walk, getPaths } from '../common/experimental/FlowWalker.js';
+import { getPaths } from '../common/experimental/FlowWalker.js';
 
 export default class NoDmlInFlowForLoop extends RuleClass {
   public ruleId: string = 'no-missing-description-on-fields';
@@ -19,8 +20,9 @@ export default class NoDmlInFlowForLoop extends RuleClass {
       const fileText = fs.readFileSync(file, 'utf-8');
       const flow = parseMetadataXml<Flow>(fileText, 'Flow');
       const flowWrapper = new FlowWrapper(flow);
-      console.log(flowWrapper);
-      walk(flowWrapper);
+
+      // walk(flowWrapper);
+      getPaths(flowWrapper);
     }
   }
 }
