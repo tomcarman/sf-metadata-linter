@@ -1,7 +1,7 @@
 import { Flow } from '@salesforce/types/metadata';
 import { FlowNodeWrapper } from './FlowNodeWrapper.js';
 import { FlowElementWrapper } from './FlowElementWrapper.js';
-import { AnyFlowNode, AnyFlowElement } from './FlowNodeTypes.js';
+import { AnyFlowNode, AnyFlowElement, FlowNodeTypes, FlowElementTypes } from './FlowNodeTypes.js';
 
 export class FlowWrapper {
   public flowName: string;
@@ -11,39 +11,7 @@ export class FlowWrapper {
   public constructor(flow: Flow) {
     this.flowName = flow.label ?? '';
 
-    const flowNodes: Array<keyof Flow> = [
-      'assignments',
-      'collectionProcessors',
-      'customErrors',
-      'recordRollbacks',
-      'screens',
-      'subflows',
-      'transforms',
-      'actionCalls',
-      'apexPluginCalls',
-      'orchestratedStages',
-      'recordCreates',
-      'recordDeletes',
-      'recordLookups',
-      'recordUpdates',
-      'waits',
-      'decisions',
-      'loops',
-      'steps',
-      'start',
-    ];
-
-    const flowElements: Array<keyof Flow> = [
-      'choices',
-      'constants',
-      'dynamicChoiceSets',
-      'formulas',
-      'stages',
-      'textTemplates',
-      'variables',
-    ];
-
-    flowNodes.forEach((property) => {
+    FlowNodeTypes.forEach((property) => {
       if (flow[property] !== undefined) {
         if (Array.isArray(flow[property])) {
           (flow[property] as AnyFlowNode[]).forEach((node) => {
@@ -55,7 +23,7 @@ export class FlowWrapper {
       }
     });
 
-    flowElements.forEach((property) => {
+    FlowElementTypes.forEach((property) => {
       if (flow[property] !== undefined) {
         if (Array.isArray(flow[property])) {
           (flow[property] as unknown as AnyFlowElement[]).forEach((node) => {

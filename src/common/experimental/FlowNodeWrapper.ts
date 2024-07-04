@@ -1,5 +1,5 @@
 import type { FlowConnector } from '@salesforce/types/metadata';
-import { arrayify } from '../util.js';
+import { arrayify, getFlowComponentTypeLabel } from '../util.js';
 import type { AnyFlowNode } from './FlowNodeTypes.js';
 
 type Connector = FlowConnector & {
@@ -9,16 +9,20 @@ type Connector = FlowConnector & {
 
 export class FlowNodeWrapper {
   public type: string;
+  public typeLabel: string;
   public name: string;
+  public label: string;
   public location?: [number, number];
-  // public data: AnyFlowNode;
+  public data: AnyFlowNode;
   public connectors: Connector[] = [];
 
   public constructor(typeOfNode: string, node: AnyFlowNode) {
     this.type = typeOfNode;
+    this.typeLabel = getFlowComponentTypeLabel(typeOfNode, node);
     this.name = typeOfNode === 'start' ? 'Start' : node.name ?? 'Unknown Node Name';
+    this.label = node.label ?? this.name;
     this.location = [node.locationX, node.locationY];
-    // this.data = node;
+    this.data = node;
     this.buildConnections(node);
     this.buildTerminators();
   }

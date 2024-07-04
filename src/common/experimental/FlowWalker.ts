@@ -30,7 +30,7 @@ export function walk(flow: FlowWrapper): void {
   }
 }
 
-type PathEntry = {
+export type PathEntry = {
   nodeName: string;
   nodeType: string;
   nodeLocation?: [number, number];
@@ -102,59 +102,6 @@ export function getPaths(flow: FlowWrapper): PathEntry[][] {
   // printPaths(paths);
 
   return paths;
-}
-
-export function generateMermaid(nodes: FlowNodeWrapper[]): void {
-  console.log('\n\nGenerating Mermaid flow...');
-  console.log(generateMermaidFlow(nodes));
-  console.log('\n\nGenerating State flow...');
-  console.log(generateStateDiagram(nodes));
-}
-
-export function generateMermaidFlow(nodes: FlowNodeWrapper[]): string {
-  let mermaid = 'flowchart TD\n';
-
-  nodes.sort((a, b) => {
-    const aLocation = a.location ? a.location[1] : 0;
-    const bLocation = b.location ? b.location[1] : 0;
-    return aLocation - bLocation;
-  });
-
-  nodes.forEach((node) => {
-    node.connectors.forEach((connection) => {
-      const source = node.name.replace(/ /g, '_');
-      const target = connection.targetReference.replace(/ /g, '_');
-      const label = connection.connectionLabel ? `|"${connection.connectionLabel}"|` : '';
-
-      if (connection.type === 'Terminator') {
-        mermaid += `    ${source}["${node.name}"] --> ${label} ${source}_end["End"]\n`;
-      } else {
-        mermaid += `    ${source}["${node.name}"] --> ${label} ${target}["${
-          nodes.find((n) => n.name === connection.targetReference)?.name
-        }"]\n`;
-      }
-    });
-  });
-
-  return mermaid;
-}
-
-function generateStateDiagram(nodes: FlowNodeWrapper[]): string {
-  let mermaid = 'stateDiagram-v2\n';
-
-  nodes.forEach((node) => {
-    node.connectors.forEach((connection) => {
-      const source = node.name.replace(/ /g, '_');
-      const target = connection.targetReference.replace(/ /g, '_');
-      const label = connection.connectionLabel ? `: ${connection.connectionLabel}` : '';
-
-      if (connection.type !== 'Terminator') {
-        mermaid += `    ${source} --> ${target}${label}\n`;
-      }
-    });
-  });
-
-  return mermaid;
 }
 
 function printNode(node: FlowNodeWrapper): void {

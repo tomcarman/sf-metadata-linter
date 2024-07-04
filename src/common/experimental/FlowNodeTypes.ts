@@ -1,4 +1,5 @@
 import {
+  Flow,
   FlowAssignment,
   FlowCollectionProcessor,
   FlowCustomError,
@@ -50,4 +51,36 @@ export type AnyFlowNode =
 
 export type AnyFlowElement = [
   FlowChoice | FlowConstant | FlowDynamicChoiceSet | FlowFormula | FlowStage | FlowTextTemplate | FlowVariable
+];
+
+export const FlowNodeTypes: Array<keyof Flow> = [
+  'assignments',
+  'collectionProcessors',
+  'customErrors',
+  'recordRollbacks',
+  'screens',
+  'subflows',
+  'transforms',
+  'actionCalls',
+  'apexPluginCalls',
+  'orchestratedStages',
+  'recordCreates',
+  'recordDeletes',
+  'recordLookups',
+  'recordUpdates',
+  'waits',
+  'decisions',
+  'loops',
+  'steps',
+  'start',
+];
+
+export const FlowElementTypes: Array<keyof Flow> = [
+  'choices',
+  'constants',
+  'dynamicChoiceSets',
+  'formulas',
+  'stages',
+  'textTemplates',
+  'variables',
 ];
