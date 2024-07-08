@@ -4,7 +4,8 @@ import { RuleClass } from '../common/types.js';
 import { parseMetadataXml } from '../common/util.js';
 import { FlowWrapper } from '../common/experimental/FlowWrapper.js';
 // import {  getPaths } from '../common/experimental/FlowWalker.js';
-import { generateMermaid } from '../common/experimental/FlowMermaid.js';
+// import { generateMermaid } from '../common/experimental/FlowMermaid.js';
+import { FlowGraph } from '../common/experimental/FlowWalkerTarjan.js';
 
 export default class NoDmlInFlowForLoop extends RuleClass {
   public ruleId: string = 'no-missing-description-on-fields';
@@ -26,20 +27,14 @@ export default class NoDmlInFlowForLoop extends RuleClass {
       // console.dir(flowWrapper, { depth: null });
       // walk(flowWrapper);
       // const paths = getPaths(flowWrapper);
-
-      // let i = 0;
-      // paths.forEach((path) => {
-      // i++
-      // const hash = Md5.hashStr(path.map(entry => entry.nodeName).join(' -> '));
-      // console.log('i: ', i, 'Hash: ', hash, 'Path: ', path.map(entry => entry.nodeName).join(' -> '));
-      // console.log('csv: ', path.map(entry => entry.nodeName).join(', '), ',');
-      // console.log('paths: ', paths.length);
-      // console.log(path.map(entry => entry.nodeName).join(' -> '));
-      // });
-
-      // console.log(paths);
       // console.log('Flow Name: ', flowWrapper.flowName, 'Paths: ', paths.length);
-      generateMermaid(flowWrapper.nodes);
+      // generateMermaid(flowWrapper.nodes);
+      const graph = new FlowGraph(flowWrapper);
+      const sccs = graph.getNonSingleStronglyConnectedNodes();
+
+      sccs.forEach((scc) => {
+        console.log('SCC: ', scc.map((node) => node.name).join(', '));
+      });
     }
   }
 }

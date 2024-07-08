@@ -19,12 +19,13 @@ export class FlowNodeWrapper {
   public constructor(typeOfNode: string, node: AnyFlowNode) {
     this.type = typeOfNode;
     this.typeLabel = getFlowComponentTypeLabel(typeOfNode, node);
-    this.name = typeOfNode === 'start' ? 'Start' : node.name ?? 'Unknown Node Name';
+    this.name =
+      typeOfNode === 'start' ? 'Start' : node.name ?? 'UnknownNode_' + (Math.random() + 1).toString(36).substring(7);
     this.label = node.label ?? this.name;
     this.location = [node.locationX, node.locationY];
     this.data = node;
     this.buildConnections(node);
-    this.buildTerminators();
+    // this.buildTerminators();
   }
 
   private buildConnections(node: AnyFlowNode): void {
@@ -36,32 +37,32 @@ export class FlowNodeWrapper {
     this.addWaitEventConnectors(node);
     this.addRuleConnectors(node);
     this.addScheduledPaths(node);
-    this.addTerminatorWhenMissingDefaultConnector(node);
+    // this.addTerminatorWhenMissingDefaultConnector(node);
   }
 
-  private buildTerminators(): void {
-    if (this.connectors.length === 0) {
-      this.addTerminator();
-    }
-  }
+  // private buildTerminators(): void {
+  //   if (this.connectors.length === 0) {
+  //     this.addTerminator();
+  //   }
+  // }
 
   private addConnector(connectorType: string, connector: FlowConnector, connectionLabel?: string): void {
     this.connectors.push({ type: connectorType, ...connector, connectionLabel });
   }
 
-  private addTerminator(connectionLabel?: string): void {
-    const connectorType = 'Terminator';
-    const connector: FlowConnector = { targetReference: '', processMetadataValues: [{ name: '' }] };
-    this.connectors.push({ type: connectorType, ...connector, connectionLabel });
-  }
+  // private addTerminator(connectionLabel?: string): void {
+  //   const connectorType = 'Terminator';
+  //   const connector: FlowConnector = { targetReference: '', processMetadataValues: [{ name: '' }] };
+  //   this.connectors.push({ type: connectorType, ...connector, connectionLabel });
+  // }
 
-  private addTerminatorWhenMissingDefaultConnector(node: AnyFlowNode): void {
-    if (this.type === 'decisions') {
-      if ('defaultConnectorLabel' in node && !('defaultConnector' in node)) {
-        this.addTerminator(node.defaultConnectorLabel);
-      }
-    }
-  }
+  // private addTerminatorWhenMissingDefaultConnector(node: AnyFlowNode): void {
+  //   if (this.type === 'decisions') {
+  //     if ('defaultConnectorLabel' in node && !('defaultConnector' in node)) {
+  //       this.addTerminator(node.defaultConnectorLabel);
+  //     }
+  //   }
+  // }
 
   private addStandardConnector(node: AnyFlowNode): void {
     if ('connector' in node && node.connector) {
@@ -88,10 +89,10 @@ export class FlowNodeWrapper {
   private addNextValueConnector(node: AnyFlowNode): void {
     if ('nextValueConnector' in node && node.nextValueConnector) {
       this.addConnector('nextValueConnector', node.nextValueConnector, 'For Each');
-      if (!('noMoreValuesConnector' in node)) {
-        // Does not have a noMoreValuesConnector
-        this.addTerminator('After Last');
-      }
+      // if (!('noMoreValuesConnector' in node)) {
+      //   // Does not have a noMoreValuesConnector
+      //   this.addTerminator('After Last');
+      // }
     }
   }
 
@@ -107,9 +108,10 @@ export class FlowNodeWrapper {
         const connectionLabel = waitEvent.name ? waitEvent.label : undefined;
         if (waitEvent.connector) {
           this.addConnector('connector', waitEvent.connector, connectionLabel);
-        } else {
-          this.addTerminator(connectionLabel);
         }
+        // else {
+        //   this.addTerminator(connectionLabel);
+        // }
       });
     }
   }
@@ -120,9 +122,10 @@ export class FlowNodeWrapper {
       arrayify(node.rules).forEach((rule) => {
         if ('connector' in rule && rule.connector) {
           this.addConnector('connector', rule.connector, rule.label);
-        } else {
-          this.addTerminator(rule.label);
         }
+        // else {
+        //   this.addTerminator(rule.label);
+        // }
       });
     }
   }
