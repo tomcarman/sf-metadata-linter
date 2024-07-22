@@ -87,3 +87,7 @@ rules:
   - name: no-double-spaces-in-value-sets
     active: true
     level: error
+
+  - name: max-flow-complexity
+    active: true
+    level: warning
