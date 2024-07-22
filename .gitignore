@@ -51,3 +51,4 @@ oclif.lock
 
 # test/demo files
 demo/
+src/common/ignore/
