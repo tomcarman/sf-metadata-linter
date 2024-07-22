@@ -12,7 +12,7 @@ import {
 } from '@salesforce/types/metadata';
 import { warningsCache } from '../commands/metalint/run.js';
 import type { Location } from './types.js';
-import type { AnyFlowNode } from './experimental/FlowNodeTypes.js';
+import type { AnyFlowNode } from './types/FlowNodeTypes.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-metadata-linter', 'metalint.utils');
