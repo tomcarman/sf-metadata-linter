@@ -10,7 +10,7 @@
       "license": "BSD-3-Clause",
       "dependencies": {
         "@oclif/core": "^3.27.0",
-        "@salesforce/core": "^7.2.0",
+        "@salesforce/core": "^7.4.1",
         "@salesforce/sf-plugins-core": "^9.1.1",
         "@salesforce/types": "^1.2.0",
         "@types/sarif": "^2.1.7",
@@ -3537,56 +3537,48 @@
       }
     },
     "node_modules/@salesforce/core": {
-      "version": "7.3.9",
-      "resolved": "https://registry.npmjs.org/@salesforce/core/-/core-7.3.9.tgz",
-      "integrity": "sha512-eJqDiA5b7wU50Ee/xjmGzSnHrNVJ8S77B7enfX30gm7gxU3i3M3QeBdiV6XAOPLSIL96DseofP6Tv6c+rljlKA==",
+      "version": "7.4.1",
+      "resolved": "https://registry.npmjs.org/@salesforce/core/-/core-7.4.1.tgz",
+      "integrity": "sha512-ccYs7uL4GYjdOcc44trfRnaz69kG0jU0aoT0qjPkIel8oVOyEoXaoDCG0A+2diqmicDp5uWK0pNs+tdWNj2mcQ==",
       "license": "BSD-3-Clause",
       "dependencies": {
         "@jsforce/jsforce-node": "^3.2.0",
-        "@salesforce/kit": "^3.1.1",
+        "@salesforce/kit": "^3.1.2",
         "@salesforce/schemas": "^1.9.0",
         "@salesforce/ts-types": "^2.0.9",
-        "ajv": "^8.13.0",
+        "ajv": "^8.15.0",
         "change-case": "^4.1.2",
+        "fast-levenshtein": "^3.0.0",
         "faye": "^1.4.0",
         "form-data": "^4.0.0",
         "js2xmlparser": "^4.0.1",
         "jsonwebtoken": "9.0.2",
         "jszip": "3.10.1",
         "pino": "^8.21.0",
-        "pino-abstract-transport": "^1.1.0",
+        "pino-abstract-transport": "^1.2.0",
         "pino-pretty": "^10.3.1",
         "proper-lockfile": "^4.1.2",
         "semver": "^7.6.2",
-        "ts-retry-promise": "^0.7.1"
+        "ts-retry-promise": "^0.8.1"
       },
       "engines": {
         "node": ">=18.0.0"
       }
     },
     "node_modules/@salesforce/core/node_modules/ajv": {
-      "version": "8.13.0",
-      "resolved": "https://registry.npmjs.org/ajv/-/ajv-8.13.0.tgz",
-      "integrity": "sha512-PRA911Blj99jR5RMeTunVbNXMF6Lp4vZXnk5GQjcnUWUTsrXtekg/pnmFFI2u/I36Y/2bITGS30GZCXei6uNkA==",
+      "version": "8.17.1",
+      "resolved": "https://registry.npmjs.org/ajv/-/ajv-8.17.1.tgz",
+      "integrity": "sha512-B/gBuNg5SiMTrPkC+A2+cW0RszwxYmn6VYxB/inlBStS5nx6xHIt/ehKRhIMhqusl7a8LjQoZnjCs5vhwxOQ1g==",
       "license": "MIT",
       "dependencies": {
         "fast-deep-equal": "^3.1.3",
+        "fast-uri": "^3.0.1",
         "json-schema-traverse": "^1.0.0",
-        "require-from-string": "^2.0.2",
-        "uri-js": "^4.4.1"
+        "require-from-string": "^2.0.2"
       },
       "funding": {
         "type": "github",
         "url": "https://github.com/sponsors/epoberezkin"
-      }
-    },
-    "node_modules/@salesforce/core/node_modules/ts-retry-promise": {
-      "version": "0.7.1",
-      "resolved": "https://registry.npmjs.org/ts-retry-promise/-/ts-retry-promise-0.7.1.tgz",
-      "integrity": "sha512-NhHOCZ2AQORvH42hOPO5UZxShlcuiRtm7P2jIq2L2RY3PBxw2mLnUsEdHrIslVBFya1v5aZmrR55lWkzo13LrQ==",
-      "license": "MIT",
-      "engines": {
-        "node": ">=6"
       }
     },
     "node_modules/@salesforce/dev-config": {
@@ -7679,7 +7671,6 @@
       "version": "3.0.0",
       "resolved": "https://registry.npmjs.org/fast-levenshtein/-/fast-levenshtein-3.0.0.tgz",
       "integrity": "sha512-hKKNajm46uNmTlhHSyZkmToAc56uZJwYq7yrciZjqOxnlfQwERDQJmHPUp7m1m9wx8vgOe8IaCKZ5Kv2k1DdCQ==",
-      "dev": true,
       "license": "MIT",
       "dependencies": {
         "fastest-levenshtein": "^1.0.7"
@@ -7699,6 +7690,22 @@
       "resolved": "https://registry.npmjs.org/fast-safe-stringify/-/fast-safe-stringify-2.1.1.tgz",
       "integrity": "sha512-W+KJc2dmILlPplD/H4K9l9LcAHAfPtP6BY84uVLXQ6Evcz9Lcg33Y2z1IVblT6xdY54PXYVHEv+0Wpq8Io6zkA==",
       "license": "MIT"
+    },
+    "node_modules/fast-uri": {
+      "version": "3.0.6",
+      "resolved": "https://registry.npmjs.org/fast-uri/-/fast-uri-3.0.6.tgz",
+      "integrity": "sha512-Atfo14OibSv5wAp4VWNsFYE1AchQRTv9cBGWET4pZWHzYshFSS9NQI6I57rdKn9croWVMbYFbLhJ+yJvmZIIHw==",
+      "funding": [
+        {
+          "type": "github",
+          "url": "https://github.com/sponsors/fastify"
+        },
+        {
+          "type": "opencollective",
+          "url": "https://opencollective.com/fastify"
+        }
+      ],
+      "license": "BSD-3-Clause"
     },
     "node_modules/fast-xml-parser": {
       "version": "4.4.0",
@@ -7726,7 +7733,6 @@
       "version": "1.0.16",
       "resolved": "https://registry.npmjs.org/fastest-levenshtein/-/fastest-levenshtein-1.0.16.tgz",
       "integrity": "sha512-eRnCtTTtGZFpQCwhJiUOuxPQWRXVKYDn0b2PeHfXL6/Zi53SLAzAHfVhVWK2AryC/WH05kGfxhFIPvTF0SXQzg==",
-      "dev": true,
       "license": "MIT",
       "engines": {
         "node": ">= 4.9.1"
@@ -13252,7 +13258,6 @@
       "version": "0.8.1",
       "resolved": "https://registry.npmjs.org/ts-retry-promise/-/ts-retry-promise-0.8.1.tgz",
       "integrity": "sha512-+AHPUmAhr5bSRRK5CurE9kNH8gZlEHnCgusZ0zy2bjfatUBDX0h6vGQjiT0YrGwSDwRZmU+bapeX6mj55FOPvg==",
-      "dev": true,
       "license": "MIT",
       "engines": {
         "node": ">=6"
@@ -13595,6 +13600,7 @@
       "version": "4.4.1",
       "resolved": "https://registry.npmjs.org/uri-js/-/uri-js-4.4.1.tgz",
       "integrity": "sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==",
+      "dev": true,
       "license": "BSD-2-Clause",
       "dependencies": {
         "punycode": "^2.1.0"
