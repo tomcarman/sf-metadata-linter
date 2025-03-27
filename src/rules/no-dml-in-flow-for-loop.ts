@@ -14,9 +14,7 @@ export default class NoDmlInFlowForLoop extends RuleClass {
   public endLine = 1;
 
   public execute(): void {
-    const flows = this.files.filter((file) =>
-      file.endsWith('Create_Ongoing_Advice_Review_Service_Appointment.flow-meta.xml')
-    );
+    const flows = this.files.filter((file) => file.endsWith('Create_Service_Appointment_Flow.flow-meta.xml'));
 
     for (const file of flows) {
       const fileText = fs.readFileSync(file, 'utf-8');
