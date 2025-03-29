@@ -29,7 +29,7 @@
       },
       "devDependencies": {
         "@oclif/plugin-command-snapshot": "^5.2.3",
-        "@salesforce/cli-plugins-testkit": "^5.3.16",
+        "@salesforce/cli-plugins-testkit": "^5.3.39",
         "@salesforce/dev-scripts": "^9.0.0",
         "@types/js-yaml": "^4.0.9",
         "eslint-plugin-sf-plugin": "^1.18.9",
@@ -2722,75 +2722,24 @@
       }
     },
     "node_modules/@jsforce/jsforce-node": {
-      "version": "3.2.0",
-      "resolved": "https://registry.npmjs.org/@jsforce/jsforce-node/-/jsforce-node-3.2.0.tgz",
-      "integrity": "sha512-3GjWNgWs0HFajVhIhwvBPb0B45o500wTBNEBYxy8XjeeRra+qw8A9xUrfVU7TAGev8kXuKhjJwaTiSzThpEnew==",
+      "version": "3.7.0",
+      "resolved": "https://registry.npmjs.org/@jsforce/jsforce-node/-/jsforce-node-3.7.0.tgz",
+      "integrity": "sha512-v9pc3lPM5RMuB81Gasz5/NKcjktE1LLEACRFopB9LiXRafb4K9bStSMl3nLEHq7+OFdtxfQB3Sx2rYXJGG4DKw==",
       "license": "MIT",
       "dependencies": {
         "@sindresorhus/is": "^4",
-        "@types/node": "^18.15.3",
-        "abort-controller": "^3.0.0",
         "base64url": "^3.0.1",
         "csv-parse": "^5.5.2",
         "csv-stringify": "^6.4.4",
         "faye": "^1.4.0",
         "form-data": "^4.0.0",
-        "fs-extra": "^8.1.0",
         "https-proxy-agent": "^5.0.0",
         "multistream": "^3.1.0",
         "node-fetch": "^2.6.1",
-        "strip-ansi": "^6.0.0",
         "xml2js": "^0.6.2"
       },
       "engines": {
         "node": ">=18"
-      }
-    },
-    "node_modules/@jsforce/jsforce-node/node_modules/@types/node": {
-      "version": "18.19.32",
-      "resolved": "https://registry.npmjs.org/@types/node/-/node-18.19.32.tgz",
-      "integrity": "sha512-2bkg93YBSDKk8DLmmHnmj/Rwr18TLx7/n+I23BigFwgexUJoMHZOd8X1OFxuF/W3NN0S2W2E5sVabI5CPinNvA==",
-      "license": "MIT",
-      "dependencies": {
-        "undici-types": "~5.26.4"
-      }
-    },
-    "node_modules/@jsforce/jsforce-node/node_modules/csv-stringify": {
-      "version": "6.4.6",
-      "resolved": "https://registry.npmjs.org/csv-stringify/-/csv-stringify-6.4.6.tgz",
-      "integrity": "sha512-h2V2XZ3uOTLilF5dPIptgUfN/o2ia/80Ie0Lly18LAnw5s8Eb7kt8rfxSUy24AztJZas9f6DPZpVlzDUtFt/ag==",
-      "license": "MIT"
-    },
-    "node_modules/@jsforce/jsforce-node/node_modules/fs-extra": {
-      "version": "8.1.0",
-      "resolved": "https://registry.npmjs.org/fs-extra/-/fs-extra-8.1.0.tgz",
-      "integrity": "sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==",
-      "license": "MIT",
-      "dependencies": {
-        "graceful-fs": "^4.2.0",
-        "jsonfile": "^4.0.0",
-        "universalify": "^0.1.0"
-      },
-      "engines": {
-        "node": ">=6 <7 || >=8"
-      }
-    },
-    "node_modules/@jsforce/jsforce-node/node_modules/jsonfile": {
-      "version": "4.0.0",
-      "resolved": "https://registry.npmjs.org/jsonfile/-/jsonfile-4.0.0.tgz",
-      "integrity": "sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==",
-      "license": "MIT",
-      "optionalDependencies": {
-        "graceful-fs": "^4.1.6"
-      }
-    },
-    "node_modules/@jsforce/jsforce-node/node_modules/universalify": {
-      "version": "0.1.2",
-      "resolved": "https://registry.npmjs.org/universalify/-/universalify-0.1.2.tgz",
-      "integrity": "sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==",
-      "license": "MIT",
-      "engines": {
-        "node": ">= 4.0.0"
       }
     },
     "node_modules/@nodelib/fs.scandir": {
@@ -3286,17 +3235,17 @@
       }
     },
     "node_modules/@salesforce/cli-plugins-testkit": {
-      "version": "5.3.16",
-      "resolved": "https://registry.npmjs.org/@salesforce/cli-plugins-testkit/-/cli-plugins-testkit-5.3.16.tgz",
-      "integrity": "sha512-Qzhd9dIUlAYPGdAJGmY2GuyMI6HkXPoJHZtumIg436VjWFnZchXJ/O7wipEk2zsqa8RfkZNJyollWd41wxTnHA==",
+      "version": "5.3.39",
+      "resolved": "https://registry.npmjs.org/@salesforce/cli-plugins-testkit/-/cli-plugins-testkit-5.3.39.tgz",
+      "integrity": "sha512-6cBN7PP3/BN11qv/RGilJdWOkSEGGh6eIzyE+tZI27s2KLf/aOysbZk90v9yhSnuxvPiREHzYCuNSufJlsciQQ==",
       "dev": true,
       "license": "BSD-3-Clause",
       "dependencies": {
-        "@salesforce/core": "^8.0.3",
-        "@salesforce/kit": "^3.1.6",
-        "@salesforce/ts-types": "^2.0.10",
+        "@salesforce/core": "^8.8.0",
+        "@salesforce/kit": "^3.2.3",
+        "@salesforce/ts-types": "^2.0.11",
         "@types/shelljs": "^0.8.15",
-        "debug": "^4.3.5",
+        "debug": "^4.4.0",
         "jszip": "^3.10.1",
         "shelljs": "^0.8.4",
         "sinon": "^17.0.2",
@@ -3308,17 +3257,17 @@
       }
     },
     "node_modules/@salesforce/cli-plugins-testkit/node_modules/@salesforce/core": {
-      "version": "8.0.3",
-      "resolved": "https://registry.npmjs.org/@salesforce/core/-/core-8.0.3.tgz",
-      "integrity": "sha512-HirswUFGQIF5Ipaa+5l3kulBOf3L25Z3fzf5QqEI4vOxgBKN2bEdKHCA/PROufi3/ejFstiXcn9/jfgyjDdBqA==",
+      "version": "8.8.7",
+      "resolved": "https://registry.npmjs.org/@salesforce/core/-/core-8.8.7.tgz",
+      "integrity": "sha512-AuPSmb/GZ7F8eV5GO6NcfFq3YSOVnPL4sssEQEvKduOSJMs8RTJ92kEefrId/tgFBYfw4b7UzndjFtdgrGGeoA==",
       "dev": true,
       "license": "BSD-3-Clause",
       "dependencies": {
-        "@jsforce/jsforce-node": "^3.2.0",
-        "@salesforce/kit": "^3.1.6",
+        "@jsforce/jsforce-node": "^3.7.0",
+        "@salesforce/kit": "^3.2.2",
         "@salesforce/schemas": "^1.9.0",
         "@salesforce/ts-types": "^2.0.10",
-        "ajv": "^8.16.0",
+        "ajv": "^8.17.1",
         "change-case": "^4.1.2",
         "fast-levenshtein": "^3.0.0",
         "faye": "^1.4.0",
@@ -3326,11 +3275,11 @@
         "js2xmlparser": "^4.0.1",
         "jsonwebtoken": "9.0.2",
         "jszip": "3.10.1",
-        "pino": "^9.2.0",
+        "pino": "^9.4.0",
         "pino-abstract-transport": "^1.2.0",
-        "pino-pretty": "^11.2.1",
+        "pino-pretty": "^11.2.2",
         "proper-lockfile": "^4.1.2",
-        "semver": "^7.6.2",
+        "semver": "^7.6.3",
         "ts-retry-promise": "^0.8.1"
       },
       "engines": {
@@ -3370,16 +3319,16 @@
       }
     },
     "node_modules/@salesforce/cli-plugins-testkit/node_modules/ajv": {
-      "version": "8.16.0",
-      "resolved": "https://registry.npmjs.org/ajv/-/ajv-8.16.0.tgz",
-      "integrity": "sha512-F0twR8U1ZU67JIEtekUcLkXkoO5mMMmgGD8sK/xUFzJ805jxHQl92hImFAqqXMyMYjSPOyUPAwHYhB72g5sTXw==",
+      "version": "8.17.1",
+      "resolved": "https://registry.npmjs.org/ajv/-/ajv-8.17.1.tgz",
+      "integrity": "sha512-B/gBuNg5SiMTrPkC+A2+cW0RszwxYmn6VYxB/inlBStS5nx6xHIt/ehKRhIMhqusl7a8LjQoZnjCs5vhwxOQ1g==",
       "dev": true,
       "license": "MIT",
       "dependencies": {
         "fast-deep-equal": "^3.1.3",
+        "fast-uri": "^3.0.1",
         "json-schema-traverse": "^1.0.0",
-        "require-from-string": "^2.0.2",
-        "uri-js": "^4.4.1"
+        "require-from-string": "^2.0.2"
       },
       "funding": {
         "type": "github",
@@ -3425,18 +3374,18 @@
       "license": "MIT"
     },
     "node_modules/@salesforce/cli-plugins-testkit/node_modules/pino": {
-      "version": "9.2.0",
-      "resolved": "https://registry.npmjs.org/pino/-/pino-9.2.0.tgz",
-      "integrity": "sha512-g3/hpwfujK5a4oVbaefoJxezLzsDgLcNJeITvC6yrfwYeT9la+edCK42j5QpEQSQCZgTKapXvnQIdgZwvRaZug==",
+      "version": "9.6.0",
+      "resolved": "https://registry.npmjs.org/pino/-/pino-9.6.0.tgz",
+      "integrity": "sha512-i85pKRCt4qMjZ1+L7sy2Ag4t1atFcdbEt76+7iRJn1g2BvsnRMGu9p8pivl9fs63M2kF/A0OacFZhTub+m/qMg==",
       "dev": true,
       "license": "MIT",
       "dependencies": {
         "atomic-sleep": "^1.0.0",
         "fast-redact": "^3.1.1",
         "on-exit-leak-free": "^2.1.0",
-        "pino-abstract-transport": "^1.2.0",
+        "pino-abstract-transport": "^2.0.0",
         "pino-std-serializers": "^7.0.0",
-        "process-warning": "^3.0.0",
+        "process-warning": "^4.0.0",
         "quick-format-unescaped": "^4.0.3",
         "real-require": "^0.2.0",
         "safe-stable-stringify": "^2.3.1",
@@ -3448,9 +3397,9 @@
       }
     },
     "node_modules/@salesforce/cli-plugins-testkit/node_modules/pino-pretty": {
-      "version": "11.2.1",
-      "resolved": "https://registry.npmjs.org/pino-pretty/-/pino-pretty-11.2.1.tgz",
-      "integrity": "sha512-O05NuD9tkRasFRWVaF/uHLOvoRDFD7tb5VMertr78rbsYFjYp48Vg3477EshVAF5eZaEw+OpDl/tu+B0R5o+7g==",
+      "version": "11.3.0",
+      "resolved": "https://registry.npmjs.org/pino-pretty/-/pino-pretty-11.3.0.tgz",
+      "integrity": "sha512-oXwn7ICywaZPHmu3epHGU2oJX4nPmKvHvB/bwrJHlGcbEWaVcotkpyVHMKLKmiVryWYByNp0jpgAcXpFJDXJzA==",
       "dev": true,
       "license": "MIT",
       "dependencies": {
@@ -3462,7 +3411,7 @@
         "joycon": "^3.1.1",
         "minimist": "^1.2.6",
         "on-exit-leak-free": "^2.1.0",
-        "pino-abstract-transport": "^1.0.0",
+        "pino-abstract-transport": "^2.0.0",
         "pump": "^3.0.0",
         "readable-stream": "^4.0.0",
         "secure-json-parse": "^2.4.0",
@@ -3473,6 +3422,16 @@
         "pino-pretty": "bin.js"
       }
     },
+    "node_modules/@salesforce/cli-plugins-testkit/node_modules/pino-pretty/node_modules/pino-abstract-transport": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/pino-abstract-transport/-/pino-abstract-transport-2.0.0.tgz",
+      "integrity": "sha512-F63x5tizV6WCh4R6RHyi2Ml+M70DNRXt/+HANowMflpgGFMAym/VKm6G7ZOQRjqN7XbGxK1Lg9t6ZrtzOaivMw==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "split2": "^4.0.0"
+      }
+    },
     "node_modules/@salesforce/cli-plugins-testkit/node_modules/pino-std-serializers": {
       "version": "7.0.0",
       "resolved": "https://registry.npmjs.org/pino-std-serializers/-/pino-std-serializers-7.0.0.tgz",
@@ -3480,10 +3439,37 @@
       "dev": true,
       "license": "MIT"
     },
+    "node_modules/@salesforce/cli-plugins-testkit/node_modules/pino/node_modules/pino-abstract-transport": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/pino-abstract-transport/-/pino-abstract-transport-2.0.0.tgz",
+      "integrity": "sha512-F63x5tizV6WCh4R6RHyi2Ml+M70DNRXt/+HANowMflpgGFMAym/VKm6G7ZOQRjqN7XbGxK1Lg9t6ZrtzOaivMw==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "split2": "^4.0.0"
+      }
+    },
+    "node_modules/@salesforce/cli-plugins-testkit/node_modules/process-warning": {
+      "version": "4.0.1",
+      "resolved": "https://registry.npmjs.org/process-warning/-/process-warning-4.0.1.tgz",
+      "integrity": "sha512-3c2LzQ3rY9d0hc1emcsHhfT9Jwz0cChib/QN89oME2R451w5fy3f0afAhERFZAwrbDU43wk12d0ORBpDVME50Q==",
+      "dev": true,
+      "funding": [
+        {
+          "type": "github",
+          "url": "https://github.com/sponsors/fastify"
+        },
+        {
+          "type": "opencollective",
+          "url": "https://opencollective.com/fastify"
+        }
+      ],
+      "license": "MIT"
+    },
     "node_modules/@salesforce/cli-plugins-testkit/node_modules/readable-stream": {
-      "version": "4.5.2",
-      "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-4.5.2.tgz",
-      "integrity": "sha512-yjavECdqeZ3GLXNgRXgeQEdz9fvDDkNKyHnbHRFtOr7/LcfgBcmct7t/ET+HaCTqfh06OzoAxrkN/IfjJBVe+g==",
+      "version": "4.7.0",
+      "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-4.7.0.tgz",
+      "integrity": "sha512-oIGGmcpTLwPga8Bn6/Z75SVaH1z5dUut2ibSyAMVhmUggWpmDn2dapB0n7f8nwaSiRtepAsfJyfXIO5DCVAODg==",
       "dev": true,
       "license": "MIT",
       "dependencies": {
@@ -3517,13 +3503,23 @@
       }
     },
     "node_modules/@salesforce/cli-plugins-testkit/node_modules/sonic-boom": {
-      "version": "4.0.1",
-      "resolved": "https://registry.npmjs.org/sonic-boom/-/sonic-boom-4.0.1.tgz",
-      "integrity": "sha512-hTSD/6JMLyT4r9zeof6UtuBDpjJ9sO08/nmS5djaA9eozT9oOlNdpXSnzcgj4FTqpk3nkLrs61l4gip9r1HCrQ==",
+      "version": "4.2.0",
+      "resolved": "https://registry.npmjs.org/sonic-boom/-/sonic-boom-4.2.0.tgz",
+      "integrity": "sha512-INb7TM37/mAcsGmc9hyyI6+QR3rR1zVRu36B0NeGXKnOOLiZOfER5SA+N7X7k3yUYRzLWafduTDvJAfDswwEww==",
       "dev": true,
       "license": "MIT",
       "dependencies": {
         "atomic-sleep": "^1.0.0"
+      }
+    },
+    "node_modules/@salesforce/cli-plugins-testkit/node_modules/split2": {
+      "version": "4.2.0",
+      "resolved": "https://registry.npmjs.org/split2/-/split2-4.2.0.tgz",
+      "integrity": "sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==",
+      "dev": true,
+      "license": "ISC",
+      "engines": {
+        "node": ">= 10.x"
       }
     },
     "node_modules/@salesforce/cli-plugins-testkit/node_modules/thread-stream": {
@@ -3729,12 +3725,12 @@
       }
     },
     "node_modules/@salesforce/kit": {
-      "version": "3.1.6",
-      "resolved": "https://registry.npmjs.org/@salesforce/kit/-/kit-3.1.6.tgz",
-      "integrity": "sha512-zAYPmCSAvdonDOnL5AzuVRVv0sRMlQd6gi12HDE1964VqSjt5pzlLU90thh3Qq4A1Wxbdu0FbHYx9BvZ4fWPvQ==",
+      "version": "3.2.3",
+      "resolved": "https://registry.npmjs.org/@salesforce/kit/-/kit-3.2.3.tgz",
+      "integrity": "sha512-X8rZouLt06dxRkn+uYTwywWDS/NqZ783AyomGqgtWdUxF61EOJvu0ehtcYeutx9Ng08uuZ+s6wNvWiDsdhUcPg==",
       "license": "BSD-3-Clause",
       "dependencies": {
-        "@salesforce/ts-types": "^2.0.10"
+        "@salesforce/ts-types": "^2.0.12"
       }
     },
     "node_modules/@salesforce/prettier-config": {
@@ -3769,9 +3765,9 @@
       }
     },
     "node_modules/@salesforce/ts-types": {
-      "version": "2.0.10",
-      "resolved": "https://registry.npmjs.org/@salesforce/ts-types/-/ts-types-2.0.10.tgz",
-      "integrity": "sha512-ulGQ1oUGXrmSUi6NGbxZZ7ykSDv439x+WYZpkMgFLC8Dx0TxJXfUAJYeZh7eKO5xI/ob3iyvN+RBcBkp4KFN1w==",
+      "version": "2.0.12",
+      "resolved": "https://registry.npmjs.org/@salesforce/ts-types/-/ts-types-2.0.12.tgz",
+      "integrity": "sha512-BIJyduJC18Kc8z+arUm5AZ9VkPRyw1KKAm+Tk+9LT99eOzhNilyfKzhZ4t+tG2lIGgnJpmytZfVDZ0e2kFul8g==",
       "license": "BSD-3-Clause",
       "engines": {
         "node": ">=18.0.0"
@@ -6381,12 +6377,12 @@
       }
     },
     "node_modules/debug": {
-      "version": "4.3.5",
-      "resolved": "https://registry.npmjs.org/debug/-/debug-4.3.5.tgz",
-      "integrity": "sha512-pt0bNEmneDIvdL1Xsd9oDQ/wrQRkXDT4AUWlNZNPKvW5x/jyO9VFXkJUP07vQ2upmw5PlaITaPKc31jK13V+jg==",
+      "version": "4.4.0",
+      "resolved": "https://registry.npmjs.org/debug/-/debug-4.4.0.tgz",
+      "integrity": "sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==",
       "license": "MIT",
       "dependencies": {
-        "ms": "2.1.2"
+        "ms": "^2.1.3"
       },
       "engines": {
         "node": ">=6.0"
@@ -6396,12 +6392,6 @@
           "optional": true
         }
       }
-    },
-    "node_modules/debug/node_modules/ms": {
-      "version": "2.1.2",
-      "resolved": "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz",
-      "integrity": "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==",
-      "license": "MIT"
     },
     "node_modules/decamelize": {
       "version": "1.2.0",
@@ -7699,6 +7689,23 @@
       "resolved": "https://registry.npmjs.org/fast-safe-stringify/-/fast-safe-stringify-2.1.1.tgz",
       "integrity": "sha512-W+KJc2dmILlPplD/H4K9l9LcAHAfPtP6BY84uVLXQ6Evcz9Lcg33Y2z1IVblT6xdY54PXYVHEv+0Wpq8Io6zkA==",
       "license": "MIT"
+    },
+    "node_modules/fast-uri": {
+      "version": "3.0.6",
+      "resolved": "https://registry.npmjs.org/fast-uri/-/fast-uri-3.0.6.tgz",
+      "integrity": "sha512-Atfo14OibSv5wAp4VWNsFYE1AchQRTv9cBGWET4pZWHzYshFSS9NQI6I57rdKn9croWVMbYFbLhJ+yJvmZIIHw==",
+      "dev": true,
+      "funding": [
+        {
+          "type": "github",
+          "url": "https://github.com/sponsors/fastify"
+        },
+        {
+          "type": "opencollective",
+          "url": "https://opencollective.com/fastify"
+        }
+      ],
+      "license": "BSD-3-Clause"
     },
     "node_modules/fast-xml-parser": {
       "version": "4.4.0",
@@ -12349,9 +12356,9 @@
       "license": "BSD-3-Clause"
     },
     "node_modules/semver": {
-      "version": "7.6.2",
-      "resolved": "https://registry.npmjs.org/semver/-/semver-7.6.2.tgz",
-      "integrity": "sha512-FNAIBWCx9qcRhoHcgcJ0gvU7SN1lYU2ZXuSfl04bSC5OpvDHFyJCjdNHomPXxjQlCBU67YW64PzY7/VIEH7F2w==",
+      "version": "7.7.1",
+      "resolved": "https://registry.npmjs.org/semver/-/semver-7.7.1.tgz",
+      "integrity": "sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==",
       "license": "ISC",
       "bin": {
         "semver": "bin/semver.js"
